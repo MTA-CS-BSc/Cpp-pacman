@@ -92,7 +92,7 @@ void GameHandler::printBoard() {
 		std::cout << this->ghosts[i].getCharToPrint();
 	}
 
-	//print pacman
+	// print pacman
 	gotoxy(this->pacman.getCurrentPosition().getX(), this->pacman.getCurrentPosition().getY());
 	std::cout << this->pacman.getCharToPrint();
 }

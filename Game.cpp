@@ -36,9 +36,7 @@ bool Game::isLoser() {
 }
 
 bool Game::isWinner() {
-	// return !this->controller.isBreadcrumbLeftOnBoard();
-
-	return true;
+	return !this->handler.breadcrumbExists();
 }
 
 void Game::pause() {
@@ -54,48 +52,47 @@ void Game::start() {
 	this->handler.printBoard();
 	Pacman& pacman = this->handler.getPacman();
 
-	//while (!this->isWinner() && !this->isLoser()) {
-	//	Sleep(200);
-	//	if (_kbhit()) {
-	//		int key = _getch();
-	//		if (key == ESC_KEY)
-	//			this->pause();
+	while (!this->isWinner() && !this->isLoser()) {
+		Sleep(200);
+		if (_kbhit()) {
+			int key = _getch();
+			if (key == ESC_KEY)
+				this->pause();
 
-	//		else if (key == int('w') || key == int('W'))
-	//			pacman.setCurrentDirection(Direction::UP);
-	//		
-	//		else if (key == int('x') || key == int('X'))
-	//			pacman.setCurrentDirection(Direction::BOTTOM);
+			else if (key == int('w') || key == int('W'))
+				pacman.setCurrentDirection(Direction::UP);
+			
+			else if (key == int('x') || key == int('X'))
+				pacman.setCurrentDirection(Direction::BOTTOM);
 
-	//		else if (key == int('d') || key == int('D'))
-	//			pacman.setCurrentDirection(Direction::RIGHT);
-	//		
-	//		else if (key == int('a') || key == int('A'))
-	//			pacman.setCurrentDirection(Direction::LEFT);
-	//		
-	//		else if (key == int('s') || key == int('S'))
-	//			pacman.setCurrentDirection(Direction::STAY);
-	//	}
+			else if (key == int('d') || key == int('D'))
+				pacman.setCurrentDirection(Direction::RIGHT);
+			
+			else if (key == int('a') || key == int('A'))
+				pacman.setCurrentDirection(Direction::LEFT);
+			
+			else if (key == int('s') || key == int('S'))
+				pacman.setCurrentDirection(Direction::STAY);
+		}
 
-	//	// CycleChanges cycleChanges = this->controller.cycle();
-	//	// this->score += cycleChanges.getScoreChange();
+		// CycleChanges cycleChanges = this->controller.cycle();
+		// this->score += cycleChanges.getScoreChange();
 
-	//	// if (cycleChanges.getIsPacmanEaten())
-	//	// {
-	//	// 	this->lifes -= 1;
-	//	// 	this->controller.initShapesPositions();
+		// if (cycleChanges.getIsPacmanEaten())
+		// {
+		// 	this->lifes -= 1;
+		// 	this->controller.initShapesPositions();
 
-	//	// 	this->supportMentalHealthAfterDeath();
-	//	// }
+		// }
 
-	//	this->printStatus();
-	//}
+		this->printStatus();
+	}
 
-	//clearScreen();
+	clearScreen();
 
-	//if (isLoser())
-	//	std::cout << "Game over!" << std::endl;
-	//
-	//else if (isWinner())
-	//	std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
+	if (isLoser())
+		std::cout << "Game over!" << std::endl;
+	
+	else if (isWinner())
+		std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
 }
