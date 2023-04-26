@@ -3,18 +3,16 @@
 #include "Ghost.h"
 #include "Settings.h"
 #include "IOModule.h"
-#include "Game.h"
 
 class GameHandler {
 private:
-    Game related_game;
     std::vector<std::string> board;
     std::vector<Ghost> ghosts;
     Pacman pacman;
     int breadcrumbs_amount;
 
 public:
-    GameHandler(Game&);
+    GameHandler();
     void initPositions();
     void initializeBoard();
     void breadcrumbEaten();
