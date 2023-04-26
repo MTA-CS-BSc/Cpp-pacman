@@ -1,8 +1,6 @@
 #include "GameHandler.h"
 
-GameHandler::GameHandler(Game& game) {
-	this->related_game = game;
-
+GameHandler::GameHandler() {
 	initializeBoard();
 	initPositions();
 }
@@ -10,7 +8,7 @@ GameHandler::GameHandler(Game& game) {
 void GameHandler::initializeBoard() {
 	this->breadcrumbs_amount = 0;
 
-	char brd[Settings::BOARD_HEIGHT][Settings::BOARD_WIDTH + 1] = {
+	char brd[Settings::BOARD_HEIGHT + 1][Settings::BOARD_WIDTH + 1] = {
 		"################################################################################",
 		"#                                                                              #",
 		"#    ###########             ###########                  ##### #####          #",
@@ -48,16 +46,18 @@ void GameHandler::initializeBoard() {
 	}
 
 	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
-		for (int j = 0; j < Settings::BOARD_WIDTH; j++)
-			this->board[i][j] = brd[i][j];
+		this->board.push_back(brd[i]);
 }
 
 void GameHandler::initPositions() {
 	this->pacman.setCurrentDirection(Direction::STAY);
 	this->pacman.setCurrentPosition(Point(Settings::BOARD_WIDTH * 3 / 4, Settings::BOARD_HEIGHT - 4 / 2));
 
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
-		this->ghosts[i].setCurrentPosition(Point(int((Settings::BOARD_WIDTH / Settings::GHOSTS_AMOUNT) * (i)+1), 1));
+	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++) {
+		Ghost g = Ghost();
+		g.setCurrentPosition(Point(int((Settings::BOARD_WIDTH / Settings::GHOSTS_AMOUNT) * (i)+1), 1));
+		ghosts.push_back(g);
+	}
 }
 
 void GameHandler::breadcrumbEaten() {
@@ -77,11 +77,22 @@ void GameHandler::setPacman(const Pacman& p) {
 }
 
 void GameHandler::printBoard() {
-	pacman.move(this->board);
-
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++) {
-		this->ghosts[i].move(this->board);
+	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
+	{
+		for (int j = 0; j < Settings::BOARD_WIDTH; j++)
+		{
+			gotoxy(j, i);
+			std::cout << (char)this->board[i][j];
+		}
 	}
 
-	// return findAndHandleCollisions();
+	// print ghosts
+	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++) {
+		gotoxy(this->ghosts[i].getCurrentPosition().getX(), this->ghosts[i].getCurrentPosition().getY());
+		std::cout << this->ghosts[i].getCharToPrint();
+	}
+
+	//print pacman
+	gotoxy(this->pacman.getCurrentPosition().getX(), this->pacman.getCurrentPosition().getY());
+	std::cout << this->pacman.getCharToPrint();
 }
