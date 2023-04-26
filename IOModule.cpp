@@ -75,11 +75,11 @@ Action getAction() {
 
 void printKeys() {
 	std::cout << "Keys:" << std::endl;
-	std::cout << "D - go right" << std::endl;
-	std::cout << "A - go left" << std::endl;
-	std::cout << "W - go up" << std::endl;
-	std::cout << "X - go down" << std::endl;
-	std::cout << "S - stop" << std::endl;
+	std::cout << RIGHT_UPPERCASE << " - right" << std::endl;
+	std::cout << LEFT_UPPERCASE << " - left" << std::endl;
+	std::cout << UP_UPPERCASE << " - up" << std::endl;
+	std::cout << DOWN_UPPERCASE << " - down" << std::endl;
+	std::cout << STAY_UPPERCASE << " - stand still" << std::endl;
 }
 
 void printHowToPlay() {

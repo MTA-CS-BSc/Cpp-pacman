@@ -43,19 +43,19 @@ void Game::start() {
 			if (key == ESC_KEY)
 				this->pause();
 
-			else if (key == int('w') || key == int('W'))
+			else if (key == int(UP_UPPERCASE) || key == int(UP_LOWERCASE))
 				pacman.setCurrentDirection(Direction::UP);
-			
-			else if (key == int('x') || key == int('X'))
+
+			else if (key == int(LEFT_UPPERCASE) || key == int(LEFT_LOWERCASE))
+				pacman.setCurrentDirection(Direction::LEFT);
+
+			else if (key == int(DOWN_UPPERCASE) || key == int(DOWN_LOWERCASE))
 				pacman.setCurrentDirection(Direction::BOTTOM);
 
-			else if (key == int('d') || key == int('D'))
+			else if (key == int(RIGHT_UPPERCASE) || key == int(RIGHT_LOWERCASE))
 				pacman.setCurrentDirection(Direction::RIGHT);
 			
-			else if (key == int('a') || key == int('A'))
-				pacman.setCurrentDirection(Direction::LEFT);
-			
-			else if (key == int('s') || key == int('S'))
+			else if (key == int(STAY_UPPERCASE) || key == int(STAY_LOWERCASE))
 				pacman.setCurrentDirection(Direction::STAY);
 		}
 
