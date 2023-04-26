@@ -24,5 +24,7 @@ int main() {
 			default:
 				break;
 		}
+
+		getAction();
 	}
 }

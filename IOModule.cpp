@@ -91,5 +91,4 @@ void printHowToPlay() {
 	std::cout << "Press any key to go back to the menu" << std::endl;
 	_getch();
 	clearScreen();
-	getAction();
 }
