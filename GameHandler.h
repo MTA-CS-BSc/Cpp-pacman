@@ -24,5 +24,10 @@ public:
     bool breadcrumbExists();
     void setPacman(const Pacman&);
     void printBoard();
+    bool isPacmanEaten();
+    void handleBreadcrumbsChange();
+    void handlePacmanEaten();
     Pacman& getPacman();
+    std::vector<std::string>& getBoard();
+    std::vector<Ghost>& getGhostsArray();
 };

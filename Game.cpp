@@ -59,15 +59,13 @@ void Game::start() {
 				pacman.setCurrentDirection(Direction::STAY);
 		}
 
-		// CycleChanges cycleChanges = this->controller.cycle();
-		// this->score += cycleChanges.getScoreChange();
+		this->handler.getPacman().move(this->handler.getBoard());
 
-		// if (cycleChanges.getIsPacmanEaten())
-		// {
-		// 	this->lifes -= 1;
-		// 	this->controller.initShapesPositions();
+		for (auto& ghost : this->handler.getGhostsArray())
+			ghost.move(this->handler.getBoard());
 
-		// }
+		this->handler.handlePacmanEaten();
+		this->handler.handleBreadcrumbsChange();
 
 		this->printStatus();
 	}
