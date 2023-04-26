@@ -23,47 +23,19 @@ void GameHandler::setLifes(int value) {
 
 void GameHandler::initializeBoard() {
 	int counter = 0;
-
-	char brd[Settings::BOARD_HEIGHT + 1][Settings::BOARD_WIDTH + 1] = {
-		"################################################################################",
-		"#                                                                              #",
-		"#    ###########             ###########                  ##### #####          #",
-		"#    ###########             ###########                  #   # #   #          #",
-		"#    ##                      ###########                  #         #          #",
-		"#    ## ########             ###########                  #   # #   #          #",
-		"#    ##                      ###########                  ##### #####          #",
-		"#    ###########                                                               #",
-		"     ###########               #########            #########                   ",
-		"#             ##               #########            #########                  #",
-		"#    ###########               #########            #########                  #",
-		"#    ###########                                                               #",
-		"#                               #####################################          #",
-		"#                               #####################################          #",
-		"#     ###########               #####################################          #",
-		"#     ###########                                                              #",
-		"#     ###########                                                   ######     #",
-		"#                         ###################                       ######     #",
-		"#      ####               ################### ##################### ######     #",
-		"#      ######             ###             ###                       ######     #",
-		"#      #########          ###    #####    ###                       ######     #",
-		"#      #########          ###    #####    ###                       ######     #",
-		"#                                                                              #",
-		"#                                                                              #",
-		"################################################################################"
-	};
 	
+	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
+		this->board.push_back(Settings::initial_board[i]);
+
 	for (int i = 1; i < Settings::BOARD_HEIGHT && this->breadcrumbs_amount < Settings::BREADCRUMBS_AMOUNT; i++) {
 		int random_index_at_row = generateRandomNumber(0, Settings::BOARD_WIDTH - 1);
 
-		if (brd[i][random_index_at_row] == '#')
+		if (this->board[i][random_index_at_row] == '#')
 			random_index_at_row = generateRandomNumber(0, Settings::BOARD_WIDTH - 1);
 
-		brd[i][random_index_at_row] = '.';
+		this->board[i][random_index_at_row] = '.';
 		this->breadcrumbs_amount++;
 	}
-
-	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
-		this->board.push_back(brd[i]);
 }
 
 void GameHandler::initPositions() {
