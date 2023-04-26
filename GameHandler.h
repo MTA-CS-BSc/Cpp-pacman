@@ -6,6 +6,7 @@
 
 class GameHandler {
 private:
+    int lifes, score;
     std::vector<std::string> board;
     std::vector<Ghost> ghosts;
     Pacman pacman;
@@ -13,6 +14,10 @@ private:
 
 public:
     GameHandler();
+    int getLifes();
+    int getScore();
+    void setLifes(int);
+    void setScore(int);
     void initPositions();
     void initializeBoard();
     void breadcrumbEaten();

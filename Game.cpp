@@ -1,23 +1,7 @@
 #include "Game.h"
 
-Game::Game() : lifes((int)3), score((int)0) {
+Game::Game() {
 	hideCursor();
-}
-
-int Game::getScore() {
-	return this->score;
-}
-
-int Game::getLifes() {
-	return this->lifes;
-}
-
-void Game::setScore(int value) {
-	this->score = value;
-}
-
-void Game::setLifes(int value) {
-	this->lifes = value;
 }
 
 void Game::printStatus() {
@@ -25,14 +9,14 @@ void Game::printStatus() {
 	int lifes_line = Settings::BOARD_HEIGHT + 3;
 
 	deleteLine(score_line);
-	std::cout << "Score: " << this->getScore();
+	std::cout << "Score: " << this->handler.getScore();
 
 	deleteLine(lifes_line);
-	std::cout << "Lifes: " << this->getLifes();
+	std::cout << "Lifes: " << this->handler.getLifes();
 }
 
 bool Game::isLoser() {
-	return this->lifes == 0;
+	return this->handler.getLifes()  == 0;
 }
 
 bool Game::isWinner() {

@@ -1,8 +1,24 @@
 #include "GameHandler.h"
 
-GameHandler::GameHandler() {
+GameHandler::GameHandler() : lifes(3), score(0) {
 	initializeBoard();
 	initPositions();
+}
+
+int GameHandler::getScore() {
+	return this->score;
+}
+
+int GameHandler::getLifes() {
+	return this->lifes;
+}
+
+void GameHandler::setScore(int value) {
+	this->score = value;
+}
+
+void GameHandler::setLifes(int value) {
+	this->lifes = value;
 }
 
 void GameHandler::initializeBoard() {
