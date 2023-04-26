@@ -16,7 +16,6 @@ class MovingEntity {
         virtual Point moveWithDirection(std::vector<std::string>);
         
     public:
-        MovingEntity() { };
         MovingEntity(Direction, double, char);
         double getSpeed();
         Point& getCurrentPosition();

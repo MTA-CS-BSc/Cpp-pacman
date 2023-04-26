@@ -1,6 +1,6 @@
 #pragma once
 // OS type
-#define LINUX
+#define WINDOWS
 
 class Settings {
 	public:

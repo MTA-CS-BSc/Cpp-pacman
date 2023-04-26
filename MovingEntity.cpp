@@ -1,5 +1,9 @@
 #include "MovingEntity.h"
 
+Point MovingEntity::moveWithDirection(std::vector<std::string>) {
+	return Point();
+}
+
 MovingEntity::MovingEntity(Direction md, double s, char ch) : current_moving_direction(md), speed(s), char_to_print(ch) {}
 
 double MovingEntity::getSpeed() {

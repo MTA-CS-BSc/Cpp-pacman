@@ -3,8 +3,7 @@
 Pacman::Pacman() : MovingEntity(Direction::STAY, 1.0, '@') {
 }
 
-Pacman::Pacman(const Pacman& value) {
-	*this = value;
+Pacman::Pacman(const Pacman& value) : MovingEntity(value) {
 }
 
 Point Pacman::moveWithDirection(std::vector<std::string> board) {
