@@ -51,15 +51,6 @@ void GameHandler::initializeBoard() {
 		"#                                                                              #",
 		"################################################################################"
 	};
-
-	//for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
-	//	for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
-	//		if (brd[i][j] != '#') {
-	//			brd[i][j] = '.';
-	//			this->breadcrumbs_amount++;
-	//		}
-	//	}
-	//}
 	
 	for (int i = 1; i < Settings::BOARD_HEIGHT && this->breadcrumbs_amount < Settings::BREADCRUMBS_AMOUNT; i++) {
 		int random_index_at_row = generateRandomNumber(0, Settings::BOARD_WIDTH - 1);
