@@ -22,7 +22,7 @@ void GameHandler::setLifes(int value) {
 }
 
 void GameHandler::initializeBoard() {
-	this->breadcrumbs_amount = 0;
+	int counter = 0;
 
 	char brd[Settings::BOARD_HEIGHT + 1][Settings::BOARD_WIDTH + 1] = {
 		"################################################################################",
@@ -52,13 +52,23 @@ void GameHandler::initializeBoard() {
 		"################################################################################"
 	};
 
-	for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
-		for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
-			if (brd[i][j] != '#') {
-				brd[i][j] = '.';
-				this->breadcrumbs_amount++;
-			}
-		}
+	//for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
+	//	for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
+	//		if (brd[i][j] != '#') {
+	//			brd[i][j] = '.';
+	//			this->breadcrumbs_amount++;
+	//		}
+	//	}
+	//}
+	
+	for (int i = 1; i < Settings::BOARD_HEIGHT && this->breadcrumbs_amount < Settings::BREADCRUMBS_AMOUNT; i++) {
+		int random_index_at_row = generateRandomNumber(0, Settings::BOARD_WIDTH - 1);
+
+		if (brd[i][random_index_at_row] == '#')
+			random_index_at_row = generateRandomNumber(0, Settings::BOARD_WIDTH - 1);
+
+		brd[i][random_index_at_row] = '.';
+		this->breadcrumbs_amount++;
 	}
 
 	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
@@ -93,10 +103,8 @@ void GameHandler::setPacman(const Pacman& p) {
 }
 
 void GameHandler::printBoard() {
-	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
-	{
-		for (int j = 0; j < Settings::BOARD_WIDTH; j++)
-		{
+	for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
+		for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
 			gotoxy(j, i);
 			std::cout << (char)this->board[i][j];
 		}
@@ -122,11 +130,11 @@ std::vector<Ghost>& GameHandler::getGhostsArray() {
 }
 
 void GameHandler::handleBreadcrumbsChange() {
-	if (this->board[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.')
+	if (this->board[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.') {
 		this->board[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
-
-	this->score += Settings::BREADCRUMBS_SCORE_CHANGE;
-	this->breadcrumbs_amount--;
+		this->score += Settings::BREADCRUMBS_SCORE_CHANGE;
+		this->breadcrumbs_amount--;
+	}
 }
 
 void GameHandler::handlePacmanEaten() {
