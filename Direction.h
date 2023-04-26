@@ -1,6 +1,6 @@
 #pragma once
 
-enum class Direction : int{ UP, BOTTOM, LEFT, RIGHT, STAY};
+enum class Direction : int{ UP, DOWN, LEFT, RIGHT, STAY};
 
 inline const char getDirectionString(Direction md) {
     switch (md) {
@@ -16,8 +16,8 @@ inline const char getDirectionString(Direction md) {
         case Direction::RIGHT:
             return 'R';
             break;
-        case Direction::BOTTOM:
-            return 'B';
+        case Direction::DOWN:
+            return 'D';
             break;
     }
 }

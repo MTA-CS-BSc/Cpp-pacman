@@ -50,7 +50,7 @@ void Game::start() {
 				pacman.setCurrentDirection(Direction::LEFT);
 
 			else if (key == int(DOWN_UPPERCASE) || key == int(DOWN_LOWERCASE))
-				pacman.setCurrentDirection(Direction::BOTTOM);
+				pacman.setCurrentDirection(Direction::DOWN);
 
 			else if (key == int(RIGHT_UPPERCASE) || key == int(RIGHT_LOWERCASE))
 				pacman.setCurrentDirection(Direction::RIGHT);

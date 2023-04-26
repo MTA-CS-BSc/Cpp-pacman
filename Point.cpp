@@ -40,7 +40,7 @@ void Point::changeWithDirection(Direction direction, double threshold) {
         case Direction::UP:
             this->addToY(-1 * threshold);
             break;
-	    case Direction::BOTTOM:
+	    case Direction::DOWN:
 		    this->addToY(threshold);
 		    break;
 	    case Direction::LEFT:
