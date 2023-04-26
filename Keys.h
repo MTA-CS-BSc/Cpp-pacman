@@ -1,0 +1,11 @@
+#pragma once
+#define UP_UPPERCASE 'W'
+#define UP_LOWERCASE 'w'
+#define LEFT_UPPERCASE 'A'
+#define LEFT_LOWERCASE 'a'
+#define DOWN_UPPERCASE 'X'
+#define DOWN_LOWERCASE 'x'
+#define RIGHT_UPPERCASE 'D'
+#define RIGHT_LOWERCASE 'd'
+#define STAY_UPPERCASE 'S'
+#define STAY_LOWERCASE 's'

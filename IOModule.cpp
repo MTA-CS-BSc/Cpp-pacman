@@ -88,7 +88,7 @@ void printHowToPlay() {
 	
 	printKeys();
 	
-	std::cout << "Press any key to go back to the menu" << std::endl;
+	std::cout << "Press any key to go back to the main screen" << std::endl;
 	_getch();
 	clearScreen();
 }
