@@ -25,6 +25,8 @@ int main() {
 				break;
 		}
 
-		getAction();
+		action = getAction();
 	}
+
+	return 0;
 }
