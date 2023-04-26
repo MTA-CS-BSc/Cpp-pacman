@@ -112,3 +112,37 @@ void GameHandler::printBoard() {
 	gotoxy(this->pacman.getCurrentPosition().getX(), this->pacman.getCurrentPosition().getY());
 	std::cout << this->pacman.getCharToPrint();
 }
+
+std::vector<std::string>& GameHandler::getBoard() {
+	return this->board;
+}
+
+std::vector<Ghost>& GameHandler::getGhostsArray() {
+	return this->ghosts;
+}
+
+void GameHandler::handleBreadcrumbsChange() {
+	if (this->board[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.')
+		this->board[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
+
+	this->score += Settings::BREADCRUMBS_SCORE_CHANGE;
+	this->breadcrumbs_amount--;
+}
+
+void GameHandler::handlePacmanEaten() {
+	bool is_pacman_eaten = this->isPacmanEaten();
+
+	if (is_pacman_eaten) {
+		this->lifes--;
+		this->initPositions();
+	}
+}
+
+bool GameHandler::isPacmanEaten() {
+	for (auto& ghost : this->ghosts)
+		if (abs(this->pacman.getCurrentPosition().getX() - ghost.getCurrentPosition().getX()) <= Settings::PACMAN_SPEED - Settings::GHOST_SPEED
+			&& abs(this->pacman.getCurrentPosition().getY() - ghost.getCurrentPosition().getY()) <= Settings::PACMAN_SPEED - Settings::GHOST_SPEED)
+			return true;
+
+	return false;
+}
