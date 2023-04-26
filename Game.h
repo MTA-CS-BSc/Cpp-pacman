@@ -1,5 +1,5 @@
 #pragma once
-// #include "GameController.h"
+#include "GameHandler.h"
 #include "IOModule.h"
 // #include "CycleChanges.h"
 #include "Ghost.h"
@@ -8,7 +8,7 @@
 class Game {
 	private:
 		int lifes, score;
-		// GameController controller;
+		GameHandler handler;
 		bool isWinner();
 		bool isLoser();
 		void printStatus();
