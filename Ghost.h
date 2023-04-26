@@ -11,7 +11,7 @@
 
 class Ghost : public MovingEntity {
     private:
-        int moves_in_current_direction;
+        int moves_in_current_direction = 0;
         Direction getRandomDirection();
         bool isDirectionOk(std::vector<std::string>, Point&, Direction);
         bool shouldChangeDirection(std::vector<std::string>, Point&);
