@@ -2,8 +2,6 @@
 #include "Point.h"
 #include "Direction.h"
 #include "IOModule.h"
-#include <vector>
-#include <string>
 
 class MovingEntity {
     private:

@@ -6,8 +6,6 @@
 #include "Point.h"
 #include <stdlib.h>
 #include <time.h>
-#include <vector>
-#include <string>
 
 class Ghost : public MovingEntity {
     private:
