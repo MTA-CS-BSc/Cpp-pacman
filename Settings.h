@@ -4,11 +4,9 @@
 
 class Settings {
 	public:
-		static constexpr double 
-			GHOST_SPEED = 0.5,
-			PACMAN_SPEED = 1.0;
-
 		static constexpr int 
+			PACMAN_SPEED = 2,
+			GHOST_SPEED = 1,
 			BOARD_WIDTH = 80,
 			BOARD_HEIGHT = 25,
 			GHOSTS_AMOUNT = 2,
