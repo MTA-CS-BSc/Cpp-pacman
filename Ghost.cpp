@@ -34,12 +34,8 @@ Point Ghost::moveWithDirection(std::vector<std::string> board) {
 			p.changeWithDirection(new_direction, this->getSpeed());
         }
 		
-		this->moves_in_current_direction = 0;
 		this->setCurrentDirection(new_direction);
 	}
-
-	else
-		this->moves_in_current_direction++;
 
 	return p;
 }
