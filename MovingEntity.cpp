@@ -1,7 +1,7 @@
 #include "MovingEntity.h"
 
 Point MovingEntity::moveWithDirection(std::vector<std::string>) {
-	return Point();
+	throw;
 }
 
 MovingEntity::MovingEntity(Direction md, double s, char ch) : current_moving_direction(md), speed(s), char_to_print(ch) {}
@@ -39,11 +39,11 @@ void MovingEntity::setCharToPrint(char ch) {
 }
 
 void MovingEntity::move(std::vector<std::string> board) {
+	Point old_position = this->getCurrentPosition();
 	Point new_location = this->moveWithDirection(board);
 
-    Point old_position = this->getCurrentPosition();
 	gotoxy(old_position.getX(), old_position.getY());
-	std::cout << board[(int)old_position.getY()][(int)old_position.getX()];
+	std::cout << Settings::initial_board[(int)old_position.getY()][(int)old_position.getX()];
 
 	this->setCurrentPosition(new_location);
 

@@ -14,6 +14,8 @@ private:
 
 public:
     GameHandler();
+    void initGhosts();
+    void resetBoard();
     int getLifes();
     int getScore();
     void setLifes(int);

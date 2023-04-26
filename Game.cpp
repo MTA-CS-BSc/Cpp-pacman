@@ -64,8 +64,8 @@ void Game::start() {
 		for (auto& ghost : this->handler.getGhostsArray())
 			ghost.move(this->handler.getBoard());
 
-		this->handler.handlePacmanEaten();
 		this->handler.handleBreadcrumbsChange();
+		this->handler.handlePacmanEaten();
 
 		this->printStatus();
 	}

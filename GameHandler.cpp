@@ -2,6 +2,7 @@
 
 GameHandler::GameHandler() : lifes(3), score(0) {
 	initializeBoard();
+	initGhosts();
 	initPositions();
 }
 
@@ -21,9 +22,14 @@ void GameHandler::setLifes(int value) {
 	this->lifes = value;
 }
 
+void GameHandler::initGhosts() {
+	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
+		this->ghosts.push_back(Ghost());
+}
+
 void GameHandler::initializeBoard() {
-	int counter = 0;
-	
+	this->board.clear();
+
 	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
 		this->board.push_back(Settings::initial_board[i]);
 
@@ -41,12 +47,10 @@ void GameHandler::initializeBoard() {
 void GameHandler::initPositions() {
 	this->pacman.setCurrentDirection(Direction::STAY);
 	this->pacman.setCurrentPosition(Point(Settings::BOARD_WIDTH * 3 / 4, Settings::BOARD_HEIGHT - 4 / 2));
-
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++) {
-		Ghost g = Ghost();
-		g.setCurrentPosition(Point(int((Settings::BOARD_WIDTH / Settings::GHOSTS_AMOUNT) * (i)+1), 1));
-		ghosts.push_back(g);
-	}
+	
+	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
+		this->ghosts[i].setCurrentPosition(Point(int((Settings::BOARD_WIDTH / Settings::GHOSTS_AMOUNT) * (i)+1), 1));
+		
 }
 
 void GameHandler::breadcrumbEaten() {
@@ -100,12 +104,18 @@ void GameHandler::handleBreadcrumbsChange() {
 	}
 }
 
+void GameHandler::resetBoard() {
+	clearScreen();
+	this->initPositions();
+	printBoard();
+}
+
 void GameHandler::handlePacmanEaten() {
 	bool is_pacman_eaten = this->isPacmanEaten();
 
 	if (is_pacman_eaten) {
 		this->lifes--;
-		this->initPositions();
+		resetBoard();
 	}
 }
 
