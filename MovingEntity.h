@@ -1,7 +1,6 @@
 #pragma once
 #include "Point.h"
 #include "IOModule.h"
-#include "Settings.h"
 
 class MovingEntity {
     private:
