@@ -1,10 +1,11 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "Settings.h"
 
 class InitialBoard {
 	public:
-		mutable char initial_board[26][81] = {
+		mutable char initial_board[Settings::BOARD_HEIGHT + 1][Settings::BOARD_WIDTH + 1] = {
 		"################################################################################",
 		"#..............................................................................#",
 		"#....###########.............###########..................#####.#####..........#",
