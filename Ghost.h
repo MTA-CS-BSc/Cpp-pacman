@@ -1,9 +1,6 @@
 #pragma once
 #include "MovingEntity.h"
-#include "Settings.h"
 #include "RandomModule.h"
-#include "Direction.h"
-#include "Point.h"
 #include <stdlib.h>
 #include <time.h>
 

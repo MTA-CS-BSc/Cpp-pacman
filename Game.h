@@ -1,8 +1,5 @@
 #pragma once
 #include "GameHandler.h"
-#include "IOModule.h"
-#include "Ghost.h"
-#include "Pacman.h"
 
 class Game {
 	private:

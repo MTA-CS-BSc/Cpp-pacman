@@ -1,10 +1,10 @@
 #pragma once
 #include "Settings.h"
+#include "Keys.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <cmath>
-#include "Keys.h"
 
 const int ESC_KEY = 27;
 

@@ -1,7 +1,6 @@
 #pragma once
 #include "Pacman.h"
 #include "Ghost.h"
-#include "Settings.h"
 #include "IOModule.h"
 
 class GameHandler {

@@ -1,6 +1,5 @@
 #pragma once
 #include "MovingEntity.h"
-#include "Settings.h"
 
 class Pacman : public MovingEntity {
 	private:
