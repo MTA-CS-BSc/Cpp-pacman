@@ -11,7 +11,7 @@ class MovingEntity {
 
     protected:
         Point current_position;
-        virtual inline Point getNewLocation(std::vector<std::string>) { return Point();  };
+        virtual inline Point getNewPosition(std::vector<std::string>) { return Point();  };
         
     public:
         MovingEntity(Direction, double, char);

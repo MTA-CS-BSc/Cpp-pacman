@@ -3,7 +3,7 @@
 
 class Pacman : public MovingEntity {
 	private:
-		Point getNewLocation(std::vector<std::string>);
+		Point getNewPosition(std::vector<std::string>);
 
 	public:
 		Pacman();

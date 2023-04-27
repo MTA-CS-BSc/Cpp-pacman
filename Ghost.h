@@ -9,7 +9,7 @@ class Ghost : public MovingEntity {
         Direction getRandomDirection();
         bool isDirectionOk(std::vector<std::string>, Point&, Direction);
         bool shouldChangeDirection(std::vector<std::string>, Point&);
-        Point getNewLocation(std::vector<std::string>);
+        Point getNewPosition(std::vector<std::string>);
 
     public:
         Ghost();
