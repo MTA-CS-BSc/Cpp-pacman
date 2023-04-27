@@ -30,18 +30,17 @@ void GameHandler::initGhosts() {
 void GameHandler::initializeBoard() {
 	this->board.clear();
 
-	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
-		this->board.push_back(Settings::initial_board[i]);
-
-	for (int i = 1; i < Settings::BOARD_HEIGHT && this->breadcrumbs_amount < Settings::BREADCRUMBS_AMOUNT; i++) {
-		int random_index_at_row = generateRandomNumber(0, Settings::BOARD_WIDTH - 1);
-
-		if (this->board[i][random_index_at_row] == '#')
-			random_index_at_row = generateRandomNumber(0, Settings::BOARD_WIDTH - 1);
-
-		this->board[i][random_index_at_row] = '.';
-		this->breadcrumbs_amount++;
+	for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
+		for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
+			if (this->initial_board_ref.initial_board[i][j] != '#') {
+				this->initial_board_ref.initial_board[i][j] = '.';
+				this->breadcrumbs_amount++;
+			}
+		}
 	}
+
+	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
+		this->board.push_back(this->initial_board_ref.initial_board[i]);
 }
 
 void GameHandler::initPositions() {
@@ -95,6 +94,7 @@ std::vector<Ghost>& GameHandler::getGhostsArray() {
 void GameHandler::handleBreadcrumbsChange() {
 	if (this->board[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.') {
 		this->board[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
+		this->initial_board_ref.initial_board[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
 		this->score += Settings::BREADCRUMBS_SCORE_CHANGE;
 		this->breadcrumbs_amount--;
 	}

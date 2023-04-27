@@ -59,10 +59,10 @@ void Game::start() {
 				pacman.setCurrentDirection(Direction::STAY);
 		}
 
-		this->handler.getPacman().move(this->handler.getBoard());
+		this->handler.getPacman().move(this->handler.getBoard(), this->handler.getInitialBoardRef());
 
 		for (auto& ghost : this->handler.getGhostsArray())
-			ghost.move(this->handler.getBoard());
+			ghost.move(this->handler.getBoard(), this->handler.getInitialBoardRef());
 
 		this->handler.handleBreadcrumbsChange();
 		this->handler.handlePacmanEaten();
