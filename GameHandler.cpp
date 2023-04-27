@@ -53,10 +53,6 @@ void GameHandler::initPositions() {
 		
 }
 
-void GameHandler::breadcrumbEaten() {
-	this->breadcrumbs_amount--;
-}
-
 bool GameHandler::breadcrumbExists() {
 	return this->breadcrumbs_amount != 0;
 }
