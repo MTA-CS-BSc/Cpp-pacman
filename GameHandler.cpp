@@ -30,8 +30,8 @@ void GameHandler::initGhosts() {
 void GameHandler::initializeBoard() {
 	for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
 		for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
-			if (this->initial_board_ref.initial_board[i][j] != '#') {
-				this->initial_board_ref.initial_board[i][j] = '.';
+			if (this->board_ref.board_obj[i][j] != '#') {
+				this->board_ref.board_obj[i][j] = '.';
 				this->breadcrumbs_amount++;
 			}
 		}
@@ -63,7 +63,7 @@ void GameHandler::printBoard() {
 	for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
 		for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
 			gotoxy(j, i);
-			std::cout << (char)this->initial_board_ref.initial_board[i][j];
+			std::cout << (char)this->board_ref.board_obj[i][j];
 		}
 	}
 
@@ -83,8 +83,8 @@ std::vector<Ghost>& GameHandler::getGhostsArray() {
 }
 
 void GameHandler::handleBreadcrumbsChange() {
-	if (this->initial_board_ref.initial_board[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.') {
-		this->initial_board_ref.initial_board[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
+	if (this->board_ref.board_obj[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.') {
+		this->board_ref.board_obj[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
 		this->score += Settings::BREADCRUMB_POINTS;
 		this->breadcrumbs_amount--;
 	}
