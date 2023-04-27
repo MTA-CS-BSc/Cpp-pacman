@@ -20,7 +20,6 @@ public:
     void setScore(int);
     void initPositions();
     void initializeBoard();
-    void breadcrumbEaten();
     bool breadcrumbExists();
     void setPacman(const Pacman&);
     void printBoard();
