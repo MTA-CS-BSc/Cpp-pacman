@@ -38,13 +38,12 @@ void MovingEntity::setCharToPrint(char ch) {
 	this->char_to_print = ch;
 }
 
-void MovingEntity::move(std::vector<std::string> board) {
+void MovingEntity::move(std::vector<std::string> board, InitialBoard& initial_board_ref) {
 	Point old_position = this->getCurrentPosition();
 	Point new_location = this->moveWithDirection(board);
 
 	gotoxy(old_position.getX(), old_position.getY());
-	// TODO
-	//std::cout << Settings::initial_board[(int)old_position.getY()][(int)old_position.getX()];
+	std::cout << initial_board_ref.initial_board[(int)old_position.getY()][(int)old_position.getX()];
 
 	this->setCurrentPosition(new_location);
 

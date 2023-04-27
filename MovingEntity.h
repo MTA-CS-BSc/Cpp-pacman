@@ -1,6 +1,7 @@
 #pragma once
 #include "Point.h"
 #include "IOModule.h"
+#include "InitialBoard.h"
 
 class MovingEntity {
     private:
@@ -24,7 +25,7 @@ class MovingEntity {
         void setCharToPrint(char);
         bool isBeyondBoundaries(std::vector<std::string>, Point&);
         bool isOnBoundary(std::vector<std::string>, Point&);
-        void move(std::vector<std::string>);
+        void move(std::vector<std::string>, InitialBoard&);
         void tunnel(std::vector<std::string>, Point&);
 };
 
