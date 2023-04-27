@@ -1,9 +1,5 @@
 #include "MovingEntity.h"
 
-Point MovingEntity::moveWithDirection(std::vector<std::string>) {
-	throw;
-}
-
 MovingEntity::MovingEntity(Direction md, double s, char ch) : current_moving_direction(md), speed(s), char_to_print(ch) {}
 
 double MovingEntity::getSpeed() {
@@ -40,7 +36,7 @@ void MovingEntity::setCharToPrint(char ch) {
 
 void MovingEntity::move(std::vector<std::string> board, InitialBoard& initial_board_ref) {
 	Point old_position = this->getCurrentPosition();
-	Point new_location = this->moveWithDirection(board);
+	Point new_location = this->getNewLocation(board);
 
 	gotoxy(old_position.getX(), old_position.getY());
 	std::cout << initial_board_ref.initial_board[(int)old_position.getY()][(int)old_position.getX()];
@@ -59,6 +55,7 @@ bool MovingEntity::isOnBoundary(std::vector<std::string> board, Point& p) {
 	return board[(int)p.getY()][(int)p.getX()] == '#';
 }
 
+// TODO: Change fmod
 void MovingEntity::tunnel(std::vector<std::string> board, Point& p) {
 	int board_height = board.size();
 	int board_width = board[0].size();

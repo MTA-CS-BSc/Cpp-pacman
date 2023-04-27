@@ -20,7 +20,7 @@ bool Ghost::isDirectionOk(std::vector<std::string> board, Point& p, Direction di
     return !(this->isOnBoundary(board, p)) && (direction != this->getDirection());
 }
 
-Point Ghost::moveWithDirection(std::vector<std::string> board) {
+Point Ghost::getNewLocation(std::vector<std::string> board) {
 	Point p = this->current_position;
 
 	p.changeWithDirection(this->getDirection(), this->getSpeed());

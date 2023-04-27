@@ -6,7 +6,7 @@ Pacman::Pacman() : MovingEntity(Direction::STAY, 1.0, '@') {
 Pacman::Pacman(const Pacman& value) : MovingEntity(value) {
 }
 
-Point Pacman::moveWithDirection(std::vector<std::string> board) {
+Point Pacman::getNewLocation(std::vector<std::string> board) {
 	Point p = this->current_position;
 
 	p.changeWithDirection(this->getDirection(), this->getSpeed());
