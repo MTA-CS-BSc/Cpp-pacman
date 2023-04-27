@@ -43,7 +43,8 @@ void MovingEntity::move(std::vector<std::string> board) {
 	Point new_location = this->moveWithDirection(board);
 
 	gotoxy(old_position.getX(), old_position.getY());
-	std::cout << Settings::initial_board[(int)old_position.getY()][(int)old_position.getX()];
+	// TODO
+	//std::cout << Settings::initial_board[(int)old_position.getY()][(int)old_position.getX()];
 
 	this->setCurrentPosition(new_location);
 

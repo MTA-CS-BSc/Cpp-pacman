@@ -30,18 +30,19 @@ void GameHandler::initGhosts() {
 void GameHandler::initializeBoard() {
 	this->board.clear();
 
-	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
-		this->board.push_back(Settings::initial_board[i]);
+	// TODO
 
-	for (int i = 1; i < Settings::BOARD_HEIGHT && this->breadcrumbs_amount < Settings::BREADCRUMBS_AMOUNT; i++) {
-		int random_index_at_row = generateRandomNumber(0, Settings::BOARD_WIDTH - 1);
-
-		if (this->board[i][random_index_at_row] == '#')
-			random_index_at_row = generateRandomNumber(0, Settings::BOARD_WIDTH - 1);
-
-		this->board[i][random_index_at_row] = '.';
-		this->breadcrumbs_amount++;
+	/*for (int i = 0; i < Settings::BOARD_HEIGHT && this->breadcrumbs_amount < Settings::BREADCRUMBS_AMOUNT; i++) {
+		for (int j = 0; j < Settings::BOARD_WIDTH && this->breadcrumbs_amount < Settings::BREADCRUMBS_AMOUNT; j++) {
+			if (this->related_game->getInitialBoard()[i][j]) {
+				this->related_game->getInitialBoard()[i][j] = '.';
+				this->breadcrumbs_amount++;
+			}
+		}
 	}
+
+	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
+		this->board.push_back(this->related_game->getInitialBoard()[i]);*/
 }
 
 void GameHandler::initPositions() {
