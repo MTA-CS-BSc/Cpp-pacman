@@ -1,6 +1,6 @@
 #include "Ghost.h"
 
-Ghost::Ghost() : MovingEntity(getRandomDirection(), 0.5, '$') {
+Ghost::Ghost() : MovingEntity(getRandomDirection(), Settings::GHOST_SPEED, '$') {
 	srand((unsigned int)time(NULL));
 }
 

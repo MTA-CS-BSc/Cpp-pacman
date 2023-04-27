@@ -1,6 +1,6 @@
 #include "Pacman.h"
 
-Pacman::Pacman() : MovingEntity(Direction::STAY, 1.0, '@') {
+Pacman::Pacman() : MovingEntity(Direction::STAY, Settings::PACMAN_SPEED, '@') {
 }
 
 Pacman::Pacman(const Pacman& value) : MovingEntity(value) {
