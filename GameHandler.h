@@ -1,10 +1,12 @@
 #pragma once
 #include "Pacman.h"
 #include "Ghost.h"
+#include "InitialBoard.h"
 
 class GameHandler {
 private:
     int lifes, score;
+    InitialBoard initial_board_ref;
     std::vector<std::string> board;
     std::vector<Ghost> ghosts;
     Pacman pacman;
@@ -30,4 +32,5 @@ public:
     Pacman& getPacman();
     std::vector<std::string>& getBoard();
     std::vector<Ghost>& getGhostsArray();
+    inline InitialBoard& getInitialBoardRef() { return this->initial_board_ref; }
 };
