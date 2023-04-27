@@ -95,7 +95,7 @@ void GameHandler::handleBreadcrumbsChange() {
 	if (this->board[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.') {
 		this->board[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
 		this->initial_board_ref.initial_board[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
-		this->score += Settings::BREADCRUMBS_SCORE_CHANGE;
+		this->score += Settings::BREADCRUMB_POINTS;
 		this->breadcrumbs_amount--;
 	}
 }
