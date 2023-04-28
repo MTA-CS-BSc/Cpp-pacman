@@ -12,7 +12,10 @@ class MovingEntity {
     protected:
         Point current_position;
         virtual inline Point getNewPosition(std::vector<std::string>) { return Point();  };
-        
+        bool isBeyondBoundaries(std::vector<std::string>, Point&);
+        bool isOnBoundary(std::vector<std::string>, Point&);
+        void tunnel(std::vector<std::string>, Point&);
+
     public:
         MovingEntity(Direction, double, char);
         double getSpeed();
@@ -23,9 +26,6 @@ class MovingEntity {
         void setSpeed(double);
         void setCurrentDirection(Direction);
         void setCharToPrint(char);
-        bool isBeyondBoundaries(std::vector<std::string>, Point&);
-        bool isOnBoundary(std::vector<std::string>, Point&);
         void move(Board&);
-        void tunnel(std::vector<std::string>, Point&);
 };
 

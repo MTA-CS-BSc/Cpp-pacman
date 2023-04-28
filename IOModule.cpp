@@ -34,7 +34,7 @@ void hideCursor() {
 #endif
 
 void deleteLine(double line) {
-	gotoxy(0.0, line);
+	gotoxy((double)0, line);
 
 	std::cout << "\x1B[2K\r";
 }
@@ -91,4 +91,9 @@ void printHowToPlay() {
 	std::cout << "Press any key to go back to the main screen" << std::endl;
 	_getch();
 	clearScreen();
+}
+
+void printAtXY(double x, double y, char ch) {
+	gotoxy(x, y);
+	std::cout << ch;
 }

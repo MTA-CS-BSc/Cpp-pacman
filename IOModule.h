@@ -37,3 +37,4 @@ void printKeys();
 void printActions();
 Action getAction();
 void printHowToPlay();
+void printAtXY(double, double, char);

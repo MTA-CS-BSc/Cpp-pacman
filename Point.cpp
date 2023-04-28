@@ -52,10 +52,3 @@ void Point::changeWithDirection(Direction direction, double threshold) {
 	}
 
 }
-
-double Point::getDistanceFromPoint(Point& p) {
-    int dx = p.x - this->x;
-    int dy = p.y - this->y;
-
-    return std::sqrt(pow(dx, 2) + pow(dy, 2));
-}

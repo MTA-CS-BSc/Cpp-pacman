@@ -32,6 +32,35 @@ void Game::pause() {
 	// this->controller.printBoard();
 }
 
+void Game::handlePacmanDirectionChange(Pacman& pacman, int key) {
+	if (key == (int)UP_UPPERCASE || key == (int)UP_LOWERCASE)
+		pacman.setCurrentDirection(Direction::UP);
+
+	else if (key == (int)LEFT_UPPERCASE || key == (int)LEFT_LOWERCASE)
+		pacman.setCurrentDirection(Direction::LEFT);
+
+	else if (key == (int)DOWN_UPPERCASE || key == (int)DOWN_LOWERCASE)
+		pacman.setCurrentDirection(Direction::DOWN);
+
+	else if (key == (int)RIGHT_UPPERCASE || key == (int)RIGHT_LOWERCASE)
+		pacman.setCurrentDirection(Direction::RIGHT);
+
+	else if (key == (int)STAY_UPPERCASE || key == (int)STAY_LOWERCASE)
+		pacman.setCurrentDirection(Direction::STAY);
+}
+
+void Game::moveEntities() {
+	this->handler.getPacman().move(this->handler.getBoardRef());
+
+	for (auto& ghost : this->handler.getGhostsArray())
+		ghost.move(this->handler.getBoardRef());
+}
+
+void Game::handleEvents() {
+	this->handler.handleBreadcrumbsChange();
+	this->handler.handlePacmanEaten();
+}
+
 void Game::start() {
 	this->handler.printBoard();
 	Pacman& pacman = this->handler.getPacman();
@@ -43,30 +72,12 @@ void Game::start() {
 			if (key == ESC_KEY)
 				this->pause();
 
-			else if (key == int(UP_UPPERCASE) || key == int(UP_LOWERCASE))
-				pacman.setCurrentDirection(Direction::UP);
-
-			else if (key == int(LEFT_UPPERCASE) || key == int(LEFT_LOWERCASE))
-				pacman.setCurrentDirection(Direction::LEFT);
-
-			else if (key == int(DOWN_UPPERCASE) || key == int(DOWN_LOWERCASE))
-				pacman.setCurrentDirection(Direction::DOWN);
-
-			else if (key == int(RIGHT_UPPERCASE) || key == int(RIGHT_LOWERCASE))
-				pacman.setCurrentDirection(Direction::RIGHT);
-			
-			else if (key == int(STAY_UPPERCASE) || key == int(STAY_LOWERCASE))
-				pacman.setCurrentDirection(Direction::STAY);
+			else
+				handlePacmanDirectionChange(pacman, key);
 		}
 
-		this->handler.getPacman().move(this->handler.getBoardRef());
-
-		for (auto& ghost : this->handler.getGhostsArray())
-			ghost.move(this->handler.getBoardRef());
-
-		this->handler.handleBreadcrumbsChange();
-		this->handler.handlePacmanEaten();
-
+		this->moveEntities();
+		this->handleEvents();
 		this->printStatus();
 	}
 

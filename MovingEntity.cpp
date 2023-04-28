@@ -38,13 +38,11 @@ void MovingEntity::move(Board& board_ref) {
 	Point old_position = this->getCurrentPosition();
 	Point new_location = this->getNewPosition(board_ref.board_obj);
 
-	gotoxy(old_position.getX(), old_position.getY());
-	std::cout << board_ref.board_obj[(int)old_position.getY()][(int)old_position.getX()];
+	printAtXY(old_position.getX(), old_position.getY(), board_ref.board_obj[(int)old_position.getY()][(int)old_position.getX()]);
 
 	this->setCurrentPosition(new_location);
 
-	gotoxy(this->getCurrentPosition().getX(), this->getCurrentPosition().getY());
-	std::cout << this->char_to_print;
+	printAtXY(this->getCurrentPosition().getX(), this->getCurrentPosition().getY(), this->char_to_print);
 }
 
 bool MovingEntity::isBeyondBoundaries(std::vector<std::string> board, Point& p) {

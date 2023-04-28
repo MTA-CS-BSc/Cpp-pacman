@@ -6,14 +6,6 @@ GameHandler::GameHandler() : lifes(3), score(0) {
 	initPositions();
 }
 
-int GameHandler::getScore() {
-	return this->score;
-}
-
-int GameHandler::getLifes() {
-	return this->lifes;
-}
-
 void GameHandler::setScore(int value) {
 	this->score = value;
 }
@@ -60,22 +52,14 @@ void GameHandler::setPacman(const Pacman& p) {
 }
 
 void GameHandler::printBoard() {
-	for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
-		for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
-			gotoxy(j, i);
-			std::cout << (char)this->board_ref.board_obj[i][j];
-		}
-	}
+	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
+		for (int j = 0; j < Settings::BOARD_WIDTH; j++)
+			printAtXY(j, i, this->board_ref.board_obj[i][j]);
 
-	// print ghosts
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++) {
-		gotoxy(this->ghosts[i].getCurrentPosition().getX(), this->ghosts[i].getCurrentPosition().getY());
-		std::cout << this->ghosts[i].getCharToPrint();
-	}
+	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
+		printAtXY(this->ghosts[i].getCurrentPosition().getX(), this->ghosts[i].getCurrentPosition().getY(), this->ghosts[i].getCharToPrint());
 
-	// print pacman
-	gotoxy(this->pacman.getCurrentPosition().getX(), this->pacman.getCurrentPosition().getY());
-	std::cout << this->pacman.getCharToPrint();
+	printAtXY(this->pacman.getCurrentPosition().getX(), this->pacman.getCurrentPosition().getY(), this->pacman.getCharToPrint());
 }
 
 std::vector<Ghost>& GameHandler::getGhostsArray() {

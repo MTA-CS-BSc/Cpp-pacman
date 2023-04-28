@@ -8,6 +8,9 @@ class Game {
 		bool isLoser();
 		void printStatus();
 		void pause();
+		void handlePacmanDirectionChange(Pacman&, int);
+		void moveEntities();
+		void handleEvents();
 	public:
 		Game();
 		void start();

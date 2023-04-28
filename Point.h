@@ -5,6 +5,7 @@
 class Point {
     private:
         double x, y;
+
     public:
         Point();
         Point(const Point&);
@@ -16,5 +17,4 @@ class Point {
         void addToX(double);
         void addToY(double);
         void changeWithDirection(Direction, double);
-        double getDistanceFromPoint(Point&);
 };
