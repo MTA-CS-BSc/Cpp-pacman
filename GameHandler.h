@@ -31,4 +31,5 @@ public:
     void handleBreadcrumbsChange();
     void handlePacmanEaten();
     void printBoard();
+    void handlePacmanDirectionChange(Pacman& pacman, int key);
 };

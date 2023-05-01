@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 
+// A class to store the board & breadcrumbs
 class Board {
 	public:
 		std::vector<std::string> board_obj = {

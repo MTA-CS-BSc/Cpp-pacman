@@ -97,3 +97,20 @@ bool GameHandler::isPacmanEaten() {
 
 	return false;
 }
+
+void GameHandler::handlePacmanDirectionChange(Pacman& pacman, int key) {
+	if (key == (int)UP_UPPERCASE || key == (int)UP_LOWERCASE)
+		pacman.setCurrentDirection(Direction::UP);
+
+	else if (key == (int)LEFT_UPPERCASE || key == (int)LEFT_LOWERCASE)
+		pacman.setCurrentDirection(Direction::LEFT);
+
+	else if (key == (int)DOWN_UPPERCASE || key == (int)DOWN_LOWERCASE)
+		pacman.setCurrentDirection(Direction::DOWN);
+
+	else if (key == (int)RIGHT_UPPERCASE || key == (int)RIGHT_LOWERCASE)
+		pacman.setCurrentDirection(Direction::RIGHT);
+
+	else if (key == (int)STAY_UPPERCASE || key == (int)STAY_LOWERCASE)
+		pacman.setCurrentDirection(Direction::STAY);
+}

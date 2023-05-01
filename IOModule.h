@@ -29,12 +29,22 @@ void clearScreen();
 void hideCursor();
 void deleteLine(double);
 
+// Returns true if the value entered is from the allowed actions and false otherwise.
 inline bool isActionValid(int value) {
 	return value == (int)Action::START || value == (int)Action::HOW_TO_PLAY || value == (int)Action::EXIT; 
-} 
+}
 
+// Prints the keys used to play the game
 void printKeys();
+
+// Prints the available actions to choose from
 void printActions();
+
+// Gets input from the user and returns an action to perform
 Action getAction();
+
+// Prints how to play (instructions)
 void printHowToPlay();
+
+// Prints the received char in the received coordinate (x, y)
 void printAtXY(double, double, char);
