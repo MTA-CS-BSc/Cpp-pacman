@@ -13,11 +13,11 @@ Direction Ghost::getRandomDirection() {
 }
 
 bool Ghost::shouldChangeDirection(std::vector<std::string> board, Point& p) {
-    return this->isBeyondBoundaries(board, p) || this->isOnBoundary(board, p);
+    return this->isBeyondBoundaries(board, p) || this->isOnWall(board, p);
 }
 
 bool Ghost::isDirectionOk(std::vector<std::string> board, Point& p, Direction direction) {
-    return !(this->isOnBoundary(board, p)) && (direction != this->getDirection());
+    return !(this->isOnWall(board, p)) && (direction != this->getDirection());
 }
 
 Point Ghost::getNewPosition(std::vector<std::string> board) {

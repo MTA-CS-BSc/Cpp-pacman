@@ -11,7 +11,7 @@ Point Pacman::getNewPosition(std::vector<std::string> board) {
 
 	p.changeWithDirection(this->getDirection(), this->getSpeed());
 
-	if (this->isOnBoundary(board, p)) {
+	if (this->isOnWall(board, p)) {
 		this->setCurrentDirection(Direction::STAY);
 		p = this->current_position;
 	}
