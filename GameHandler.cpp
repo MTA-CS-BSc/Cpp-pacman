@@ -6,14 +6,6 @@ GameHandler::GameHandler() : lifes(3), score(0) {
 	initPositions();
 }
 
-void GameHandler::setScore(int value) {
-	this->score = value;
-}
-
-void GameHandler::setLifes(int value) {
-	this->lifes = value;
-}
-
 void GameHandler::initGhosts() {
 	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
 		this->ghosts.push_back(Ghost());
@@ -39,18 +31,6 @@ void GameHandler::initPositions() {
 		
 }
 
-bool GameHandler::breadcrumbExists() {
-	return this->breadcrumbs_amount != 0;
-}
-
-Pacman& GameHandler::getPacman() {
-	return this->pacman;
-}
-
-void GameHandler::setPacman(const Pacman& p) {
-	this->pacman = p;
-}
-
 void GameHandler::printBoard() {
 	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
 		for (int j = 0; j < Settings::BOARD_WIDTH; j++)
@@ -60,10 +40,6 @@ void GameHandler::printBoard() {
 		printAtXY(this->ghosts[i].getCurrentPosition().getX(), this->ghosts[i].getCurrentPosition().getY(), this->ghosts[i].getCharToPrint());
 
 	printAtXY(this->pacman.getCurrentPosition().getX(), this->pacman.getCurrentPosition().getY(), this->pacman.getCharToPrint());
-}
-
-std::vector<Ghost>& GameHandler::getGhostsArray() {
-	return this->ghosts;
 }
 
 void GameHandler::handleBreadcrumbsChange() {

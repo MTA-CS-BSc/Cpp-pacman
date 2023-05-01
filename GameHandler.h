@@ -22,12 +22,12 @@ public:
     inline int getLifes() const { return this->lifes; }
     inline int getScore() const { return this->score; }
     inline Board& getBoardRef() { return this->board_ref; }
-    std::vector<Ghost>& getGhostsArray();
-    Pacman& getPacman();
-    void setPacman(const Pacman&);
-    void setLifes(int);
-    void setScore(int);
-    bool breadcrumbExists();
+    inline std::vector<Ghost>& getGhostsArray() { return this->ghosts; };
+    inline Pacman& getPacman() { return this->pacman; };
+    inline void setPacman(const Pacman& p) { this->pacman = p; };
+    inline void setLifes(int value) { this->lifes = value; };
+    inline void setScore(int value) { this->score = value; };
+    inline bool breadcrumbExists() { return this->breadcrumbs_amount != 0; };
     void handleBreadcrumbsChange();
     void handlePacmanEaten();
     void printBoard();
