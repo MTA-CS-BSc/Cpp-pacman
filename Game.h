@@ -6,10 +6,10 @@ class Game {
 		GameHandler handler;
 
 		// Returns true if all breacrumbs were eaten, and false otherwise
-		inline bool isWinner() { return !this->handler.breadcrumbExists(); };
+		inline bool isWinner() { return !this->handler.breadcrumbExists(); }
 
 		// Returns true if there are no lifes left, and false otherwise
-		inline bool isLoser() { return this->handler.getLifes() == 0; };
+		inline bool isLoser() { return this->handler.getLifes() == 0; }
 
 		// Prints the amount of lifes & score of the user
 		void printStatus();
@@ -24,6 +24,6 @@ class Game {
 		void handleEvents();
 		
 	public:
-		Game() { hideCursor(); };
+		Game() { hideCursor(); }
 		void start();
 };

@@ -2,38 +2,6 @@
 
 MovingEntity::MovingEntity(Direction md, double s, char ch) : current_moving_direction(md), speed(s), char_to_print(ch) {}
 
-double MovingEntity::getSpeed() {
-	return this->speed;
-}
-
-Point& MovingEntity::getCurrentPosition() {
-	return this->current_position;
-}
-
-Direction MovingEntity::getDirection() {
-	return this->current_moving_direction;
-}
-
-char MovingEntity::getCharToPrint() {
-	return this->char_to_print;
-}
-
-void MovingEntity::setCurrentPosition(Point value) {
-	this->current_position = value;
-}
-
-void MovingEntity::setSpeed(double value) {
-	this->speed = value;
-}
-
-void MovingEntity::setCurrentDirection(Direction md) {
-	this->current_moving_direction = md;
-}
-
-void MovingEntity::setCharToPrint(char ch) {
-	this->char_to_print = ch;
-}
-
 void MovingEntity::move(Board& board_ref) {
 	Point old_position = this->getCurrentPosition();
 	Point new_location = this->getNewPosition(board_ref.board_obj);
@@ -43,14 +11,6 @@ void MovingEntity::move(Board& board_ref) {
 	this->setCurrentPosition(new_location);
 
 	printAtXY(this->getCurrentPosition().getX(), this->getCurrentPosition().getY(), this->char_to_print);
-}
-
-bool MovingEntity::isBeyondBoundaries(std::vector<std::string> board, Point& p) {
-	return p.getY() < 0 || p.getX() < 0 || p.getY() >= board.size() || p.getX() >= board[0].size();
-}
-
-bool MovingEntity::isOnBoundary(std::vector<std::string> board, Point& p) {
-	return board[(int)p.getY()][(int)p.getX()] == '#';
 }
 
 // TODO: Change fmod

@@ -1,39 +1,11 @@
 #include "Point.h"
 
-Point::Point() {
-    this->x = this->y = 0;
-}
-
 Point::Point(double x_value, double y_value) {
     this->x = x_value;
     this->y = y_value;
 }
 
 Point::Point(const Point& p) : Point(p.x, p.y) { }
-
-double Point::getX() const {
-	return this->x;
-}
-
-double Point::getY() const {
-	return this->y;
-}
-
-void Point::setX(double value) {
-	this->x = value;
-}
-
-void Point::setY(double value) {
-	this->y = value;
-}
-
-void Point::addToX(double value) {
-	this->x += value;
-}
-
-void Point::addToY(double value) {
-	this->y += value;
-}
 
 void Point::changeWithDirection(Direction direction, double threshold) {
 	switch (direction) {
