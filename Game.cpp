@@ -1,9 +1,5 @@
 #include "Game.h"
 
-Game::Game() {
-	hideCursor();
-}
-
 void Game::printStatus() {
 	int score_line = Settings::BOARD_HEIGHT + 2;
 	int lifes_line = Settings::BOARD_HEIGHT + 3;
@@ -15,24 +11,14 @@ void Game::printStatus() {
 	std::cout << "Lifes: " << this->handler.getLifes();
 }
 
-bool Game::isLoser() {
-	return this->handler.getLifes()  == 0;
-}
-
-bool Game::isWinner() {
-	return !this->handler.breadcrumbExists();
-}
-
 void Game::pause() {
 	clearScreen();
 	std::cout << "Game paused! Press any key to resume...";
 	_getch();
 	clearScreen();
 
-	// this->controller.printBoard();
+	this->handler.printBoard();
 }
-
-
 
 void Game::moveEntities() {
 	this->handler.getPacman().move(this->handler.getBoardRef());

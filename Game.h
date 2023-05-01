@@ -6,10 +6,10 @@ class Game {
 		GameHandler handler;
 
 		// Returns true if all breacrumbs were eaten, and false otherwise
-		bool isWinner();
+		inline bool isWinner() { return !this->handler.breadcrumbExists(); };
 
 		// Returns true if there are no lifes left, and false otherwise
-		bool isLoser();
+		inline bool isLoser() { return this->handler.getLifes() == 0; };
 
 		// Prints the amount of lifes & score of the user
 		void printStatus();
@@ -22,7 +22,8 @@ class Game {
 
 		// Handles on-board events (pacman-ghost & pacman-breadcrumb intersections)
 		void handleEvents();
+		
 	public:
-		Game();
+		Game() { hideCursor(); };
 		void start();
 };
