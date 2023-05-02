@@ -1,13 +1,10 @@
 #include "Game.h"
 
 void Game::printStatus() {
-	int score_line = Settings::BOARD_HEIGHT + 2;
-	int lifes_line = Settings::BOARD_HEIGHT + 3;
-
-	deleteLine(score_line);
+	deleteLine(Settings::SCORE_LINE);
 	std::cout << "Score: " << this->handler.getScore();
 
-	deleteLine(lifes_line);
+	deleteLine(Settings::LIFES_LINE);
 	std::cout << "Lifes: " << this->handler.getLifes();
 }
 
