@@ -15,12 +15,9 @@ void MovingEntity::move(Board& board_ref) {
 
 // TODO: Change fmod
 void MovingEntity::tunnel(std::vector<std::string> board, Point& p) {
-	int board_height = board.size();
-	int board_width = board[0].size();
+	if (p.getX() < 0 || p.getX() >= Settings::BOARD_WIDTH)
+		p.setX(fmod((p.getX() + Settings::BOARD_WIDTH), Settings::BOARD_WIDTH));
 
-	if (p.getX() < 0 || p.getX() >= board_width)
-		p.setX(fmod((p.getX() + board_width), board_width));
-
-    else if (p.getY() < 0 || p.getY() >= board_height)
-		p.setY(fmod((p.getY() + board_height), board_height));
+    else if (p.getY() < 0 || p.getY() >= Settings::BOARD_HEIGHT)
+		p.setY(fmod((p.getY() + Settings::BOARD_HEIGHT), Settings::BOARD_HEIGHT));
 }
