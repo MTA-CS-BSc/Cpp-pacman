@@ -13,11 +13,10 @@ void MovingEntity::move(Board& board_ref) {
 	printAtXY(this->getCurrentPosition().getX(), this->getCurrentPosition().getY(), this->char_to_print);
 }
 
-// TODO: Change fmod
 void MovingEntity::tunnel(std::vector<std::string> board, Point& p) {
 	if (p.getX() < 0 || p.getX() >= Settings::BOARD_WIDTH)
-		p.setX(fmod((p.getX() + Settings::BOARD_WIDTH), Settings::BOARD_WIDTH));
+		p.setX(std::remainder((p.getX() + Settings::BOARD_WIDTH), Settings::BOARD_WIDTH));
 
     else if (p.getY() < 0 || p.getY() >= Settings::BOARD_HEIGHT)
-		p.setY(fmod((p.getY() + Settings::BOARD_HEIGHT), Settings::BOARD_HEIGHT));
+		p.setY(std::remainder((p.getY() + Settings::BOARD_HEIGHT), Settings::BOARD_HEIGHT));
 }
