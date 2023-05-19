@@ -9,11 +9,11 @@ class Settings {
 		static constexpr int
 			PACMAN_SPEED = 1,
 			BOARD_WIDTH = 80,
-			BOARD_HEIGHT = 25,
+			BOARD_HEIGHT = 23,
 			GHOSTS_AMOUNT = 2,
 			BREADCRUMB_POINTS = 1,
-			SCORE_LINE = BOARD_HEIGHT + 2,
-		    LIFES_LINE = BOARD_HEIGHT + 3;
+			SCORE_LINE = BOARD_HEIGHT + 1,
+		    LIFES_LINE = BOARD_HEIGHT + 2;
 		;
 
 		static constexpr double
