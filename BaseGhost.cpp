@@ -1,11 +1,5 @@
 #include "BaseGhost.h"
 
-BaseGhost::BaseGhost() : MovingEntity(getRandomDirection(), Settings::GHOST_SPEED, '$'), moves_in_same_direction(0) {
-}
-
-BaseGhost::BaseGhost(Direction dir, double speed, char ch) : MovingEntity(dir, speed, ch), moves_in_same_direction(0) {
-}
-
 Direction BaseGhost::getRandomDirection() {
 	return static_cast<Direction>(generateRandomNumber(0, 3));
 }

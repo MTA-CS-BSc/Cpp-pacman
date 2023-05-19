@@ -26,6 +26,6 @@ protected:
     virtual Point getNewPosition(Board&);
 
 public:
-    BaseGhost();
-    BaseGhost(Direction, double, char);
+    BaseGhost() : MovingEntity(getRandomDirection(), Settings::GHOST_SPEED, '$'), moves_in_same_direction(0) { }
+    BaseGhost(Direction d, double speed, char ch) : MovingEntity(d, speed, ch), moves_in_same_direction(0) { }
 };
