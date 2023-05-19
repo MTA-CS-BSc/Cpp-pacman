@@ -9,7 +9,7 @@ bool BaseGhost::isDirectionOk(Board& board, Point& p, Direction direction) {
 }
 
 bool BaseGhost::shouldChangeDirection(Board& board, Point& p) {
-	return this->isBeyondBoundaries(board, p) || this->isOnWall(board, p) || this->moves_in_same_direction >= Settings::GHOST_MAX_MOVES_IN_SAME_DIR;
+	return this->isBeyondBoundaries(board, p) || this->isOnWall(board, p);
 }
 
 Point BaseGhost::getNewPosition(Board& board) {
