@@ -12,6 +12,16 @@ bool BaseGhost::shouldChangeDirection(Board& board, Point& p) {
 	return this->isBeyondBoundaries(board, p) || this->isOnWall(board, p);
 }
 
+Direction BaseGhost::getNewDirection(Board& board, Point& p) {
+	Direction new_direction = this->getRandomDirection();
+
+	while (!this->isDirectionOk(board, p, new_direction)) {
+		p = this->current_position; // Reset
+		new_direction = this->getRandomDirection();
+		p.changeWithDirection(new_direction, this->getSpeed());
+	}
+}
+
 Point BaseGhost::getNewPosition(Board& board) {
 	Point p = this->current_position;
 
