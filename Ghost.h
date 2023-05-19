@@ -11,16 +11,16 @@ class Ghost : public MovingEntity {
 
         // Receives the board, a point and a direction.
         // Returns true if the direction is valid (i.e not on a wall & differs from the current direction)
-        bool isDirectionOk(std::vector<std::string>&, Point&, Direction);
+        bool isDirectionOk(Board& board, Point&, Direction);
 
         // Receives the board and a point.
         // Returns true if the ghot should change it's current direction
         // (i.e encountered a wall || passed beyond the board's boundaries)
-        bool shouldChangeDirection(std::vector<std::string>&, Point&);
+        bool shouldChangeDirection(Board&, Point&);
 
         // Receives the game's board.
 		// Returns the ghost's new position (point) according to the ghost's walking logic.
-        Point getNewPosition(std::vector<std::string>&);
+        Point getNewPosition(Board&);
 
     public:
         Ghost();

@@ -1,7 +1,7 @@
 #pragma once
 
 // OS type
-#define LINUX
+#define WINDOWS
 
 // A module to store game settings
 class Settings {
