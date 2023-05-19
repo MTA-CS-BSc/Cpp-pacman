@@ -20,7 +20,7 @@ protected:
 
     // Receives the game's board.
     // Returns the ghost's new position (point) according to the ghost's walking logic.
-    virtual Point getNewPosition(Board&);
+    Point getNewPosition(Board&);
 
     virtual inline void ghostMovementLogic(Board&, Point&) { }
 
