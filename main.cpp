@@ -2,6 +2,8 @@
 
 void startGame() {
 	Game game = Game();
+	srand((unsigned int)time(NULL));
+
 	game.start();
 
 	std::cout << "\n\nPress any key to go back to the menu" << std::endl;

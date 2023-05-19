@@ -1,26 +1,24 @@
 #include "Ghost.h"
 
 Ghost::Ghost() : MovingEntity(getRandomDirection(), Settings::GHOST_SPEED, '$') {
-	srand((unsigned int)time(NULL));
 }
 
 Ghost::Ghost(Direction dir, double speed, char ch) : MovingEntity(dir, speed, ch) {
-	srand((unsigned int)time(NULL));
 }
 
 Direction Ghost::getRandomDirection() {
 	return static_cast<Direction>(generateRandomNumber(0, 3));
 }
 
-bool Ghost::shouldChangeDirection(std::vector<std::string> board, Point& p) {
+bool Ghost::shouldChangeDirection(std::vector<std::string>& board, Point& p) {
     return this->isBeyondBoundaries(board, p) || this->isOnWall(board, p);
 }
 
-bool Ghost::isDirectionOk(std::vector<std::string> board, Point& p, Direction direction) {
+bool Ghost::isDirectionOk(std::vector<std::string>& board, Point& p, Direction direction) {
     return !(this->isOnWall(board, p)) && (direction != this->getDirection());
 }
 
-Point Ghost::getNewPosition(std::vector<std::string> board) {
+Point Ghost::getNewPosition(std::vector<std::string>& board) {
 	Point p = this->current_position;
 
 	p.changeWithDirection(this->getDirection(), this->getSpeed());
