@@ -5,7 +5,7 @@
 #include <time.h>
 
 class BaseGhost : public MovingEntity {
-private:
+protected:
     int moves_in_same_direction;
 
     // Generates a random direction according to the ghosts' walking logic
@@ -15,7 +15,6 @@ private:
     // Returns true if the direction is valid (i.e not on a wall & differs from the current direction)
     bool isDirectionOk(Board& board, Point&, Direction);
 
-protected:
     // Receives the board and a point.
     // Returns true if the ghot should change it's current direction
     // (i.e encountered a wall || passed beyond the board's boundaries)
