@@ -6,7 +6,7 @@ private:
 	int moves_in_same_direction;
 	bool is_smart;
 
-	bool shouldChangeDirection(Board&, Point&) override;
+	bool shouldChangeFoolness();
 	void ghostMovementLogic(Board&, Point&) override;
 
 public:
