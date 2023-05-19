@@ -15,20 +15,8 @@ bool BaseGhost::shouldChangeDirection(Board& board, Point& p) {
 Point BaseGhost::getNewPosition(Board& board) {
 	Point p = this->current_position;
 
+	this->ghostMovementLogic(board, p);
 	p.changeWithDirection(this->getDirection(), this->getSpeed());
-
-	if (shouldChangeDirection(board, p)) {
-		Direction new_direction = this->getRandomDirection();
-
-		while (!isDirectionOk(board, p, new_direction)) {
-			p = this->current_position; // Reset
-			new_direction = this->getRandomDirection();
-			p.changeWithDirection(new_direction, this->getSpeed());
-		}
-
-		this->setCurrentDirection(new_direction);
-		this->moves_in_same_direction = 0;
-	}
 
 	return p;
 }

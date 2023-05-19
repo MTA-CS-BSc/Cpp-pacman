@@ -6,8 +6,6 @@
 
 class BaseGhost : public MovingEntity {
 protected:
-    int moves_in_same_direction;
-
     // Generates a random direction according to the ghosts' walking logic
     Direction getRandomDirection();
 
@@ -24,7 +22,9 @@ protected:
     // Returns the ghost's new position (point) according to the ghost's walking logic.
     virtual Point getNewPosition(Board&);
 
+    virtual inline void ghostMovementLogic(Board&, Point&) { }
+
 public:
-    BaseGhost() : MovingEntity(getRandomDirection(), Settings::GHOST_SPEED, '$'), moves_in_same_direction(0) { }
-    BaseGhost(Direction d, double speed, char ch) : MovingEntity(d, speed, ch), moves_in_same_direction(0) { }
+    BaseGhost() : MovingEntity(getRandomDirection(), Settings::GHOST_SPEED, '$') { }
+    BaseGhost(Direction d, double speed, char ch) : MovingEntity(d, speed, ch) { }
 };

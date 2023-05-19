@@ -3,9 +3,11 @@
 
 class NoviceGhost : public BaseGhost {
 private:
+	int moves_in_same_direction;
 	bool shouldChangeDirection(Board&, Point&);
+	void ghostMovomentLogic(Board&, Point&);
 
 public:
-	NoviceGhost() : BaseGhost() { }
-	NoviceGhost(Direction d, double speed, char ch) : BaseGhost(d, speed, ch) { }
+	NoviceGhost() : BaseGhost(), moves_in_same_direction(0) { }
+	NoviceGhost(Direction d, double speed, char ch) : BaseGhost(d, speed, ch), moves_in_same_direction(0) { }
 };
