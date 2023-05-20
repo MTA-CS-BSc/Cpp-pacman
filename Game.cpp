@@ -23,14 +23,8 @@ void Game::moveEntities() {
 	for (auto& ghost : this->handler.getGhostsArray())
 		ghost->move(this->handler.getBoardRef());
 
-	for (auto& fruit : this->handler.getFruitsArray()) {
-		bool before_visibility = fruit->getIsVisible();
+	for (auto& fruit : this->handler.getFruitsArray())
 		fruit->move(this->handler.getBoardRef());
-		bool after_visibility = fruit->getIsVisible();
-
-		if (before_visibility && !after_visibility)
-			fruit->setCurrentPosition(this->handler.getRandomPosition());
-	}	
 }
 
 void Game::handleEvents() {
