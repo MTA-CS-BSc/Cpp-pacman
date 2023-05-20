@@ -1,7 +1,5 @@
 #pragma once
 #include "MovingEntity.h"
-#include <stdlib.h>
-#include <time.h>
 
 class BaseGhost : public MovingEntity {
 protected:
