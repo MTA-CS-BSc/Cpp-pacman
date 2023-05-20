@@ -121,7 +121,7 @@ void GameHandler::removeAllFruit() {
 
 void GameHandler::resetBoard() {
 	clearScreen();
-	removeFruit();
+	removeAllFruit();
 	initPositions();
 	printBoard();
 }
