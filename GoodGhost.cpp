@@ -12,16 +12,17 @@ void GoodGhost::ghostMovementLogic(Board& board, Point& p) {
 		this->is_smart = !this->is_smart;
 
 	else {
-		// if (this->is_smart) {
-			// SmartGhost::chasePacman(board, p);
-			// this->moves_in_same_direction++;
-		// }
+		if (this->is_smart) {
+			SmartGhost::ghostMovementLogic(board, p);
+			this->moves_in_same_direction++;
+		}
 
-		// else if (shouldChangeDirection(board, p)) {
-			// this->setCurrentDirection(getNewDirection(board, p));
-			// this->moves_in_same_direction = 0;
-			// }
-		// }
+		else if (!this->is_smart && shouldChangeDirection(board, p)) {
+			this->setCurrentDirection(getNewDirection(board, p));
+			this->moves_in_same_direction = 0;
+		}
 
+		else
+			this->moves_in_same_direction++;
 	}
 }
