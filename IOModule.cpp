@@ -63,7 +63,7 @@ Action getAction() {
         else {
 			std::cout << "Wrong input!" << std::endl;
 			std::cin.clear();
-			// std::cin.ignore(80, '\n');
+			std::cin.ignore(80, '\n');
         }
 
 	}

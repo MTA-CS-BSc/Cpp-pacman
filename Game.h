@@ -24,6 +24,7 @@ class Game {
 		void handleEvents();
 		
 	public:
-		Game() { hideCursor(); }
+		Game(GhostMode gm) : handler(gm) { hideCursor(); }
+		inline GameHandler& getGameHandler() { return this->handler; }
 		void start();
 };

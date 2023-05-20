@@ -1,13 +1,16 @@
 #pragma once
 #include "Pacman.h"
-#include "Ghost.h"
+#include "NoviceGhost.h"
+#include "GoodGhost.h"
 #include "Board.h"
+#include "GhostMode.h"
 
 class GameHandler {
 private:
     int lifes, score;
     Board board_ref;
-    std::vector<Ghost> ghosts;
+    std::vector<BaseGhost*> ghosts;
+    GhostMode ghost_mode;
     Pacman pacman;
     int breadcrumbs_amount;
 
@@ -27,15 +30,18 @@ private:
     void resetBoard();
 
 public:
-    GameHandler();
+    ~GameHandler();
+    GameHandler(GhostMode gm);
+    inline GhostMode getGhostMode() const { return this->ghost_mode; }
     inline int getLifes() const { return this->lifes; }
     inline int getScore() const { return this->score; }
     inline Board& getBoardRef() { return this->board_ref; }
-    inline std::vector<Ghost>& getGhostsArray() { return this->ghosts; }
+    inline std::vector<BaseGhost*>& getGhostsArray() { return this->ghosts; }
     inline Pacman& getPacman() { return this->pacman; }
     inline void setPacman(const Pacman& p) { this->pacman = p; }
     inline void setLifes(int value) { this->lifes = value; }
     inline void setScore(int value) { this->score = value; }
+    inline void setGhostMode(GhostMode value) { this->ghost_mode = value; }
     inline bool breadcrumbExists() { return this->breadcrumbs_amount != 0; }
 
     // Adds 1 to the user's score if a breadcrumb was eaten

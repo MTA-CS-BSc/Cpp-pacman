@@ -20,8 +20,8 @@ void Game::pause() {
 void Game::moveEntities() {
 	this->handler.getPacman().move(this->handler.getBoardRef());
 
-	for (auto& ghost : this->handler.getGhostsArray())
-		ghost.move(this->handler.getBoardRef());
+	for (auto ghost : this->handler.getGhostsArray())
+		ghost->move(this->handler.getBoardRef());
 }
 
 void Game::handleEvents() {

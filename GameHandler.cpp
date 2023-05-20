@@ -1,14 +1,28 @@
 #include "GameHandler.h"
 
-GameHandler::GameHandler() : lifes(3), score(0) {
+GameHandler::~GameHandler() {
+	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
+		delete this->ghosts[i];
+}
+
+GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm) {
 	initializeBoard();
 	initGhosts();
 	initPositions();
 }
 
 void GameHandler::initGhosts() {
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
-		this->ghosts.push_back(Ghost());
+	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++) {
+		if (this->ghost_mode == GhostMode::NOVICE)
+			this->ghosts.push_back(new NoviceGhost());
+
+		else if (this->ghost_mode == GhostMode::GOOD)
+			this->ghosts.push_back(new GoodGhost(this->pacman));
+
+		else if (this->ghost_mode == GhostMode::BEST)
+			this->ghosts.push_back(new SmartGhost(this->pacman));
+	}
+		
 }
 
 void GameHandler::initializeBoard() {
@@ -27,7 +41,7 @@ void GameHandler::initPositions() {
 	this->pacman.setCurrentPosition(Point(Settings::BOARD_WIDTH * 3 / 4, Settings::BOARD_HEIGHT - 4 / 2));
 	
 	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
-		this->ghosts[i].setCurrentPosition(Point(int((Settings::BOARD_WIDTH / Settings::GHOSTS_AMOUNT) * (i)+1), 1));
+		this->ghosts[i]->setCurrentPosition(Point(int((Settings::BOARD_WIDTH / Settings::GHOSTS_AMOUNT) * (i)+1), 1));
 		
 }
 
@@ -37,7 +51,7 @@ void GameHandler::printBoard() {
 			printAtXY(j, i, this->board_ref.board_obj[i][j]);
 
 	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
-		printAtXY(this->ghosts[i].getCurrentPosition().getX(), this->ghosts[i].getCurrentPosition().getY(), this->ghosts[i].getCharToPrint());
+		printAtXY(this->ghosts[i]->getCurrentPosition().getX(), this->ghosts[i]->getCurrentPosition().getY(), this->ghosts[i]->getCharToPrint());
 
 	printAtXY(this->pacman.getCurrentPosition().getX(), this->pacman.getCurrentPosition().getY(), this->pacman.getCharToPrint());
 }
@@ -66,9 +80,9 @@ void GameHandler::handlePacmanEaten() {
 }
 
 bool GameHandler::isPacmanEaten() {
-	for (auto& ghost : this->ghosts)
-		if (abs(this->pacman.getCurrentPosition().getX() - ghost.getCurrentPosition().getX()) <= Settings::PACMAN_SPEED - Settings::GHOST_SPEED
-			&& abs(this->pacman.getCurrentPosition().getY() - ghost.getCurrentPosition().getY()) <= Settings::PACMAN_SPEED - Settings::GHOST_SPEED)
+	for (auto ghost : this->ghosts)
+		if (abs(this->pacman.getCurrentPosition().getX() - ghost->getCurrentPosition().getX()) <= Settings::PACMAN_SPEED - Settings::GHOST_SPEED
+			&& abs(this->pacman.getCurrentPosition().getY() - ghost->getCurrentPosition().getY()) <= Settings::PACMAN_SPEED - Settings::GHOST_SPEED)
 			return true;
 
 	return false;
