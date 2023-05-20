@@ -3,6 +3,9 @@
 GameHandler::~GameHandler() {
 	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
 		delete this->ghosts[i];
+
+	for (int i = 0; i < Settings::FRUIT_AMOUNT; i++)
+		delete this->fruits[i];
 }
 
 GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm) {
@@ -14,7 +17,7 @@ GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm) {
 
 void GameHandler::initFruits() {
 	for (int i = 0; i < Settings::FRUIT_AMOUNT; i++)
-		this->fruits.push_back(Fruit());
+		this->fruits.push_back(new Fruit());
 }
 
 void GameHandler::initGhosts() {
@@ -46,11 +49,11 @@ bool GameHandler::isLocationTaken(Point& p) {
 
 	taken = this->pacman.getCurrentPosition() == p;
 
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT && !taken; i++)
-		taken = this->ghosts[i]->getCurrentPosition() == p;
+	for (auto& ghost : this->ghosts)
+		taken = ghost->getCurrentPosition() == p;
 
-	for (int i = 0; i < Settings::FRUIT_AMOUNT && !taken; i++)
-		taken = this->fruits[i].getCurrentPosition() == p;
+	for (auto& fruit : this->fruits)
+		taken = fruit->getCurrentPosition() == p;
 
 	return taken;
 }
@@ -77,7 +80,7 @@ void GameHandler::initPositions() {
 		ghost->setCurrentPosition(getRandomPosition());
 	
 	for (auto& fruit : this->fruits)
-		fruit.setCurrentPosition(getRandomPosition());
+		fruit->setCurrentPosition(getRandomPosition());
 }
 
 void GameHandler::printBoard() {
@@ -86,8 +89,8 @@ void GameHandler::printBoard() {
 			printAtXY(j, i, this->board_ref.board_obj[i][j]);
 
 	for (auto& fruit : this->fruits)
-		if (fruit.getIsVisible())
-			printAtXY(fruit.getCurrentPosition().getX(), fruit.getCurrentPosition().getY(), fruit.getCharToPrint());
+		if (fruit->getIsVisible())
+			printAtXY(fruit->getCurrentPosition().getX(), fruit->getCurrentPosition().getY(), fruit->getCharToPrint());
 
 	for (auto& ghost : this->ghosts)
 		printAtXY(ghost->getCurrentPosition().getX(), ghost->getCurrentPosition().getY(), ghost->getCharToPrint());
@@ -103,15 +106,22 @@ void GameHandler::handleBreadcrumbsChange() {
 	}
 }
 
-void GameHandler::removeFruit(Fruit& fruit) {
+void GameHandler::removeFruit(Fruit*& fruit, bool generate_new_char = true) {
 	Point current_fruit_position;
-	current_fruit_position = fruit.getCurrentPosition();
+	current_fruit_position = fruit->getCurrentPosition();
 
+	fruit->setIsVisible(false);
+	
 	printAtXY(current_fruit_position.getX(), current_fruit_position.getY(),
 		board_ref.board_obj[(int)current_fruit_position.getY()][(int)current_fruit_position.getX()]);
+	
+	fruit->setCurrentPosition(getRandomPosition());
 
-	fruit.setCurrentPosition(getRandomPosition());
-	fruit.setIsVisible(false);
+	if (generate_new_char) {
+		fruit->setCharToPrint(generateRandomFruitChar());
+		fruit->setOriginalChar(fruit->getCharToPrint());
+	}
+		
 }
 
 void GameHandler::removeAllFruit() {
@@ -128,10 +138,10 @@ void GameHandler::resetBoard() {
 
 void GameHandler::handlePacmanFruitCollision() {
 	for (auto& fruit : this->fruits) {
-		if (fruit.getIsVisible()) {
-			if (abs(fruit.getCurrentPosition().getX() - this->pacman.getCurrentPosition().getX()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED
-				&& abs(fruit.getCurrentPosition().getY() - this->pacman.getCurrentPosition().getY()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED) {
-				this->score += fruit.getFruitPoints();
+		if (fruit->getIsVisible()) {
+			if (abs(fruit->getCurrentPosition().getX() - this->pacman.getCurrentPosition().getX()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED
+				&& abs(fruit->getCurrentPosition().getY() - this->pacman.getCurrentPosition().getY()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED) {
+				this->score += fruit->getFruitPoints();
 				removeFruit(fruit);
 			}
 		}
@@ -140,11 +150,11 @@ void GameHandler::handlePacmanFruitCollision() {
 
 void GameHandler::handleGhostFruitCollision() {
 	for (auto& fruit : this->fruits) {
-		if (fruit.getIsVisible()) {
+		if (fruit->getIsVisible()) {
 			for (auto& ghost : this->ghosts) {
-				if (abs(fruit.getCurrentPosition().getX() - ghost->getCurrentPosition().getX()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED
-					&& abs(fruit.getCurrentPosition().getY() - ghost->getCurrentPosition().getY()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED)
-					removeFruit(fruit);
+				if (abs(fruit->getCurrentPosition().getX() - ghost->getCurrentPosition().getX()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED
+					&& abs(fruit->getCurrentPosition().getY() - ghost->getCurrentPosition().getY()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED)
+					removeFruit(fruit, false);
 			}
 		}
 	}

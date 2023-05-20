@@ -6,18 +6,24 @@ bool Fruit::shouldChangeDirection(Board& board, Point& p) {
 }
 
 Point Fruit::getNewPosition(Board& board) {
-	if (shouldChangeVisibility()) {
-		this->setIsVisible(!this->getIsVisible());
-		this->setCharToPrint(board.board_obj[(int)this->getCurrentPosition().getY()][(int)this->getCurrentPosition().getX()]);
-		printAtXY(this->getCurrentPosition().getX(), this->getCurrentPosition().getY(), this->getCharToPrint());
-	}
-
 	Point p = this->current_position;
 
-	p.changeWithDirection(this->getDirection(), this->getSpeed());
+	if (shouldChangeVisibility()) {
+		this->setIsVisible(!this->getIsVisible());
+		
+		if (!this->getIsVisible())
+			this->setCharToPrint(board.board_obj[(int)this->getCurrentPosition().getY()][(int)this->getCurrentPosition().getX()]);
 
-	if (shouldChangeDirection(board, p))
-		this->setCurrentDirection(getValidRandomDirection(board, p));
+		else
+			this->setCharToPrint(this->getOriginalChar());
+	}
+
+	if (this->getIsVisible()) {
+		p.changeWithDirection(this->getDirection(), this->getSpeed());
+
+		if (shouldChangeDirection(board, p))
+			this->setCurrentDirection(getValidRandomDirection(board, p));
+	}
 
 	return p;
 }

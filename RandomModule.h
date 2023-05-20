@@ -9,9 +9,9 @@ inline int generateRandomNumber(int start, int end) {
 }
 
 inline char generateRandomFruitChar() {
-    return static_cast<char>(generateRandomNumber(Settings::FRUIT_MIN, Settings::FRUIT_MAX));
+    return generateRandomNumber(Settings::FRUIT_MIN, Settings::FRUIT_MAX) + '0';
 }
 
 inline bool generateRandomBoolean() {
-    return generateRandomNumber(1, 100) % 50 == 1;
+    return generateRandomNumber(1, 150) % 50 == 0;
 }

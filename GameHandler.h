@@ -12,7 +12,7 @@ private:
     GhostMode ghost_mode;
     Pacman pacman;
     int breadcrumbs_amount;
-    std::vector<Fruit> fruits;
+    std::vector<Fruit*> fruits;
 
     // Initializes the game board with breadcrumbs.
     void initializeBoard();
@@ -32,9 +32,6 @@ private:
     // Resets the entities positions and re-prints the board. 
     void resetBoard();
 
-    // Generates a random available position (i.e not a wall or a taken one)
-    Point getRandomPosition();
-
     // Returns true if the requested position is taken by another entity
     bool isLocationTaken(Point&);
 
@@ -42,7 +39,7 @@ private:
     void removeAllFruit();
 
     // Removes a single fruit, resets it's position and it's visibility (to false).
-    void removeFruit(Fruit&);
+    void removeFruit(Fruit*&, bool);
 
 public:
     ~GameHandler();
@@ -52,13 +49,16 @@ public:
     inline int getScore() const { return this->score; }
     inline Board& getBoardRef() { return this->board_ref; }
     inline std::vector<BaseGhost*>& getGhostsArray() { return this->ghosts; }
-    inline std::vector<Fruit>& getFruitsArray() { return this->fruits;  }
+    inline std::vector<Fruit*>& getFruitsArray() { return this->fruits;  }
     inline Pacman& getPacman() { return this->pacman; }
     inline void setPacman(const Pacman& p) { this->pacman = p; }
     inline void setLifes(int value) { this->lifes = value; }
     inline void setScore(int value) { this->score = value; }
     inline void setGhostMode(GhostMode value) { this->ghost_mode = value; }
     inline bool breadcrumbExists() { return this->breadcrumbs_amount != 0; }
+
+    // Generates a random available position (i.e not a wall or a taken one)
+    Point getRandomPosition();
 
     // Removes the fruit from the screen and set's it's visibility to false
     void handleGhostFruitCollision();

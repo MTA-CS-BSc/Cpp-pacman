@@ -11,7 +11,7 @@ class Settings {
 			BOARD_WIDTH = 80,
 			BOARD_HEIGHT = 23,
 			GHOSTS_AMOUNT = 2,
-			FRUIT_AMOUNT = 5,
+			FRUIT_AMOUNT = 2,
 			GHOST_MAX_MOVES_IN_SAME_DIR = 20,
 			FRUIT_MIN = 5,
 			FRUIT_MAX = 9,

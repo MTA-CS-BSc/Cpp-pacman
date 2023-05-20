@@ -38,7 +38,7 @@ class MovingEntity {
         }
 
         inline bool isDirectionOk(Board& board, Point& p, Direction direction) {
-            return !(this->isOnWall(board, p)) && !(this->isBeyondBoundaries(board, p));
+            return !(this->isOnWall(board, p)) && !(this->isBeyondBoundaries(board, p)) && this->getDirection() != direction;
         }
 
         inline Direction getRandomDirection() {
