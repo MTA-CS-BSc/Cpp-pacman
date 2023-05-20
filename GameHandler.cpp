@@ -73,11 +73,11 @@ void GameHandler::initPositions() {
 	this->pacman.setCurrentDirection(Direction::STAY);
 	this->pacman.setCurrentPosition(getRandomPosition());
 	
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
-		this->ghosts[i]->setCurrentPosition(getRandomPosition());
+	for (auto& ghost : this->ghosts)
+		ghost->setCurrentPosition(getRandomPosition());
 	
-	for (int i = 0; i < Settings::FRUIT_AMOUNT; i++)
-		this->fruits[i].setCurrentPosition(getRandomPosition());
+	for (auto& fruit : this->fruits)
+		fruit.setCurrentPosition(getRandomPosition());
 }
 
 void GameHandler::printBoard() {
@@ -99,9 +99,23 @@ void GameHandler::handleBreadcrumbsChange() {
 	}
 }
 
+void GameHandler::removeFruit() {
+	Point current_fruit_position;
+
+	for (auto& fruit : this->fruits) {
+		current_fruit_position = fruit.getCurrentPosition();
+
+		printAtXY(current_fruit_position.getX(), current_fruit_position.getY(),
+			board_ref.board_obj[(int)current_fruit_position.getY()][(int)current_fruit_position.getX()]);
+
+		fruit.setIsVisible(false);
+	}
+}
+
 void GameHandler::resetBoard() {
 	clearScreen();
-	this->initPositions();
+	removeFruit();
+	initPositions();
 	printBoard();
 }
 

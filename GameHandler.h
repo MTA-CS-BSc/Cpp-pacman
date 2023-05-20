@@ -34,6 +34,8 @@ private:
     Point getRandomPosition();
     bool isLocationTaken(Point&);
 
+    void removeFruit();
+
 public:
     ~GameHandler();
     GameHandler(GhostMode gm);
