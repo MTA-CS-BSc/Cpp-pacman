@@ -85,6 +85,10 @@ void GameHandler::printBoard() {
 		for (int j = 0; j < Settings::BOARD_WIDTH; j++)
 			printAtXY(j, i, this->board_ref.board_obj[i][j]);
 
+	for (auto& fruit : this->fruits)
+		if (fruit.getIsVisible())
+			printAtXY(fruit.getCurrentPosition().getX(), fruit.getCurrentPosition().getY(), fruit.getCharToPrint());
+
 	for (auto& ghost : this->ghosts)
 		printAtXY(ghost->getCurrentPosition().getX(), ghost->getCurrentPosition().getY(), ghost->getCharToPrint());
 

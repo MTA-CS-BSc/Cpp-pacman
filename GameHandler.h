@@ -23,6 +23,7 @@ private:
     // Creates the ghosts objects according to the amount needed, declared in the settings module.
     void initGhosts();
 
+    // Creates the fruits objects according to the amount needed, declared in the settings module.
     void initFruits();
 
     // Returns true if the pacman was eaten, and false otherwise.
@@ -31,10 +32,16 @@ private:
     // Resets the entities positions and re-prints the board. 
     void resetBoard();
 
+    // Generates a random available position (i.e not a wall or a taken one)
     Point getRandomPosition();
+
+    // Returns true if the requested position is taken by another entity
     bool isLocationTaken(Point&);
 
+    // Removes all fruits using removeFruit function
     void removeAllFruit();
+
+    // Removes a single fruit, resets it's position and it's visibility (to false).
     void removeFruit(Fruit&);
 
 public:
@@ -45,6 +52,7 @@ public:
     inline int getScore() const { return this->score; }
     inline Board& getBoardRef() { return this->board_ref; }
     inline std::vector<BaseGhost*>& getGhostsArray() { return this->ghosts; }
+    inline std::vector<Fruit>& getFruitsArray() { return this->fruits;  }
     inline Pacman& getPacman() { return this->pacman; }
     inline void setPacman(const Pacman& p) { this->pacman = p; }
     inline void setLifes(int value) { this->lifes = value; }
@@ -52,11 +60,13 @@ public:
     inline void setGhostMode(GhostMode value) { this->ghost_mode = value; }
     inline bool breadcrumbExists() { return this->breadcrumbs_amount != 0; }
 
+    // Removes the fruit from the screen and set's it's visibility to false
     void handleGhostFruitCollision();
 
+    // Adds the fruit score to the total score and removes the fruit
     void handlePacmanFruitCollision();
 
-    // Adds 1 to the user's score if a breadcrumb was eaten
+    // Adds 1 to the user's score if a breadcrumb was eaten and removes it from the screen
     void handleBreadcrumbsChange();
 
     // If the pacman was eaten, removes a life from the pacman's remaining lifes
