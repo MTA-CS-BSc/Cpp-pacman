@@ -20,4 +20,8 @@ class Point {
         // Receives a direction and the amount of 'steps' to do in that direction.
         // Changes the x, y values accordingly.
         void changeWithDirection(Direction, double);
+
+        inline bool operator==(const Point& other) {
+            return this->getX() == other.getX() && this->getY() == other.getY();
+        }
 };
