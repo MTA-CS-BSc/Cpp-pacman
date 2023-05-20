@@ -34,7 +34,8 @@ private:
     Point getRandomPosition();
     bool isLocationTaken(Point&);
 
-    void removeFruit();
+    void removeAllFruit();
+    void removeFruit(Fruit&);
 
 public:
     ~GameHandler();
@@ -52,6 +53,8 @@ public:
     inline bool breadcrumbExists() { return this->breadcrumbs_amount != 0; }
 
     void handleGhostFruitCollision();
+
+    void handlePacmanFruitCollision();
 
     // Adds 1 to the user's score if a breadcrumb was eaten
     void handleBreadcrumbsChange();
