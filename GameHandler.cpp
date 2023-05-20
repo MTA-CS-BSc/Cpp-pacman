@@ -129,7 +129,8 @@ void GameHandler::resetBoard() {
 void GameHandler::handlePacmanFruitCollision() {
 	for (auto& fruit : this->fruits) {
 		if (abs(fruit.getCurrentPosition().getX() - this->pacman.getCurrentPosition().getX()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED
-			&& abs(fruit.getCurrentPosition().getY() - this->pacman.getCurrentPosition().getY()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED) {
+			&& abs(fruit.getCurrentPosition().getY() - this->pacman.getCurrentPosition().getY()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED
+			&& fruit.getIsVisible()) {
 			this->score += fruit.getFruitPoints();
 			removeFruit(fruit);
 		}
