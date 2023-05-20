@@ -1,14 +1,10 @@
 #pragma once
 #include "MovingEntity.h"
-#include "RandomModule.h"
 #include <stdlib.h>
 #include <time.h>
 
 class BaseGhost : public MovingEntity {
 protected:
-    // Generates a random direction according to the ghosts' walking logic
-    Direction getRandomDirection();
-
     // Receives the board, a point and a direction.
     // Returns true if the direction is valid (i.e not on a wall & differs from the current direction)
     bool isDirectionOk(Board& board, Point&, Direction);

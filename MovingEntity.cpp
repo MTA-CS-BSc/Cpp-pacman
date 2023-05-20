@@ -1,6 +1,8 @@
 #include "MovingEntity.h"
 
-MovingEntity::MovingEntity(Direction md, double s, char ch) : current_moving_direction(md), speed(s), char_to_print(ch) {}
+Direction MovingEntity::getRandomDirection() {
+	return static_cast<Direction>(generateRandomNumber(0, 3));
+}
 
 void MovingEntity::move(Board& board_ref) {
 	Point old_position = this->getCurrentPosition();

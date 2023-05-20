@@ -1,9 +1,5 @@
 #include "BaseGhost.h"
 
-Direction BaseGhost::getRandomDirection() {
-	return static_cast<Direction>(generateRandomNumber(0, 3));
-}
-
 bool BaseGhost::isDirectionOk(Board& board, Point& p, Direction direction) {
 	return !(this->isOnWall(board, p)) && !(this->isBeyondBoundaries(board, p) && (direction != this->getDirection()));
 }

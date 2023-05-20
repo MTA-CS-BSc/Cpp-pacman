@@ -2,6 +2,7 @@
 #include "Point.h"
 #include "IOModule.h"
 #include "Board.h"
+#include "RandomModule.h"
 
 class MovingEntity {
     private:
@@ -11,6 +12,9 @@ class MovingEntity {
 
     protected:
         Point current_position;
+
+        // Generates a random direction according to the ghosts' walking logic
+        Direction getRandomDirection();
 
         // A virtual function to be implemented when inherting from MovingEntity
         // that handles the calculation of the entity's new position (according to the entity's logic)
@@ -30,7 +34,7 @@ class MovingEntity {
         }
 
     public:
-        MovingEntity(Direction, double, char);
+        MovingEntity(Direction md, double s, char ch) : current_moving_direction(md), speed(s), char_to_print(ch) { }
         inline double getSpeed() const { return this->speed; };
         inline Point& getCurrentPosition() { return this->current_position; };
         inline char getCharToPrint() const { return this->char_to_print; };
