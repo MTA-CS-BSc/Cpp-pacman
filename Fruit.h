@@ -9,6 +9,7 @@ private:
 	inline bool shouldChangeVisibility() { return generateRandomBoolean(); }
 	inline bool shouldChangeDirectionRandomly() { return generateRandomBoolean(); }
 
+	Point generateFruitRandomPosition(Board&);
 	bool shouldChangeDirection(Board&, Point&) override;
 	Point getNewPosition(Board&) override;
 
