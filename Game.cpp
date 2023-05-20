@@ -20,14 +20,18 @@ void Game::pause() {
 void Game::moveEntities() {
 	this->handler.getPacman().move(this->handler.getBoardRef());
 
-	for (auto ghost : this->handler.getGhostsArray())
+	for (auto& ghost : this->handler.getGhostsArray())
 		ghost->move(this->handler.getBoardRef());
+
+	for (auto& fruit : this->handler.getFruitsArray())
+		fruit.move(this->handler.getBoardRef());
 }
 
 void Game::handleEvents() {
 	this->handler.handleBreadcrumbsChange();
 	this->handler.handlePacmanEaten();
 	this->handler.handleGhostFruitCollision();
+	this->handler.handlePacmanFruitCollision();
 }
 
 void Game::start() {
