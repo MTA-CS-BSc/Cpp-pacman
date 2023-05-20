@@ -55,3 +55,5 @@ void printHowToPlay();
 
 // Prints the received char in the received coordinate (x, y)
 void printAtXY(double, double, char);
+
+std::string getGhostModeString(GhostMode);

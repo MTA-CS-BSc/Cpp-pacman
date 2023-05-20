@@ -120,3 +120,14 @@ void printAtXY(double x, double y, char ch) {
 	gotoxy(x, y);
 	std::cout << ch;
 }
+
+std::string getGhostModeString(GhostMode mode) {
+	switch (mode) {
+	case GhostMode::BEST:
+		return "BEST";
+	case GhostMode::GOOD:
+		return "GOOD";
+	case GhostMode::NOVICE:
+		return "NOVICE";
+	}
+}
