@@ -27,8 +27,9 @@ Direction BaseGhost::getNewDirection(Board& board, Point& p) {
 Point BaseGhost::getNewPosition(Board& board) {
 	Point p = this->current_position;
 
-	this->ghostMovementLogic(board, p);
 	p.changeWithDirection(this->getDirection(), this->getSpeed());
+
+	this->ghostMovementLogic(board, p);
 
 	return p;
 }
