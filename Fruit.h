@@ -5,8 +5,8 @@ class Fruit : public MovingEntity {
 private:
 	bool is_visible;
 
-	inline bool shouldDisappear() { return generateRandomNumber(1, 100) % 50 == 1; }
-	inline bool shouldChangeDirectionRandomly() { return generateRandomNumber(1, 100) % 50 == 1; }
+	inline bool shouldChangeVisibility() { return generateRandomBoolean(); }
+	inline bool shouldChangeDirectionRandomly() { return generateRandomBoolean(); }
 
 	bool shouldChangeDirection(Board&, Point&) override;
 	Point getNewPosition(Board&) override;

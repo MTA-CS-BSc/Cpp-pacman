@@ -11,3 +11,7 @@ inline int generateRandomNumber(int start, int end) {
 inline char generateRandomFruitChar() {
     return static_cast<char>(generateRandomNumber(Settings::FRUIT_MIN, Settings::FRUIT_MAX));
 }
+
+inline bool generateRandomBoolean() {
+    return generateRandomNumber(1, 100) % 50 == 1;
+}
