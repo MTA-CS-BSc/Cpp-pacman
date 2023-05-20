@@ -1,6 +1,5 @@
 #include "Game.h"
 
-
 std::string getGhostModeString(GhostMode mode) {
 	switch (mode) {
 	case GhostMode::BEST:
@@ -12,38 +11,10 @@ std::string getGhostModeString(GhostMode mode) {
 	}
 }
 
-
-bool isModeValid(int value) {
-	return value == (int)GhostMode::BEST || value == (int)GhostMode::GOOD || value == (int)GhostMode::NOVICE;
-}
-
-GhostMode getGhostsMode() {
-	int value;
-	bool valid = false;
-
-	while (!valid) {
-		std::cout << "Available modes:\n (1) BEST, (2) GOOD, (3) NOVICE" << std::endl;
-
-		std::cin >> value;
-
-		if (!std::cin.fail() && isModeValid(value))
-			valid = true;
-
-		else {
-			std::cout << "Wrong input!" << std::endl;
-			std::cin.clear();
-			std::cin.ignore(80, '\n');
-		}
-	}
-
-	clearScreen();
-	return static_cast<GhostMode>(value);
-}
-
 void startGame() {
 	srand((unsigned int)time(NULL));
 
-	GhostMode ghost_mode = getGhostsMode();
+	GhostMode ghost_mode = getGhostMode();
 
 	Game game = Game(ghost_mode);
 	game.start();

@@ -73,6 +73,29 @@ Action getAction() {
 	return static_cast<Action>(value);
 }
 
+GhostMode getGhostMode() {
+	int value;
+	bool valid = false;
+
+	while (!valid) {
+		std::cout << "Available modes:\n (1) BEST, (2) GOOD, (3) NOVICE" << std::endl;
+
+		std::cin >> value;
+
+		if (!std::cin.fail() && isModeValid(value))
+			valid = true;
+
+		else {
+			std::cout << "Wrong input!" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(80, '\n');
+		}
+	}
+
+	clearScreen();
+	return static_cast<GhostMode>(value);
+}
+
 void printKeys() {
 	std::cout << "Keys:" << std::endl;
 	std::cout << RIGHT_UPPERCASE << " - right" << std::endl;

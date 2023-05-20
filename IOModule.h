@@ -1,6 +1,7 @@
 #pragma once
 #include "Settings.h"
 #include "Keys.h"
+#include "GhostMode.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,6 +35,10 @@ inline bool isActionValid(int value) {
 	return value == (int)Action::START || value == (int)Action::HOW_TO_PLAY || value == (int)Action::EXIT; 
 }
 
+inline bool isModeValid(int value) {
+	return value == (int)GhostMode::BEST || value == (int)GhostMode::GOOD || value == (int)GhostMode::NOVICE;
+}
+
 // Prints the keys used to play the game
 void printKeys();
 
@@ -42,6 +47,8 @@ void printActions();
 
 // Gets input from the user and returns an action to perform
 Action getAction();
+
+GhostMode getGhostMode();
 
 // Prints how to play (instructions)
 void printHowToPlay();

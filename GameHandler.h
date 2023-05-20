@@ -1,9 +1,7 @@
 #pragma once
-#include "Pacman.h"
 #include "NoviceGhost.h"
 #include "GoodGhost.h"
 #include "Board.h"
-#include "GhostMode.h"
 
 class GameHandler {
 private:
