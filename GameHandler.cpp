@@ -128,21 +128,24 @@ void GameHandler::resetBoard() {
 
 void GameHandler::handlePacmanFruitCollision() {
 	for (auto& fruit : this->fruits) {
-		if (abs(fruit.getCurrentPosition().getX() - this->pacman.getCurrentPosition().getX()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED
-			&& abs(fruit.getCurrentPosition().getY() - this->pacman.getCurrentPosition().getY()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED
-			&& fruit.getIsVisible()) {
-			this->score += fruit.getFruitPoints();
-			removeFruit(fruit);
+		if (fruit.getIsVisible()) {
+			if (abs(fruit.getCurrentPosition().getX() - this->pacman.getCurrentPosition().getX()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED
+				&& abs(fruit.getCurrentPosition().getY() - this->pacman.getCurrentPosition().getY()) <= Settings::PACMAN_SPEED - Settings::FRUIT_SPEED) {
+				this->score += fruit.getFruitPoints();
+				removeFruit(fruit);
+			}
 		}
 	}
 }
 
 void GameHandler::handleGhostFruitCollision() {
 	for (auto& fruit : this->fruits) {
-		for (auto& ghost : this->ghosts) {
-			if (abs(fruit.getCurrentPosition().getX() - ghost->getCurrentPosition().getX()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED
-				&& abs(fruit.getCurrentPosition().getY() - ghost->getCurrentPosition().getY()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED)
-				fruit.setIsVisible(false);
+		if (fruit.getIsVisible()) {
+			for (auto& ghost : this->ghosts) {
+				if (abs(fruit.getCurrentPosition().getX() - ghost->getCurrentPosition().getX()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED
+					&& abs(fruit.getCurrentPosition().getY() - ghost->getCurrentPosition().getY()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED)
+					removeFruit(fruit);
+			}
 		}
 	}
 }
