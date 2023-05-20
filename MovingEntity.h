@@ -45,7 +45,7 @@ class MovingEntity {
             return static_cast<Direction>(generateRandomNumber(0, 3));
         }
 
-        Direction getNewDirection(Board&, Point&);
+        Direction getValidRandomDirection(Board&, Point&);
 
     public:
         MovingEntity(Direction md, double s, char ch) : current_moving_direction(md), speed(s), char_to_print(ch) { }

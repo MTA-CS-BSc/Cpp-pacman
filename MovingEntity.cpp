@@ -19,7 +19,7 @@ void MovingEntity::tunnel(Board& board, Point& p) {
 		p.setY(std::remainder((p.getY() + Settings::BOARD_HEIGHT), Settings::BOARD_HEIGHT));
 }
 
-Direction MovingEntity::getNewDirection(Board& board, Point& p) {
+Direction MovingEntity::getValidRandomDirection(Board& board, Point& p) {
 	Direction new_direction = getRandomDirection();
 
 	while (!this->isDirectionOk(board, p, new_direction)) {

@@ -6,5 +6,14 @@ bool Fruit::shouldChangeDirection(Board& board, Point& p) {
 }
 
 Point Fruit::getNewPosition(Board& board) {
+	Point p = this->current_position;
 
+	p.changeWithDirection(this->getDirection(), this->getSpeed());
+
+	if (shouldChangeDirection(board, p))
+		this->setCurrentDirection(getValidRandomDirection(board, p));
+
+	// TODO: handle random change visibility
+
+	return p;
 }

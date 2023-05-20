@@ -6,7 +6,7 @@ bool NoviceGhost::shouldChangeDirection(Board& board, Point& p) {
 
 void NoviceGhost::ghostMovementLogic(Board& board, Point& p) {
 	if (shouldChangeDirection(board, p)) {
-		this->setCurrentDirection(getNewDirection(board, p));
+		this->setCurrentDirection(getValidRandomDirection(board, p));
 		this->moves_in_same_direction = 0;	
 	}
 

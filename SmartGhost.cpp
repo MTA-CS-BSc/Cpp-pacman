@@ -16,7 +16,7 @@ Direction SmartGhost::getBestMovingDirection(Board& board, Point& p) {
 	else if (dy < 0 && isDirectionOk(board, p, Direction::LEFT))
 		return Direction::LEFT;
 
-	return getNewDirection(board, p);
+	return getValidRandomDirection(board, p);
 }
 
 void SmartGhost::ghostMovementLogic(Board& board, Point& p) {

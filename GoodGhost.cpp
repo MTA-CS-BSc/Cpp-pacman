@@ -18,7 +18,7 @@ void GoodGhost::ghostMovementLogic(Board& board, Point& p) {
 		}
 
 		else if (!this->is_smart && shouldChangeDirection(board, p)) {
-			this->setCurrentDirection(getNewDirection(board, p));
+			this->setCurrentDirection(getValidRandomDirection(board, p));
 			this->moves_in_same_direction = 0;
 		}
 
