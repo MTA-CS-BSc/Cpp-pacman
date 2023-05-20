@@ -1,11 +1,5 @@
 #include "Pacman.h"
 
-Pacman::Pacman() : MovingEntity(Direction::STAY, Settings::PACMAN_SPEED, '@') {
-}
-
-Pacman::Pacman(const Pacman& value) : MovingEntity(value) {
-}
-
 Point Pacman::getNewPosition(Board& board) {
 	Point p = this->current_position;
 

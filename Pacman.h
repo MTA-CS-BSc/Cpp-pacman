@@ -8,6 +8,6 @@ class Pacman : public MovingEntity {
 		Point getNewPosition(Board&);
 
 	public:
-		Pacman();
-		Pacman(const Pacman&);
+		Pacman() : MovingEntity(Direction::STAY, Settings::PACMAN_SPEED, '@') { }
+		Pacman(const Pacman& value) : MovingEntity(value) { }
 };
