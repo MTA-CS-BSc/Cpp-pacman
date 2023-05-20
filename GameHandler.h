@@ -2,6 +2,7 @@
 #include "NoviceGhost.h"
 #include "GoodGhost.h"
 #include "Board.h"
+#include "Fruit.h"
 
 class GameHandler {
 private:
@@ -11,6 +12,7 @@ private:
     GhostMode ghost_mode;
     Pacman pacman;
     int breadcrumbs_amount;
+    std::vector<Fruit> fruits;
 
     // Initializes the game board with breadcrumbs.
     void initializeBoard();
@@ -21,11 +23,16 @@ private:
     // Creates the ghosts objects according to the amount needed, declared in the settings module.
     void initGhosts();
 
+    void initFruits();
+
     // Returns true if the pacman was eaten, and false otherwise.
     bool isPacmanEaten();
 
     // Resets the entities positions and re-prints the board. 
     void resetBoard();
+
+    Point getRandomPosition();
+    bool isLocationTaken(Point&);
 
 public:
     ~GameHandler();

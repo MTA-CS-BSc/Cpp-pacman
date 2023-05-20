@@ -8,7 +8,13 @@ GameHandler::~GameHandler() {
 GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm) {
 	initializeBoard();
 	initGhosts();
+	initFruits();
 	initPositions();
+}
+
+void GameHandler::initFruits() {
+	for (int i = 0; i < Settings::FRUIT_AMOUNT; i++)
+		this->fruits.push_back(Fruit());
 }
 
 void GameHandler::initGhosts() {
@@ -22,7 +28,6 @@ void GameHandler::initGhosts() {
 		else if (this->ghost_mode == GhostMode::BEST)
 			this->ghosts.push_back(new SmartGhost(this->pacman));
 	}
-		
 }
 
 void GameHandler::initializeBoard() {
@@ -36,13 +41,43 @@ void GameHandler::initializeBoard() {
 	}
 }
 
+bool GameHandler::isLocationTaken(Point& p) {
+	bool taken = false;
+
+	taken = this->pacman.getCurrentPosition() == p;
+
+	for (int i = 0; i < Settings::GHOSTS_AMOUNT && !taken; i++)
+		taken = this->ghosts[i]->getCurrentPosition() == p;
+
+	for (int i = 0; i < Settings::FRUIT_AMOUNT && !taken; i++)
+		taken = this->fruits[i].getCurrentPosition() == p;
+
+	return taken;
+}
+
+Point GameHandler::getRandomPosition() {
+	Point location = Point(generateRandomNumber(0, Settings::BOARD_WIDTH - 2),
+					generateRandomNumber(0, Settings::BOARD_HEIGHT - 2));
+
+	while (this->board_ref.board_obj[(int)location.getY()][(int)location.getX()] == '#'
+			|| isLocationTaken(location)) {
+		location.setX(generateRandomNumber(0, Settings::BOARD_WIDTH - 2));
+		location.setY(generateRandomNumber(0, Settings::BOARD_HEIGHT - 2));
+	}
+
+	return location;
+
+}
+
 void GameHandler::initPositions() {
 	this->pacman.setCurrentDirection(Direction::STAY);
-	this->pacman.setCurrentPosition(Point(Settings::BOARD_WIDTH * 3 / 4, Settings::BOARD_HEIGHT - 4 / 2));
+	this->pacman.setCurrentPosition(getRandomPosition());
 	
 	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
-		this->ghosts[i]->setCurrentPosition(Point(int((Settings::BOARD_WIDTH / Settings::GHOSTS_AMOUNT) * (i)+1), 1));
-		
+		this->ghosts[i]->setCurrentPosition(getRandomPosition());
+	
+	for (int i = 0; i < Settings::FRUIT_AMOUNT; i++)
+		this->fruits[i].setCurrentPosition(getRandomPosition());
 }
 
 void GameHandler::printBoard() {
