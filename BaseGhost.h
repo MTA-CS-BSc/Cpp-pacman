@@ -2,10 +2,12 @@
 #include "MovingEntity.h"
 
 class BaseGhost : public MovingEntity {
-protected:
+private:
     // Receives the game's board.
     // Returns the ghost's new position (point) according to the ghost's walking logic.
     Point getNewPosition(Board&) override;
+
+protected:
     virtual inline void ghostMovementLogic(Board&, Point&) { }
 
 public:
