@@ -13,12 +13,14 @@ class MovingEntity {
     protected:
         Point current_position;
 
-        // Generates a random direction according to the ghosts' walking logic
-        Direction getRandomDirection();
-
         // A virtual function to be implemented when inherting from MovingEntity
         // that handles the calculation of the entity's new position (according to the entity's logic)
         virtual inline Point getNewPosition(Board&) { return Point();  }
+
+        // Receives the board and a point.
+        // Returns true if the entity should change it's current direction
+        // (i.e encountered a wall || passed beyond the board's boundaries)
+        virtual bool shouldChangeDirection(Board&, Point&);
 
         // Handles tunneling (from one side to another).
         void tunnel(Board&, Point&);
@@ -32,6 +34,12 @@ class MovingEntity {
         inline bool isBeyondBoundaries(Board& board, Point& p) {
             return p.getY() < 0 || p.getX() < 0 || p.getY() >= board.board_obj.size() || p.getX() >= board.board_obj[0].size();
         }
+
+        inline bool isDirectionOk(Board& board, Point& p, Direction direction) {
+            return !(this->isOnWall(board, p)) && !(this->isBeyondBoundaries(board, p) && (direction != this->getDirection()));
+        }
+
+        Direction getNewDirection(Board&, Point&);
 
     public:
         MovingEntity(Direction md, double s, char ch) : current_moving_direction(md), speed(s), char_to_print(ch) { }
