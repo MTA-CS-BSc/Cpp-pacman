@@ -51,6 +51,8 @@ public:
     inline void setGhostMode(GhostMode value) { this->ghost_mode = value; }
     inline bool breadcrumbExists() { return this->breadcrumbs_amount != 0; }
 
+    void handleGhostFruitCollision();
+
     // Adds 1 to the user's score if a breadcrumb was eaten
     void handleBreadcrumbsChange();
 

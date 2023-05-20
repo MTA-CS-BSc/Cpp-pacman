@@ -119,6 +119,16 @@ void GameHandler::resetBoard() {
 	printBoard();
 }
 
+void GameHandler::handleGhostFruitCollision() {
+	for (auto& fruit : this->fruits) {
+		for (auto& ghost : this->ghosts) {
+			if (abs(fruit.getCurrentPosition().getX() - ghost->getCurrentPosition().getX()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED
+				&& abs(fruit.getCurrentPosition().getY() - ghost->getCurrentPosition().getY()) <= Settings::GHOST_SPEED - Settings::FRUIT_SPEED)
+				fruit.setIsVisible(false);
+		}
+	}
+}
+
 void GameHandler::handlePacmanEaten() {
 	bool is_pacman_eaten = this->isPacmanEaten();
 

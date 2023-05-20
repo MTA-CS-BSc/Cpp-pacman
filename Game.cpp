@@ -27,6 +27,7 @@ void Game::moveEntities() {
 void Game::handleEvents() {
 	this->handler.handleBreadcrumbsChange();
 	this->handler.handlePacmanEaten();
+	this->handler.handleGhostFruitCollision();
 }
 
 void Game::start() {
