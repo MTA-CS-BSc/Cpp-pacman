@@ -85,8 +85,8 @@ void GameHandler::printBoard() {
 		for (int j = 0; j < Settings::BOARD_WIDTH; j++)
 			printAtXY(j, i, this->board_ref.board_obj[i][j]);
 
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
-		printAtXY(this->ghosts[i]->getCurrentPosition().getX(), this->ghosts[i]->getCurrentPosition().getY(), this->ghosts[i]->getCharToPrint());
+	for (auto& ghost : this->ghosts)
+		printAtXY(ghost->getCurrentPosition().getX(), ghost->getCurrentPosition().getY(), ghost->getCharToPrint());
 
 	printAtXY(this->pacman.getCurrentPosition().getX(), this->pacman.getCurrentPosition().getY(), this->pacman.getCharToPrint());
 }
