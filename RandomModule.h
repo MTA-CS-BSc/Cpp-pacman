@@ -13,5 +13,5 @@ inline char generateRandomFruitChar() {
 }
 
 inline bool generateRandomBoolean() {
-    return generateRandomNumber(1, 150) % 50 == 0;
+    return generateRandomNumber(1, 100) % 50 == 1;
 }
