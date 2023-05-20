@@ -20,7 +20,9 @@ class MovingEntity {
         // Receives the board and a point.
         // Returns true if the entity should change it's current direction
         // (i.e encountered a wall || passed beyond the board's boundaries)
-        virtual bool shouldChangeDirection(Board&, Point&);
+        virtual inline bool shouldChangeDirection(Board& board, Point& p) {
+            return !isDirectionOk(board, p, this->getDirection());
+        }
 
         // Handles tunneling (from one side to another).
         void tunnel(Board&, Point&);

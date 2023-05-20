@@ -19,10 +19,6 @@ void MovingEntity::tunnel(Board& board, Point& p) {
 		p.setY(std::remainder((p.getY() + Settings::BOARD_HEIGHT), Settings::BOARD_HEIGHT));
 }
 
-bool MovingEntity::shouldChangeDirection(Board& board, Point& p) {
-	return this->isBeyondBoundaries(board, p) || this->isOnWall(board, p);
-}
-
 Direction MovingEntity::getNewDirection(Board& board, Point& p) {
 	Direction new_direction = getRandomDirection();
 
