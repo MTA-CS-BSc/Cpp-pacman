@@ -65,7 +65,6 @@ Point GameHandler::getFreeRandomPosition() {
 		location = generateRandomPosition(this->board_ref);
 
 	return location;
-
 }
 
 void GameHandler::initPositions() {
