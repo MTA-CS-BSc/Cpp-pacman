@@ -17,7 +17,6 @@ Point Fruit::generateFruitRandomPosition(Board& board) {
 }
 
 void Fruit::changeFruitCharAccordingToVisibility(Board& board, Point& p) {
-
 	if (!this->getIsVisible())
 		this->setCharToPrint(board.board_obj[(int)p.getY()][(int)p.getX()]);
 
