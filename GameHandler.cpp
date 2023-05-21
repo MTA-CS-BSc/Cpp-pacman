@@ -58,7 +58,7 @@ bool GameHandler::isLocationTaken(Point& p) {
 	return taken;
 }
 
-Point GameHandler::getRandomPosition() {
+Point GameHandler::getFreeRandomPosition() {
 	Point location = generateRandomPosition(this->board_ref);
 
 	while (isLocationTaken(location))
@@ -70,13 +70,13 @@ Point GameHandler::getRandomPosition() {
 
 void GameHandler::initPositions() {
 	this->pacman.setCurrentDirection(Direction::STAY);
-	this->pacman.setCurrentPosition(getRandomPosition());
+	this->pacman.setCurrentPosition(getFreeRandomPosition());
 	
 	for (auto& ghost : this->ghosts)
-		ghost->setCurrentPosition(getRandomPosition());
+		ghost->setCurrentPosition(getFreeRandomPosition());
 	
 	for (auto& fruit : this->fruits)
-		fruit->setCurrentPosition(getRandomPosition());
+		fruit->setCurrentPosition(getFreeRandomPosition());
 }
 
 void GameHandler::printBoard() {
@@ -111,7 +111,7 @@ void GameHandler::removeFruit(Fruit*& fruit, bool generate_new_char = true) {
 	printAtXY(current_fruit_position.getX(), current_fruit_position.getY(),
 		board_ref.board_obj[(int)current_fruit_position.getY()][(int)current_fruit_position.getX()]);
 	
-	fruit->setCurrentPosition(getRandomPosition());
+	fruit->setCurrentPosition(getFreeRandomPosition());
 
 	if (generate_new_char) {
 		fruit->setCharToPrint(generateRandomFruitChar());

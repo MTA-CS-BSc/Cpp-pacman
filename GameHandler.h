@@ -58,7 +58,7 @@ public:
     inline bool breadcrumbExists() { return this->breadcrumbs_amount != 0; }
 
     // Generates a random available position (i.e not a wall or a taken one)
-    Point getRandomPosition();
+    Point getFreeRandomPosition();
 
     // Removes the fruit from the screen and set's it's visibility to false
     void handleGhostFruitCollision();
