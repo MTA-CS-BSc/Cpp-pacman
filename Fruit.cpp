@@ -16,26 +16,33 @@ Point Fruit::generateFruitRandomPosition(Board& board) {
 	return location;
 }
 
-Point Fruit::getNewPosition(Board& board) {
-	Point p = this->current_position;
-	
-	p.changeWithDirection(this->getDirection(), this->getSpeed());
+void Fruit::changeFruitCharAccordingToVisibility(Board& board, Point& p) {
 
-	if (shouldChangeVisibility()) {
-		this->setIsVisible(!this->getIsVisible());
-		p = generateFruitRandomPosition(board);
-	}
-	
-	if (!this->getIsVisible()) {
+	if (!this->getIsVisible())
 		this->setCharToPrint(board.board_obj[(int)p.getY()][(int)p.getX()]);
-		printAtXY(p.getX(), p.getY(), this->getCharToPrint());
-	}	
 
 	else
 		this->setCharToPrint(this->getOriginalChar());
+}
 
-	if (shouldChangeDirection(board, p))
-		this->setCurrentDirection(getValidRandomDirection(board, p));
+Point Fruit::getNewPosition(Board& board) {
+	Point p = this->current_position;
+
+	if (shouldChangeVisibility()) {
+		this->setIsVisible(!this->getIsVisible());
+
+		if (this->getIsVisible())
+			p = generateFruitRandomPosition(board);
+	}
+
+	changeFruitCharAccordingToVisibility(board, p);
+
+	if (this->getIsVisible()) {
+		p.changeWithDirection(this->getDirection(), this->getSpeed());
+
+		if (shouldChangeDirection(board, p))
+			this->setCurrentDirection(getValidRandomDirection(board, p));
+	}
 
 	return p;
 }

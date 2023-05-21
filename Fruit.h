@@ -8,6 +8,8 @@ private:
 
 	inline bool shouldChangeVisibility() { return generateRandomBoolean(); }
 	inline bool shouldChangeDirectionRandomly() { return generateShouldRandomDir(); }
+	
+	void changeFruitCharAccordingToVisibility(Board&, Point&);
 
 	Point generateFruitRandomPosition(Board&);
 	bool shouldChangeDirection(Board&, Point&) override;
