@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "Settings.h"
+#include "Point.h"
 
 // Returns a random number between start and end
 inline int generateRandomNumber(int start, int end) {
@@ -18,4 +19,16 @@ inline bool generateRandomBoolean() {
 
 inline bool generateShouldRandomDir() {
     return generateRandomNumber(1, 100) % 9 == 0;
+}
+
+inline Point generateRandomPosition(Board& board) {
+	Point location = Point(generateRandomNumber(0, Settings::BOARD_WIDTH - 2),
+		generateRandomNumber(0, Settings::BOARD_HEIGHT - 2));
+
+	while (board.board_obj[(int)location.getY()][(int)location.getX()] == '#') {
+		location.setX(generateRandomNumber(0, Settings::BOARD_WIDTH - 2));
+		location.setY(generateRandomNumber(0, Settings::BOARD_HEIGHT - 2));
+	}
+
+	return location;
 }

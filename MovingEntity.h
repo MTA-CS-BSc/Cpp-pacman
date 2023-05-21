@@ -1,5 +1,4 @@
 #pragma once
-#include "Point.h"
 #include "IOModule.h"
 #include "Board.h"
 #include "RandomModule.h"

@@ -11,7 +11,6 @@ private:
 	
 	void changeFruitCharAccordingToVisibility(Board&, Point&);
 
-	Point generateFruitRandomPosition(Board&);
 	bool shouldChangeDirection(Board&, Point&) override;
 	Point getNewPosition(Board&) override;
 
