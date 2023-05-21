@@ -59,14 +59,10 @@ bool GameHandler::isLocationTaken(Point& p) {
 }
 
 Point GameHandler::getRandomPosition() {
-	Point location = Point(generateRandomNumber(0, Settings::BOARD_WIDTH - 2),
-					generateRandomNumber(0, Settings::BOARD_HEIGHT - 2));
+	Point location = generateRandomPosition(this->board_ref);
 
-	while (this->board_ref.board_obj[(int)location.getY()][(int)location.getX()] == '#'
-			|| isLocationTaken(location)) {
-		location.setX(generateRandomNumber(0, Settings::BOARD_WIDTH - 2));
-		location.setY(generateRandomNumber(0, Settings::BOARD_HEIGHT - 2));
-	}
+	while (isLocationTaken(location))
+		location = generateRandomPosition(this->board_ref);
 
 	return location;
 
