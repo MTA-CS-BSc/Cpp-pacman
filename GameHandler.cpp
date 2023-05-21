@@ -49,11 +49,11 @@ bool GameHandler::isLocationTaken(Point& p) {
 
 	taken = this->pacman.getCurrentPosition() == p;
 
-	for (auto& ghost : this->ghosts)
-		taken = ghost->getCurrentPosition() == p;
+	for (int i = 0; i < Settings::GHOSTS_AMOUNT && !taken; i++)
+		taken = this->ghosts[i]->getCurrentPosition() == p;
 
-	for (auto& fruit : this->fruits)
-		taken = fruit->getCurrentPosition() == p;
+	for (int i = 0; i < Settings::FRUIT_AMOUNT && !taken; i++)
+		taken = this->fruits[i]->getCurrentPosition() == p;
 
 	return taken;
 }
