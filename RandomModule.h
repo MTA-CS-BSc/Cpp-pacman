@@ -13,5 +13,9 @@ inline char generateRandomFruitChar() {
 }
 
 inline bool generateRandomBoolean() {
-    return generateRandomNumber(1, 100) % 50 == 1;
+    return generateRandomNumber(1, 100) % 50 == 0;
+}
+
+inline bool generateShouldRandomDir() {
+    return generateRandomNumber(1, 100) % 9 == 0;
 }

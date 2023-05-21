@@ -7,7 +7,7 @@ private:
 	char original_char;
 
 	inline bool shouldChangeVisibility() { return generateRandomBoolean(); }
-	inline bool shouldChangeDirectionRandomly() { return generateRandomBoolean(); }
+	inline bool shouldChangeDirectionRandomly() { return generateShouldRandomDir(); }
 
 	Point generateFruitRandomPosition(Board&);
 	bool shouldChangeDirection(Board&, Point&) override;
