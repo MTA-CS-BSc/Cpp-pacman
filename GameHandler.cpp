@@ -36,7 +36,8 @@ void GameHandler::initGhosts() {
 void GameHandler::initializeBoard() {
 	for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
 		for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
-			if (this->board_ref.board_obj[i][j] != '#') {
+			if (this->board_ref.board_obj[i][j] != '#'
+					&& this->board_ref.board_obj[i][j] != '%') {
 				this->board_ref.board_obj[i][j] = '.';
 				this->breadcrumbs_amount++;
 			}
