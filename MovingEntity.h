@@ -33,7 +33,7 @@ class MovingEntity {
 
         // Returns true if the point is beyond the board's boundaries, and false otherwise.
         inline bool isBeyondBoundaries(Board& board, Point& p) {
-            return p.getY() < 0 || p.getX() < 0 || p.getY() >= board.getBoard().size() || p.getX() >= board.getWidth();
+            return p.getY() < 0 || p.getX() < 0 || p.getY() >= board.getHeight() || p.getX() >= board.getWidth();
         }
 
         inline bool isDirectionOk(Board& board, Point& p, Direction direction) {
