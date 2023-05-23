@@ -34,8 +34,8 @@ void GameHandler::initGhosts() {
 }
 
 void GameHandler::initializeBoard() {
-	for (int i = 0; i < Settings::BOARD_HEIGHT; i++) {
-		for (int j = 0; j < Settings::BOARD_WIDTH; j++) {
+	for (int i = 0; i < this->board_ref.board_height; i++) {
+		for (int j = 0; j < this->board_ref.board_width; j++) {
 			if (this->board_ref.board_obj[i][j] != '#'
 					&& this->board_ref.board_obj[i][j] != '%') {
 				this->board_ref.board_obj[i][j] = '.';
@@ -80,8 +80,8 @@ void GameHandler::initPositions() {
 }
 
 void GameHandler::printBoard() {
-	for (int i = 0; i < Settings::BOARD_HEIGHT; i++)
-		for (int j = 0; j < Settings::BOARD_WIDTH; j++)
+	for (int i = 0; i < this->board_ref.board_height; i++)
+		for (int j = 0; j < this->board_ref.board_width; j++)
 			printAtXY(j, i, this->board_ref.board_obj[i][j]);
 
 	for (auto& fruit : this->fruits)

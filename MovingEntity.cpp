@@ -12,11 +12,11 @@ void MovingEntity::move(Board& board_ref) {
 }
 
 void MovingEntity::tunnel(Board& board, Point& p) {
-	if (p.getX() < 0 || p.getX() >= Settings::BOARD_WIDTH)
-		p.setX(std::remainder((p.getX() + Settings::BOARD_WIDTH), Settings::BOARD_WIDTH));
+	if (p.getX() < 0 || p.getX() >= board.board_height)
+		p.setX(std::remainder((p.getX() + board.board_width), board.board_width));
 
-    else if (p.getY() < 0 || p.getY() >= Settings::BOARD_HEIGHT)
-		p.setY(std::remainder((p.getY() + Settings::BOARD_HEIGHT), Settings::BOARD_HEIGHT));
+    else if (p.getY() < 0 || p.getY() >= board.board_height)
+		p.setY(std::remainder((p.getY() + board.board_height), board.board_height));
 }
 
 Direction MovingEntity::getValidRandomDirection(Board& board, Point& p) {

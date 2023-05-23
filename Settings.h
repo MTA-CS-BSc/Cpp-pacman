@@ -19,7 +19,6 @@ class Settings {
 			BREADCRUMB_POINTS = 1,
 			SCORE_LINE = BOARD_HEIGHT + 1,
 		    LIFES_LINE = BOARD_HEIGHT + 2;
-		;
 
 		static constexpr double
 			FRUIT_SPEED = 0.25,
