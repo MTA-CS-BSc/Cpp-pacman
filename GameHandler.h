@@ -17,9 +17,6 @@ private:
     FilesHandler files_handler;
     int current_board_index;
 
-    // Initializes the game board with breadcrumbs.
-    void initializeBoard();
-
     // Sets the inital on-board entities' positions.
     void initPositions();
 
@@ -81,7 +78,15 @@ public:
     // Changes the pacman's direction according to the pressed key
     void handlePacmanDirectionChange(Pacman& pacman, int key);
 
+
+    // TODO
+    
     std::vector<std::string> loadCurrentBoard();
 
     FilesHandler getFilesHandler() const { return this->files_handler; }
+    inline int getCurrentBoardIndex() const { return this->current_board_index; }
+    void setCurrentBoardIndex(const int value) { this->current_board_index = value; }
+
+    // Initializes the game board with breadcrumbs.
+    void initializeBoard();
 };
