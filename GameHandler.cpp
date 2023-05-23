@@ -56,7 +56,7 @@ void GameHandler::initializeBoard() {
 
 std::vector<std::string> GameHandler::loadCurrentBoard() {
 	std::string current_file_name;
-	std::vector<std::string> files = files_handler.getSortedScreenFiles(".", "1screen");
+	std::vector<std::string> files = files_handler.getSortedScreenFiles(".", "screen");
 
 	if (files.empty())
 		return std::vector<std::string>();
@@ -119,8 +119,10 @@ void GameHandler::printBoard() {
 }
 
 void GameHandler::handleBreadcrumbsChange() {
-	if (this->board_ref.getBoard()[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.') {
-		this->board_ref.getBoard()[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
+	Point pacman_position = this->pacman.getCurrentPosition();
+
+	if (this->board_ref.getBoard()[(int)pacman_position.getY()][(int)pacman_position.getX()] == '.') {
+		this->board_ref.getBoard()[(int)pacman_position.getY()][(int)pacman_position.getX()] = ' ';
 		this->score += Settings::BREADCRUMB_POINTS;
 		this->breadcrumbs_amount--;
 	}
