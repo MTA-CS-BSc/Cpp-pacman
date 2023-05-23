@@ -1,14 +1,16 @@
 #include "GameHandler.h"
 
 GameHandler::~GameHandler() {
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++)
+	int ghosts_amount = this->ghosts.size();
+
+	for (int i = 0; i < ghosts_amount; i++)
 		delete this->ghosts[i];
 
 	for (int i = 0; i < Settings::FRUIT_AMOUNT; i++)
 		delete this->fruits[i];
 }
 
-GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm) {
+GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm), current_board_index(0) {
 	initializeBoard();
 	initGhosts();
 	initFruits();
@@ -21,7 +23,7 @@ void GameHandler::initFruits() {
 }
 
 void GameHandler::initGhosts() {
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT; i++) {
+	for (int i = 0; i < files_handler.getGhostsAmount(); i++) {
 		if (this->ghost_mode == GhostMode::NOVICE)
 			this->ghosts.push_back(new NoviceGhost());
 
@@ -34,15 +36,34 @@ void GameHandler::initGhosts() {
 }
 
 void GameHandler::initializeBoard() {
+	std::vector<std::string> current_board = loadCurrentBoard();
+
+	this->board_ref.setBoard(loadCurrentBoard());
+
 	for (int i = 0; i < this->board_ref.getHeight(); i++) {
 		for (int j = 0; j < this->board_ref.getWidth(); j++) {
 			if (this->board_ref.getBoard()[i][j] != '#'
-					&& this->board_ref.getBoard()[i][j] != '%') {
+				&& this->board_ref.getBoard()[i][j] != '%') {
 				this->board_ref.getBoard()[i][j] = '.';
 				this->breadcrumbs_amount++;
 			}
+
+			else if (this->board_ref.getBoard()[i][j] == '%')
+				this->board_ref.getBoard()[i][j] = ' ';
 		}
 	}
+}
+
+std::vector<std::string> GameHandler::loadCurrentBoard() {
+	std::string current_file_name;
+	std::vector<std::string> files = files_handler.getSortedScreenFiles(".", "1screen");
+
+	if (files.empty())
+		return std::vector<std::string>();
+
+	current_file_name = files[current_board_index];
+	files_handler.loadBoardFromFile(current_file_name);
+	return files_handler.getCurrentBoard();
 }
 
 bool GameHandler::isLocationTaken(Point& p) {
@@ -50,7 +71,7 @@ bool GameHandler::isLocationTaken(Point& p) {
 
 	taken = this->pacman.getCurrentPosition() == p;
 
-	for (int i = 0; i < Settings::GHOSTS_AMOUNT && !taken; i++)
+	for (int i = 0; i < this->ghosts.size() && !taken; i++)
 		taken = this->ghosts[i]->getCurrentPosition() == p;
 
 	for (int i = 0; i < Settings::FRUIT_AMOUNT && !taken; i++)
@@ -60,6 +81,9 @@ bool GameHandler::isLocationTaken(Point& p) {
 }
 
 Point GameHandler::getFreeRandomPosition() {
+	if (!this->board_ref.getHeight())
+		return Point();
+
 	Point location = generateRandomPosition(this->board_ref);
 
 	while (isLocationTaken(location))
@@ -70,10 +94,10 @@ Point GameHandler::getFreeRandomPosition() {
 
 void GameHandler::initPositions() {
 	this->pacman.setCurrentDirection(Direction::STAY);
-	this->pacman.setCurrentPosition(getFreeRandomPosition());
+	this->pacman.setCurrentPosition(files_handler.getPacmanPosition());
 	
-	for (auto& ghost : this->ghosts)
-		ghost->setCurrentPosition(getFreeRandomPosition());
+	for (int i = 0; i < this->ghosts.size(); i++)
+		this->ghosts[i]->setCurrentPosition(files_handler.getGhostsPositions()[i]);
 	
 	for (auto& fruit : this->fruits)
 		fruit->setCurrentPosition(getFreeRandomPosition());
@@ -82,7 +106,7 @@ void GameHandler::initPositions() {
 void GameHandler::printBoard() {
 	for (int i = 0; i < this->board_ref.getHeight(); i++)
 		for (int j = 0; j < this->board_ref.getWidth(); j++)
-			printAtXY(j, i, this->board_ref.getBoard()[i][j]);
+				printAtXY(j, i, this->board_ref.getBoard()[i][j]);
 
 	for (auto& fruit : this->fruits)
 		if (fruit->getIsVisible())

@@ -35,30 +35,40 @@ void Game::handleEvents() {
 }
 
 void Game::start() {
-	this->handler.printBoard();
-	Pacman& pacman = this->handler.getPacman();
+	if (!this->handler.getFilesHandler().getCurrentBoard().size() == 0) {
+		std::cout << "No screen files were found!" << std::endl;
+		std::cout << "Press any key to go back to the main menu..." << std::endl;
+		_getch();
+		clearScreen();
+	}
+	
+	else {
+		this->handler.printBoard();
+		Pacman& pacman = this->handler.getPacman();
 
-	while (!this->isWinner() && !this->isLoser()) {
-		Sleep(200);
-		if (_kbhit()) {
-			int key = _getch();
-			if (key == ESC_KEY)
-				this->pause();
+		while (!this->isWinner() && !this->isLoser()) {
+			Sleep(200);
+			if (_kbhit()) {
+				int key = _getch();
+				if (key == ESC_KEY)
+					this->pause();
 
-			else
-				this->handler.handlePacmanDirectionChange(pacman, key);
+				else
+					this->handler.handlePacmanDirectionChange(pacman, key);
+			}
+
+			this->moveEntities();
+			this->handleEvents();
+			this->printStatus();
 		}
 
-		this->moveEntities();
-		this->handleEvents();
-		this->printStatus();
+		clearScreen();
+
+		if (isLoser())
+			std::cout << "Game over!" << std::endl;
+	
+		else if (isWinner())
+			std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
 	}
 
-	clearScreen();
-
-	if (isLoser())
-		std::cout << "Game over!" << std::endl;
-	
-	else if (isWinner())
-		std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
 }

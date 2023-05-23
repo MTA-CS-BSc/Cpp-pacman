@@ -3,6 +3,7 @@
 #include "GoodGhost.h"
 #include "Board.h"
 #include "Fruit.h"
+#include "FilesHandler.h"
 
 class GameHandler {
 private:
@@ -13,6 +14,8 @@ private:
     Pacman pacman;
     int breadcrumbs_amount;
     std::vector<Fruit*> fruits;
+    FilesHandler files_handler;
+    int current_board_index;
 
     // Initializes the game board with breadcrumbs.
     void initializeBoard();
@@ -77,4 +80,8 @@ public:
 
     // Changes the pacman's direction according to the pressed key
     void handlePacmanDirectionChange(Pacman& pacman, int key);
+
+    std::vector<std::string> loadCurrentBoard();
+
+    FilesHandler getFilesHandler() const { return this->files_handler; }
 };
