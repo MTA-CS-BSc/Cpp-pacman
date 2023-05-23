@@ -22,10 +22,16 @@ inline bool generateShouldRandomDir() {
 }
 
 inline Point generateRandomPoint(int height, int width) {
+	if (height <= 2 || width <= 2)
+		return Point();
+
 	return Point(generateRandomNumber(0, width - 2),
 		generateRandomNumber(0, height - 2));
 }
 inline Point generateRandomPosition(Board& board) {
+	if (!board.getHeight())
+		return Point();
+
 	Point location = generateRandomPoint(board.getHeight(), board.getWidth());
 
 	while (board.getBoard()[(int)location.getY()][(int)location.getX()] == '#')
