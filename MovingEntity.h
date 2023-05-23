@@ -28,12 +28,12 @@ class MovingEntity {
         
         // Returns true if the point is on a wall, and false otherwise.
         inline bool isOnWall(Board& board, Point& p) {
-            return board.board_obj[(int)p.getY()][(int)p.getX()] == '#';
+            return board.getBoard()[(int)p.getY()][(int)p.getX()] == '#';
         }
 
         // Returns true if the point is beyond the board's boundaries, and false otherwise.
         inline bool isBeyondBoundaries(Board& board, Point& p) {
-            return p.getY() < 0 || p.getX() < 0 || p.getY() >= board.board_obj.size() || p.getX() >= board.board_obj[0].size();
+            return p.getY() < 0 || p.getX() < 0 || p.getY() >= board.getBoard().size() || p.getX() >= board.getWidth();
         }
 
         inline bool isDirectionOk(Board& board, Point& p, Direction direction) {

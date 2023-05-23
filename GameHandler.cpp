@@ -34,11 +34,11 @@ void GameHandler::initGhosts() {
 }
 
 void GameHandler::initializeBoard() {
-	for (int i = 0; i < this->board_ref.board_height; i++) {
-		for (int j = 0; j < this->board_ref.board_width; j++) {
-			if (this->board_ref.board_obj[i][j] != '#'
-					&& this->board_ref.board_obj[i][j] != '%') {
-				this->board_ref.board_obj[i][j] = '.';
+	for (int i = 0; i < this->board_ref.getHeight(); i++) {
+		for (int j = 0; j < this->board_ref.getWidth(); j++) {
+			if (this->board_ref.getBoard()[i][j] != '#'
+					&& this->board_ref.getBoard()[i][j] != '%') {
+				this->board_ref.getBoard()[i][j] = '.';
 				this->breadcrumbs_amount++;
 			}
 		}
@@ -80,9 +80,9 @@ void GameHandler::initPositions() {
 }
 
 void GameHandler::printBoard() {
-	for (int i = 0; i < this->board_ref.board_height; i++)
-		for (int j = 0; j < this->board_ref.board_width; j++)
-			printAtXY(j, i, this->board_ref.board_obj[i][j]);
+	for (int i = 0; i < this->board_ref.getHeight(); i++)
+		for (int j = 0; j < this->board_ref.getWidth(); j++)
+			printAtXY(j, i, this->board_ref.getBoard()[i][j]);
 
 	for (auto& fruit : this->fruits)
 		if (fruit->getIsVisible())
@@ -95,8 +95,8 @@ void GameHandler::printBoard() {
 }
 
 void GameHandler::handleBreadcrumbsChange() {
-	if (this->board_ref.board_obj[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.') {
-		this->board_ref.board_obj[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
+	if (this->board_ref.getBoard()[this->pacman.getCurrentPosition().getY()][this->pacman.getCurrentPosition().getX()] == '.') {
+		this->board_ref.getBoard()[(int)this->pacman.getCurrentPosition().getY()][(int)this->pacman.getCurrentPosition().getX()] = ' ';
 		this->score += Settings::BREADCRUMB_POINTS;
 		this->breadcrumbs_amount--;
 	}
@@ -109,7 +109,7 @@ void GameHandler::removeFruit(Fruit*& fruit, bool generate_new_char = true) {
 	fruit->setIsVisible(false);
 	
 	printAtXY(current_fruit_position.getX(), current_fruit_position.getY(),
-		board_ref.board_obj[(int)current_fruit_position.getY()][(int)current_fruit_position.getX()]);
+		board_ref.getBoard()[(int)current_fruit_position.getY()][(int)current_fruit_position.getX()]);
 	
 	fruit->setCurrentPosition(getFreeRandomPosition());
 

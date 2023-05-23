@@ -1,10 +1,10 @@
 #include "Game.h"
 
 void Game::printStatus() {
-	deleteLine(this->getGameHandler().getBoardRef().score_line);
+	deleteLine(this->getGameHandler().getBoardRef().getScoreLine());
 	std::cout << "Score: " << this->handler.getScore();
 
-	deleteLine(this->getGameHandler().getBoardRef().lifes_line);
+	deleteLine(this->getGameHandler().getBoardRef().getLifesLine());
 	std::cout << "Lifes: " << this->handler.getLifes();
 }
 

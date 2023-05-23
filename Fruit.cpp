@@ -6,7 +6,7 @@ bool Fruit::shouldChangeDirection(Board& board, Point& p) {
 
 void Fruit::changeFruitCharAccordingToVisibility(Board& board, Point& p) {
 	if (!this->getIsVisible())
-		this->setCharToPrint(board.board_obj[(int)p.getY()][(int)p.getX()]);
+		this->setCharToPrint(board.getBoard()[(int)p.getY()][(int)p.getX()]);
 
 	else
 		this->setCharToPrint(this->getOriginalChar());

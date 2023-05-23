@@ -21,14 +21,15 @@ inline bool generateShouldRandomDir() {
     return generateRandomNumber(1, 100) % 9 == 0;
 }
 
+inline Point generateRandomPoint(int height, int width) {
+	return Point(generateRandomNumber(0, width - 2),
+		generateRandomNumber(0, height - 2));
+}
 inline Point generateRandomPosition(Board& board) {
-	Point location = Point(generateRandomNumber(0, Settings::BOARD_WIDTH - 2),
-		generateRandomNumber(0, board.board_height - 2));
+	Point location = generateRandomPoint(board.getHeight(), board.getWidth());
 
-	while (board.board_obj[(int)location.getY()][(int)location.getX()] == '#') {
-		location.setX(generateRandomNumber(0, Settings::BOARD_WIDTH - 2));
-		location.setY(generateRandomNumber(0, board.board_height - 2));
-	}
+	while (board.getBoard()[(int)location.getY()][(int)location.getX()] == '#')
+		location = generateRandomPoint(board.getHeight(), board.getWidth());
 
 	return location;
 }
