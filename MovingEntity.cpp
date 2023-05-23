@@ -4,7 +4,9 @@ void MovingEntity::move(Board& board_ref) {
 	Point old_position = this->getCurrentPosition();
 	Point new_location = this->getNewPosition(board_ref);
 
-	printAtXY(old_position.getX(), old_position.getY(), board_ref.getBoard()[(int)old_position.getY()][(int)old_position.getX()]);
+	if (old_position.getX() >= 0 && old_position.getY() >= 0 &&
+			old_position.getX() < board_ref.getWidth() && old_position.getY() < board_ref.getHeight())
+		printAtXY(old_position.getX(), old_position.getY(), board_ref.getBoard()[(int)old_position.getY()][(int)old_position.getX()]);
 
 	this->setCurrentPosition(new_location);
 
@@ -12,11 +14,11 @@ void MovingEntity::move(Board& board_ref) {
 }
 
 void MovingEntity::tunnel(Board& board, Point& p) {
-	if (p.getX() < 0 || p.getX() >= board.getHeight())
-		p.setX(std::remainder((p.getX() + board.getWidth()), board.getWidth()));
+	if (p.getX() < 0 || p.getX() >= board.getWidth())
+		p.setX(std::fmod((p.getX() + board.getWidth()), board.getWidth()));
 
     else if (p.getY() < 0 || p.getY() >= board.getHeight())
-		p.setY(std::remainder((p.getY() + board.getHeight()), board.getHeight()));
+		p.setY(std::fmod((p.getY() + board.getHeight()), board.getHeight()));
 }
 
 Direction MovingEntity::getValidRandomDirection(Board& board, Point& p) {

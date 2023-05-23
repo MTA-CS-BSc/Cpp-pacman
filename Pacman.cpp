@@ -5,13 +5,13 @@ Point Pacman::getNewPosition(Board& board) {
 
 	p.changeWithDirection(this->getDirection(), this->getSpeed());
 
-	if (this->isOnWall(board, p)) {
+	if (this->isBeyondBoundaries(board, p))
+		this->tunnel(board, p);
+
+	else if (this->isOnWall(board, p)) {
 		this->setCurrentDirection(Direction::STAY);
 		p = this->current_position;
 	}
-
-	if (this->isBeyondBoundaries(board, p))
-		this->tunnel(board, p);
 	
 	return p;
 }
