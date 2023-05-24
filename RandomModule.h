@@ -1,10 +1,8 @@
 #pragma once
 #include <cstdlib>
 #include <ctime>
-#include "Settings.h"
 #include "Point.h"
 
-// Returns a random number between start and end
 inline int generateRandomNumber(int start, int end) {
     return start + std::rand() % (end - start + 1);
 }
@@ -28,6 +26,7 @@ inline Point generateRandomPoint(int height, int width) {
 	return Point(generateRandomNumber(0, width - 2),
 		generateRandomNumber(0, height - 2));
 }
+
 inline Point generateRandomPosition(Board& board) {
 	if (!board.getHeight())
 		return Point();

@@ -1,13 +1,12 @@
 #pragma once
 
+#include "IOModule.h"
 #include "Board.h"
+#include "Point.h"
 #include <algorithm>
 #include <filesystem>
-#include <iostream>
-#include "IOModule.h"
 #include <fstream>
 #include <string>
-#include "Point.h"
 
 namespace fs = std::filesystem;
 

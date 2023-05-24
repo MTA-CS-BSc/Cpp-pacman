@@ -1,7 +1,6 @@
 #pragma once
 #include "NoviceGhost.h"
 #include "GoodGhost.h"
-#include "Board.h"
 #include "Fruit.h"
 #include "FilesHandler.h"
 
@@ -17,12 +16,11 @@ private:
     FilesHandler files_handler;
     int current_board_index;
 
-
+    // Removes all fruit, initializes positions of entities and prints the board.
+    void resetBoard();
 
     // Returns true if the pacman was eaten, and false otherwise.
     bool isPacmanEaten();
-
-
 
     // Creates the ghosts objects according to the amount needed, declared in the settings module.
     void initGhosts();
@@ -39,8 +37,10 @@ private:
     // Removes a single fruit, resets it's position and it's visibility (to false).
     void removeFruit(Fruit*&, bool);
 
+    // Loads the current board (according to current_board_index
+    std::vector<std::string> loadCurrentBoard();
+
 public:
-    void resetBoard();
     ~GameHandler();
     GameHandler(GhostMode gm);
     inline GhostMode getGhostMode() const { return this->ghost_mode; }
@@ -55,6 +55,15 @@ public:
     inline void setScore(int value) { this->score = value; }
     inline void setGhostMode(GhostMode value) { this->ghost_mode = value; }
     inline bool breadcrumbExists() { return this->breadcrumbs_amount != 0; }
+    inline FilesHandler getFilesHandler() const { return this->files_handler; }
+    inline int getCurrentBoardIndex() const { return this->current_board_index; }
+    inline void setCurrentBoardIndex(const int value) { this->current_board_index = value; }
+
+    // Initializes the current game board with breadcrumbs.
+    void initializeBoard();
+
+    // Sets the inital on-board entities' positions.
+    void initPositions();
 
     // Generates a random available position (i.e not a wall or a taken one)
     Point getFreeRandomPosition();
@@ -76,18 +85,4 @@ public:
 
     // Changes the pacman's direction according to the pressed key
     void handlePacmanDirectionChange(Pacman& pacman, int key);
-
-
-    // TODO
-    
-    std::vector<std::string> loadCurrentBoard();
-
-    FilesHandler getFilesHandler() const { return this->files_handler; }
-    inline int getCurrentBoardIndex() const { return this->current_board_index; }
-    void setCurrentBoardIndex(const int value) { this->current_board_index = value; }
-
-    // Initializes the game board with breadcrumbs.
-    void initializeBoard();
-    // Sets the inital on-board entities' positions.
-    void initPositions();
 };
