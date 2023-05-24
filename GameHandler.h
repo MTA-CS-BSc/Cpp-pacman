@@ -17,20 +17,18 @@ private:
     FilesHandler files_handler;
     int current_board_index;
 
-    // Sets the inital on-board entities' positions.
-    void initPositions();
+
+
+    // Returns true if the pacman was eaten, and false otherwise.
+    bool isPacmanEaten();
+
+
 
     // Creates the ghosts objects according to the amount needed, declared in the settings module.
     void initGhosts();
 
     // Creates the fruits objects according to the amount needed, declared in the settings module.
     void initFruits();
-
-    // Returns true if the pacman was eaten, and false otherwise.
-    bool isPacmanEaten();
-
-    // Resets the entities positions and re-prints the board. 
-    void resetBoard();
 
     // Returns true if the requested position is taken by another entity
     bool isLocationTaken(Point&);
@@ -42,6 +40,7 @@ private:
     void removeFruit(Fruit*&, bool);
 
 public:
+    void resetBoard();
     ~GameHandler();
     GameHandler(GhostMode gm);
     inline GhostMode getGhostMode() const { return this->ghost_mode; }
@@ -89,4 +88,6 @@ public:
 
     // Initializes the game board with breadcrumbs.
     void initializeBoard();
+    // Sets the inital on-board entities' positions.
+    void initPositions();
 };

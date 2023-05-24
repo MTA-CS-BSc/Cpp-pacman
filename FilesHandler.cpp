@@ -38,12 +38,12 @@ void FilesHandler::loadBoardFromFile(const std::string& file_path) {
             if (current_char == '#' || current_char == ' ' || current_char == '%')
                 addCharToBoard(brd, current_position.getY(), current_char);
 
-            else if (current_char == '$') {
+            else if (current_char == '@') {
                 addCharToBoard(brd, current_position.getY(), ' ');
                 this->pacman_position = current_position;
             }
 
-            else if (current_char == '@') {
+            else if (current_char == '$') {
                 addCharToBoard(brd, current_position.getY(), ' ');
                 this->ghosts_positions.push_back(current_position);
             }

@@ -14,7 +14,6 @@ GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm), cur
 	initializeBoard();
 	initGhosts();
 	initFruits();
-	initPositions();
 }
 
 void GameHandler::initFruits() {
@@ -38,7 +37,8 @@ void GameHandler::initGhosts() {
 void GameHandler::initializeBoard() {
 	std::vector<std::string> current_board = loadCurrentBoard();
 
-	this->board_ref.setBoard(loadCurrentBoard());
+	this->breadcrumbs_amount = 0;
+	this->board_ref.setBoard(current_board);
 
 	for (int i = 0; i < this->board_ref.getHeight(); i++) {
 		for (int j = 0; j < this->board_ref.getWidth(); j++) {

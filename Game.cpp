@@ -1,10 +1,10 @@
 #include "Game.h"
 
 void Game::printStatus() {
-	deleteLine(this->getGameHandler().getBoardRef().getScoreLine());
+	deleteLine(this->handler.getBoardRef().getScoreLine());
 	std::cout << "Score: " << this->handler.getScore();
 
-	deleteLine(this->getGameHandler().getBoardRef().getLifesLine());
+	deleteLine(this->handler.getBoardRef().getLifesLine());
 	std::cout << "Lifes: " << this->handler.getLifes();
 }
 
@@ -19,7 +19,7 @@ void Game::pause() {
 
 void Game::moveEntities() {
 	this->handler.getPacman().move(this->handler.getBoardRef());
-
+	
 	for (auto& ghost : this->handler.getGhostsArray())
 		ghost->move(this->handler.getBoardRef());
 
@@ -35,7 +35,9 @@ void Game::handleEvents() {
 }
 
 void Game::start() {
-	if (!this->handler.getFilesHandler().getCurrentBoard().size() == 0) {
+	bool finishedScreens = false;
+
+	if (!this->handler.getFilesHandler().getCurrentBoard().size()) {
 		std::cout << "No screen files were found!" << std::endl;
 		std::cout << "Press any key to go back to the main menu..." << std::endl;
 		_getch();
@@ -43,32 +45,56 @@ void Game::start() {
 	}
 	
 	else {
-		this->handler.printBoard();
 		Pacman& pacman = this->handler.getPacman();
 
-		while (!this->isWinner() && !this->isLoser()) {
-			Sleep(200);
-			if (_kbhit()) {
-				int key = _getch();
-				if (key == ESC_KEY)
-					this->pause();
+		while (!finishedScreens && !this->isLoser()) {
+			clearScreen();
+			this->handler.initializeBoard();
+			this->handler.initPositions();
+			this->handler.printBoard();
+			while (!this->isWinner() && !this->isLoser()) {
+				Sleep(200);
+				if (_kbhit()) {
+					int key = _getch();
+					if (key == ESC_KEY)
+						this->pause();
 
-				else
-					this->handler.handlePacmanDirectionChange(pacman, key);
+					else
+						this->handler.handlePacmanDirectionChange(pacman, key);
+				}
+
+				this->moveEntities();
+				this->handleEvents();
+				this->printStatus();
 			}
 
-			this->moveEntities();
-			this->handleEvents();
-			this->printStatus();
+			clearScreen();
+
+			if (isLoser())
+				std::cout << "Game over!" << std::endl;
+
+			else if (isWinner()) {
+				std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
+				
+				this->handler.setCurrentBoardIndex(this->handler.getCurrentBoardIndex() + 1);
+
+				if (this->handler.getFilesHandler().getSortedScreenFiles(".", "screen").size() - 1 >= this->handler.getCurrentBoardIndex()) {
+					std::cout << "Would you like to continue to the next screen? Press y for yes" << std::endl;
+					char ch = _getch();
+
+					if (ch == 'y') finishedScreens = false;
+										
+
+					else
+						finishedScreens = true;
+				}
+
+				else
+					finishedScreens = true;
+			}
 		}
 
+		_getch();
 		clearScreen();
-
-		if (isLoser())
-			std::cout << "Game over!" << std::endl;
-	
-		else if (isWinner())
-			std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
 	}
-
 }
