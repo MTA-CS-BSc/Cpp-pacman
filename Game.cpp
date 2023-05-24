@@ -97,7 +97,7 @@ void Game::start() {
 				std::cout << "Game over!" << std::endl;
 
 			else if (isWinner())
-				promptForWinner();
+				finishedScreens = promptForWinner();
 		}
 
 		_getch();
