@@ -22,6 +22,13 @@ class Game {
 
 		// Handles on-board events (pacman-ghost & pacman-breadcrumb intersections)
 		void handleEvents();
+
+		// Runs a single game session for loaded board
+		void runCurrentBoardGame(Pacman&);
+		
+		// Prompt for winner. Returns true if there are more screens & user wants to keep playing, false otherwise
+		bool promptForWinner();
+
 		
 	public:
 		Game(GhostMode gm) : handler(gm) { hideCursor(); }

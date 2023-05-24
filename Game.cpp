@@ -34,8 +34,45 @@ void Game::handleEvents() {
 	this->handler.handlePacmanFruitCollision();
 }
 
+void Game::runCurrentBoardGame(Pacman& pacman) {
+	while (!this->isWinner() && !this->isLoser()) {
+		Sleep(200);
+		if (_kbhit()) {
+			int key = _getch();
+			if (key == ESC_KEY)
+				this->pause();
+
+			else
+				this->handler.handlePacmanDirectionChange(pacman, key);
+		}
+
+		this->moveEntities();
+		this->handleEvents();
+		this->printStatus();
+	}
+}
+
+bool Game::promptForWinner() {
+	std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
+
+	this->handler.setCurrentBoardIndex(this->handler.getCurrentBoardIndex() + 1);
+
+	if (this->handler.getFilesHandler().getSortedScreenFiles(".", "screen").size() - 1 >= this->handler.getCurrentBoardIndex()) {
+		std::cout << "Would you like to continue to the next screen? Press y for yes" << std::endl;
+		char ch = _getch();
+
+		if (ch == 'y') return false;
+
+		else
+			return true;
+	}
+
+	return true;
+}
+
 void Game::start() {
 	bool finishedScreens = false;
+	this->handler.setCurrentBoardIndex(0);
 
 	if (!this->handler.getFilesHandler().getCurrentBoard().size()) {
 		std::cout << "No screen files were found!" << std::endl;
@@ -52,46 +89,15 @@ void Game::start() {
 			this->handler.initializeBoard();
 			this->handler.initPositions();
 			this->handler.printBoard();
-			while (!this->isWinner() && !this->isLoser()) {
-				Sleep(200);
-				if (_kbhit()) {
-					int key = _getch();
-					if (key == ESC_KEY)
-						this->pause();
 
-					else
-						this->handler.handlePacmanDirectionChange(pacman, key);
-				}
-
-				this->moveEntities();
-				this->handleEvents();
-				this->printStatus();
-			}
-
+			runCurrentBoardGame(pacman);
 			clearScreen();
 
 			if (isLoser())
 				std::cout << "Game over!" << std::endl;
 
-			else if (isWinner()) {
-				std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
-				
-				this->handler.setCurrentBoardIndex(this->handler.getCurrentBoardIndex() + 1);
-
-				if (this->handler.getFilesHandler().getSortedScreenFiles(".", "screen").size() - 1 >= this->handler.getCurrentBoardIndex()) {
-					std::cout << "Would you like to continue to the next screen? Press y for yes" << std::endl;
-					char ch = _getch();
-
-					if (ch == 'y') finishedScreens = false;
-										
-
-					else
-						finishedScreens = true;
-				}
-
-				else
-					finishedScreens = true;
-			}
+			else if (isWinner())
+				promptForWinner();
 		}
 
 		_getch();
