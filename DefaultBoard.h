@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 
-const std::vector<std::string> brd = {
+const std::vector<std::string> default_board = {
 "###############################################################################",
 "#                                                                             #",
 "#    ###########                    ##### #####                               #",

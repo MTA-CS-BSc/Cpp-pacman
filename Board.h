@@ -7,10 +7,7 @@ class Board {
 		std::vector<std::string> board_obj;
 
 	public:
-		Board() {
-			setBoard(brd);
-		}
-
+		Board() { setBoard(default_board); }
 		inline std::vector<std::string>& getBoard() { return board_obj; }
 		inline void setBoard(std::vector<std::string> _value) { board_obj = _value; }
 		inline int getWidth() const { return board_obj[0].size(); }
