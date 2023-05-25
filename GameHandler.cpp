@@ -18,7 +18,7 @@ void GameHandler::setGhostMode(GhostMode value) {
 	initPositions();
 }
 
-GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm), current_board_index(0), breadcrumbs_amount(0) {
+GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm), breadcrumbs_amount(0) {
 	if (gm != GhostMode::NOT_CHOSEN) {
 		initializeBoard();
 		initGhosts();
@@ -74,7 +74,7 @@ std::vector<std::string> GameHandler::loadCurrentBoard() {
 	if (files.empty())
 		return std::vector<std::string>();
 
-	current_file_name = files[current_board_index];
+	current_file_name = files[this->files_handler.getCurrentBoardIndex()];
 	files_handler.loadBoardFromFile(current_file_name);
 	return files_handler.getCurrentBoard();
 }

@@ -13,7 +13,6 @@ private:
     Pacman pacman;
     int breadcrumbs_amount;
     std::vector<Fruit*> fruits;
-    int current_board_index;
     FilesHandler files_handler;
 
     // Removes all fruit, initializes positions of entities and prints the board.
