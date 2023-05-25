@@ -42,6 +42,7 @@ void deleteLine(double line) {
 void printActions() {
     std::cout << "Available Actions:\n" << std::endl;
 	std::cout << static_cast<int>(Action::START) << ": start a new game" << std::endl;
+	std::cout << static_cast<int>(Action::START_BY_FILENAME) << ": start a new game from a file" << std::endl;
 	std::cout << static_cast<int>(Action::HOW_TO_PLAY) << ": how to play" << std::endl;
 	std::cout << static_cast<int>(Action::EXIT) << ": quit (for sore losers)" << std::endl;
 }
@@ -130,4 +131,23 @@ std::string getGhostModeString(GhostMode mode) {
 	case GhostMode::NOVICE:
 		return "NOVICE";
 	}
+}
+
+
+bool has_ending(std::string const& str, std::string const& ending) {
+	if (str.length() >= ending.length())
+		return (0 == str.compare(str.length() - ending.length(), ending.length(), ending));
+
+	return false;
+}
+
+std::vector<std::string> listdir(const std::string& path, const std::string& suffix) {
+	std::vector<std::string> files;
+
+	for (const auto& entry : fs::directory_iterator(path))
+		if (has_ending(entry.path().string(), suffix))
+			files.push_back(entry.path().string());
+
+	sort(files.begin(), files.end());
+	return files;
 }

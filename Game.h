@@ -26,9 +26,11 @@ class Game {
 		// Runs a single game session for loaded board
 		void runCurrentBoardGame(Pacman&);
 		
+		bool promptForWinner();
 	public:
 		Game(GhostMode gm) : handler(gm) { hideCursor(); }
 		Game() : Game(GhostMode::NOT_CHOSEN) { }
 		inline void setGhostMode(GhostMode gm) { this->handler.setGhostMode(gm); }
+		inline GameHandler& getGameHandler() { return this->handler; }
 		void start();
 };

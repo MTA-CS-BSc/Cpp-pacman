@@ -13,8 +13,8 @@ private:
     Pacman pacman;
     int breadcrumbs_amount;
     std::vector<Fruit*> fruits;
-    FilesHandler files_handler;
     int current_board_index;
+    FilesHandler files_handler;
 
     // Removes all fruit, initializes positions of entities and prints the board.
     void resetBoard();
@@ -53,11 +53,12 @@ public:
     inline void setPacman(const Pacman& p) { this->pacman = p; }
     inline void setLifes(int value) { this->lifes = value; }
     inline void setScore(int value) { this->score = value; }
-    inline void setGhostMode(GhostMode value) { this->ghost_mode = value; }
     inline bool breadcrumbExists() { return this->breadcrumbs_amount != 0; }
-    inline FilesHandler getFilesHandler() const { return this->files_handler; }
-    inline int getCurrentBoardIndex() const { return this->current_board_index; }
-    inline void setCurrentBoardIndex(const int value) { this->current_board_index = value; }
+    inline int getCurrentBoardIndex() const { return this->files_handler.getCurrentBoardIndex(); }
+    inline void setCurrentBoardIndex(const int value) { this->files_handler.setCurrentBoardIndex(value); }
+    inline FilesHandler& getFilesHandler() { return this->files_handler; }
+
+    void setGhostMode(GhostMode);
 
     // Initializes the current game board with breadcrumbs.
     void initializeBoard();

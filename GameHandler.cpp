@@ -10,10 +10,21 @@ GameHandler::~GameHandler() {
 		delete this->fruits[i];
 }
 
-GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm), current_board_index(0) {
+void GameHandler::setGhostMode(GhostMode value) {
+	this->ghost_mode = value;
 	initializeBoard();
 	initGhosts();
 	initFruits();
+	initPositions();
+}
+
+GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm), current_board_index(0), breadcrumbs_amount(0) {
+	if (gm != GhostMode::NOT_CHOSEN) {
+		initializeBoard();
+		initGhosts();
+		initFruits();
+		initPositions();
+	}
 }
 
 void GameHandler::initFruits() {
@@ -22,7 +33,9 @@ void GameHandler::initFruits() {
 }
 
 void GameHandler::initGhosts() {
-	for (int i = 0; i < files_handler.getGhostsAmount(); i++) {
+	this->ghosts.clear();
+
+	for (int i = 0; i < this->files_handler.getGhostsAmount(); i++) {
 		if (this->ghost_mode == GhostMode::NOVICE)
 			this->ghosts.push_back(new NoviceGhost());
 
@@ -94,10 +107,10 @@ Point GameHandler::getFreeRandomPosition() {
 
 void GameHandler::initPositions() {
 	this->pacman.setCurrentDirection(Direction::STAY);
-	this->pacman.setCurrentPosition(files_handler.getPacmanPosition());
+	this->pacman.setCurrentPosition(this->files_handler.getPacmanPosition());
 	
 	for (int i = 0; i < this->ghosts.size(); i++)
-		this->ghosts[i]->setCurrentPosition(files_handler.getGhostsPositions()[i]);
+		this->ghosts[i]->setCurrentPosition(this->files_handler.getGhostsPositions()[i]);
 	
 	for (auto& fruit : this->fruits)
 		fruit->setCurrentPosition(getFreeRandomPosition());
