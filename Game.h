@@ -26,12 +26,9 @@ class Game {
 		// Runs a single game session for loaded board
 		void runCurrentBoardGame(Pacman&);
 		
-		// Prompt for winner. Returns true if there are more screens & user wants to keep playing, false otherwise
-		bool promptForWinner();
-
-		
 	public:
 		Game(GhostMode gm) : handler(gm) { hideCursor(); }
-		inline GameHandler& getGameHandler() { return this->handler; }
+		Game() : Game(GhostMode::NOT_CHOSEN) { }
+		inline void setGhostMode(GhostMode gm) { this->handler.setGhostMode(gm); }
 		void start();
 };

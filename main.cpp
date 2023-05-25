@@ -2,10 +2,8 @@
 
 void startGame() {
 	srand((unsigned int)time(NULL));
-
-	GhostMode ghost_mode = getGhostMode();
-
-	Game game = Game(ghost_mode);
+	Game game = Game();
+	game.setGhostMode(getGhostMode());
 	game.start();
 
 	std::cout << "\n\nPress any key to go back to the menu" << std::endl;

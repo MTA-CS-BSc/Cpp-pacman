@@ -52,55 +52,31 @@ void Game::runCurrentBoardGame(Pacman& pacman) {
 	}
 }
 
-bool Game::promptForWinner() {
-	std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
-
-	this->handler.setCurrentBoardIndex(this->handler.getCurrentBoardIndex() + 1);
-
-	if (this->handler.getFilesHandler().getSortedScreenFiles(".", "screen").size() - 1 >= this->handler.getCurrentBoardIndex()) {
-		std::cout << "Would you like to continue to the next screen? Press y for yes" << std::endl;
-		char ch = _getch();
-
-		if (ch == 'y') return false;
-
-		else
-			return true;
-	}
-
-	return true;
-}
-
 void Game::start() {
-	bool finishedScreens = false;
-	this->handler.setCurrentBoardIndex(0);
+	this->handler.printBoard();
+	Pacman& pacman = this->handler.getPacman();
 
-	if (!this->handler.getFilesHandler().getCurrentBoard().size()) {
-		std::cout << "No screen files were found!" << std::endl;
-		std::cout << "Press any key to go back to the main menu..." << std::endl;
-		_getch();
-		clearScreen();
-	}
-	
-	else {
-		Pacman& pacman = this->handler.getPacman();
+	while (!this->isWinner() && !this->isLoser()) {
+		Sleep(200);
+		if (_kbhit()) {
+			int key = _getch();
+			if (key == ESC_KEY)
+				this->pause();
 
-		while (!finishedScreens && !this->isLoser()) {
-			clearScreen();
-			this->handler.initializeBoard();
-			this->handler.initPositions();
-			this->handler.printBoard();
-
-			runCurrentBoardGame(pacman);
-			clearScreen();
-
-			if (isLoser())
-				std::cout << "Game over!" << std::endl;
-
-			else if (isWinner())
-				finishedScreens = promptForWinner();
+			else
+				this->handler.handlePacmanDirectionChange(pacman, key);
 		}
 
-		_getch();
-		clearScreen();
+		this->moveEntities();
+		this->handleEvents();
+		this->printStatus();
 	}
+
+	clearScreen();
+
+	if (isLoser())
+		std::cout << "Game over!" << std::endl;
+
+	else if (isWinner())
+		std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
 }
