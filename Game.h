@@ -28,7 +28,7 @@ class Game {
 		
 		bool promptForWinner();
 	public:
-		Game(GhostMode gm) : handler(gm) { hideCursor(); }
+		Game(GhostMode);
 		Game() : Game(GhostMode::NOT_CHOSEN) { }
 		inline void setGhostMode(GhostMode gm) { this->handler.setGhostMode(gm); }
 		inline GameHandler& getGameHandler() { return this->handler; }

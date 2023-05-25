@@ -1,6 +1,6 @@
 #include "FilesHandler.h"
 
-std::vector<std::string> FilesHandler::getSortedScreenFiles(const std::string& path, const std::string& suffix) {
+std::vector<std::string> FilesHandler::getSortedScreenFiles() {
     return listdir(".", "screen");
 }
 

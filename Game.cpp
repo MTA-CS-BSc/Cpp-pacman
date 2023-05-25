@@ -1,5 +1,10 @@
 #include "Game.h"
 
+Game::Game(GhostMode gm) : handler(gm) {
+	hideCursor();
+	srand((unsigned int)time(NULL));
+}
+
 void Game::printStatus() {
 	deleteLine(this->handler.getBoardRef().getScoreLine());
 	std::cout << "Score: " << this->handler.getScore();
@@ -57,7 +62,7 @@ bool Game::promptForWinner() {
 
 	this->handler.setCurrentBoardIndex(this->handler.getCurrentBoardIndex() + 1);
 
-	if (this->handler.getFilesHandler().getSortedScreenFiles(".", "screen").size() - 1 >= this->handler.getCurrentBoardIndex()) {
+	if (this->handler.getFilesHandler().getSortedScreenFiles().size() - 1 >= this->handler.getCurrentBoardIndex()) {
 		std::cout << "Would you like to continue to the next screen? Press y for yes" << std::endl;
 		char ch = _getch();
 

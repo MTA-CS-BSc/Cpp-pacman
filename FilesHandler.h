@@ -13,8 +13,8 @@ private:
 
 public:
 	FilesHandler() : current_board_index(0) { }
-	std::vector<std::string> getSortedScreenFiles(const std::string& path, const std::string& suffix);
-	void loadBoardFromFile(const std::string& file_path);
+	std::vector<std::string> getSortedScreenFiles();
+	void loadBoardFromFile(const std::string&);
 	inline int getGhostsAmount() const { return this->ghosts_positions.size(); }
 	inline Point getPacmanPosition() const { return this->pacman_position; }
 	inline std::vector<Point> getGhostsPositions() const { return this->ghosts_positions; }

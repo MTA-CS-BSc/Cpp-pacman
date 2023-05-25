@@ -33,9 +33,7 @@ void startGameFromFileName(Game& game) {
 
 }
 
-void startGame(Game& game, bool isFromFile = false) {
-	srand((unsigned int)time(NULL));
-	
+void startGame(Game& game, bool isFromFile = false) {	
 	game.getGameHandler().setCurrentBoardIndex(0);
 
 	if (!isFromFile) {
