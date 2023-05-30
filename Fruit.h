@@ -9,6 +9,11 @@ private:
 	inline bool shouldChangeVisibility() { return generateRandomBoolean(); }
 	inline bool shouldChangeDirectionRandomly() { return generateShouldRandomDir(); }
 	
+	// Sets the fruit's char according to it's visibility.
+	// If the fruit is invisible, the function will set the char of the fruit
+	// to be the char in the fruit's current position on the board.
+	// Otherwise, the function will set the char of the fruit to be the char
+	// that was firstly assigned to the fruit (in ctor).
 	void changeFruitCharAccordingToVisibility(Board&, Point&);
 
 	bool shouldChangeDirection(Board&, Point&) override;

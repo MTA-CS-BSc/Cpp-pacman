@@ -38,12 +38,13 @@ void clearScreen();
 void hideCursor();
 void deleteLine(double);
 
-// Returns true if the value entered is from the allowed actions, and false otherwise
+// Returns true if the value entered is from the allowed actions and false otherwise
 inline bool isActionValid(int value) {
 	return value == (int)Action::START || value == (int)Action::HOW_TO_PLAY || value == (int)Action::EXIT || value == (int)Action::START_BY_FILENAME; 
 }
 
-inline bool isModeValid(int value) {
+// Returns true if the value entered is from the allowed ghost modes and false otherwise
+inline bool isGhostModeValid(int value) {
 	return value == (int)GhostMode::BEST || value == (int)GhostMode::GOOD || value == (int)GhostMode::NOVICE;
 }
 
@@ -56,6 +57,7 @@ void printActions();
 // Gets input from the user and returns an action to perform
 Action getAction();
 
+// Gets input from the user and returns a GhostMode to set
 GhostMode getGhostMode();
 
 // Prints how to play (instructions)
@@ -64,8 +66,11 @@ void printHowToPlay();
 // Prints the received char in the received coordinate (x, y)
 void printAtXY(double, double, char);
 
+// Receives a GhostMode and returns it's correlated string
 std::string getGhostModeString(GhostMode);
 
+// Returns true if the file name ends with the given ending and false otherwise
 bool has_ending(std::string const&, std::string const&);
 
+// Returns an array of file names in the given path with the given file name ending
 std::vector<std::string> listdir(const std::string&, const std::string&);

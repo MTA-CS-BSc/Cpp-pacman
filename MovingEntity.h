@@ -36,14 +36,18 @@ class MovingEntity {
             return p.getY() < 0 || p.getX() < 0 || p.getY() >= board.getHeight() || p.getX() >= board.getWidth();
         }
 
+        // Returns true if the given direction is not the same direction as current
+        // and if the point is not hitting a wall or beyond the board's boundaries
         inline bool isDirectionOk(Board& board, Point& p, Direction direction) {
             return !(this->isOnWall(board, p)) && !(this->isBeyondBoundaries(board, p)) && this->getDirection() != direction;
         }
 
+        // Returns a random direction
         inline Direction getRandomDirection() {
             return static_cast<Direction>(generateRandomNumber(0, 3));
         }
 
+        // Generates a valid random direction for the entity to go to.
         Direction getValidRandomDirection(Board&, Point&);
 
     public:

@@ -10,8 +10,7 @@ GameHandler::~GameHandler() {
 		delete this->fruits[i];
 }
 
-void GameHandler::setGhostMode(GhostMode value) {
-	this->ghost_mode = value;
+void GameHandler::initGameProperties() {
 	initializeBoard();
 	initGhosts();
 	initFruits();
@@ -19,12 +18,13 @@ void GameHandler::setGhostMode(GhostMode value) {
 }
 
 GameHandler::GameHandler(GhostMode gm) : lifes(3), score(0), ghost_mode(gm), breadcrumbs_amount(0) {
-	if (gm != GhostMode::NOT_CHOSEN) {
-		initializeBoard();
-		initGhosts();
-		initFruits();
-		initPositions();
-	}
+	if (gm != GhostMode::NOT_CHOSEN)
+		initGameProperties();
+}
+
+void GameHandler::setGhostMode(GhostMode value) {
+	this->ghost_mode = value;
+	initGameProperties();
 }
 
 void GameHandler::initFruits() {

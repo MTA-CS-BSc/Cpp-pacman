@@ -57,6 +57,10 @@ public:
     inline void setCurrentBoardIndex(const int value) { this->files_handler.setCurrentBoardIndex(value); }
     inline FilesHandler& getFilesHandler() { return this->files_handler; }
 
+    // Initializes the board and the entities on it.
+    void initGameProperties();
+
+    // Sets the requested ghost mode and initializes the game's entities.
     void setGhostMode(GhostMode);
 
     // Initializes the current game board with breadcrumbs.

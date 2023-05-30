@@ -83,7 +83,7 @@ GhostMode getGhostMode() {
 
 		std::cin >> value;
 
-		if (!std::cin.fail() && isModeValid(value))
+		if (!std::cin.fail() && isGhostModeValid(value))
 			valid = true;
 
 		else {

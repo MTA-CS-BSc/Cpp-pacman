@@ -8,7 +8,7 @@ private:
 	Point pacman_position;
 	std::vector<Point> ghosts_positions;
 	std::vector<std::string> board;
-	void addCharToBoard(std::vector<std::string>& brd, int y, char ch);
+	void addCharToBoard(std::vector<std::string>&, int, char);
 	int current_board_index;
 
 public:

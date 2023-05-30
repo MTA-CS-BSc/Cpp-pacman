@@ -57,22 +57,18 @@ void Game::runCurrentBoardGame(Pacman& pacman) {
 	}
 }
 
-bool Game::promptForWinner() {
+bool Game::getShouldContinueToNextScreen() {
+	char ch = '\0';
 	std::cout << "Somebody gotta consider changing his profession! Congrats! " << std::endl;
 
 	this->handler.setCurrentBoardIndex(this->handler.getCurrentBoardIndex() + 1);
 
 	if (this->handler.getFilesHandler().getSortedScreenFiles().size() - 1 >= this->handler.getCurrentBoardIndex()) {
 		std::cout << "Would you like to continue to the next screen? Press y for yes" << std::endl;
-		char ch = _getch();
-
-		if (ch == 'y') return false;
-
-		else
-			return true;
+		ch = _getch();
 	}
 
-	return true;
+	return ch == 'y' ? true : false;
 }
 
 void Game::start() {
@@ -101,7 +97,7 @@ void Game::start() {
 				std::cout << "Game over!" << std::endl;
 
 			else if (isWinner())
-				finishedScreens = promptForWinner();
+				finishedScreens = !getShouldContinueToNextScreen();
 		}
 
 		_getch();

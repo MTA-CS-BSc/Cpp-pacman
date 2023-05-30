@@ -26,7 +26,12 @@ class Game {
 		// Runs a single game session for loaded board
 		void runCurrentBoardGame(Pacman&);
 		
-		bool promptForWinner();
+		// Fired when user winned a single screen.
+		// Prompts a message to the user and receives choice whether
+		// or not to continue to the next screen (if there are any left).
+		// Returns true if the user entered 'y', false otherwise or if there are no screens left.
+		bool getShouldContinueToNextScreen();
+
 	public:
 		Game(GhostMode);
 		Game() : Game(GhostMode::NOT_CHOSEN) { }
