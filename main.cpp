@@ -26,7 +26,7 @@ void startGameFromFileName(Game& game) {
 	}
 
 	else {
-		std::cout << "Wrong input!";
+		std::cout << "Wrong input!" << std::endl;
 		_getch();
 		clearScreen();
 	}
