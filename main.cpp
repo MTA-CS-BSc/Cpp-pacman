@@ -2,33 +2,30 @@
 
 void startGameFromFileName(Game& game) {
 	std::string file_name;
+	int i;
 
-	std::cout << "Please enter a file name from the directory:" << std::endl;
-	std::cin >> file_name;
+	std::vector<std::string> files = getSortedScreenFiles();
 
-	file_name = ".\\" + file_name;
-
-	auto files = getSortedScreenFiles();
-	int i = 0;
-	bool found_file = false;
-
-	for (; i < files.size() && !found_file; i++) {
-		if (files[i] == file_name) {
-			found_file = true;
-			i--;
-		}
+	if (!files.size()) {
+		printNoScreenFilesMessage();
+		return;
 	}
 
-	if (found_file) {
+	file_name = getFileName();
+	file_name = ".\\" + file_name;
+	
+	i = getFileIndex(files, file_name);
+
+	if (i != NOT_FOUND) {
+		clearScreen();
 		game.getGameHandler().setGhostMode(getGhostMode());
 		game.getGameHandler().setCurrentBoardIndex(i);
 		game.start();
 	}
 
 	else {
-		std::cout << "Wrong input!" << std::endl;
-		_getch();
-		clearScreen();
+		std::cout << "Wrong input! File doesn't exist" << std::endl;
+		printPressAnyKeyToReturnMessage();
 	}
 
 }
@@ -36,10 +33,8 @@ void startGameFromFileName(Game& game) {
 void startGame(Game& game, bool isFromFile = false) {	
 	game.getGameHandler().setCurrentBoardIndex(0);
 
-	if (!getSortedScreenFiles().size()) {
-		std::cout << "No screen files found in directory!" << std::endl;
-		printPressAnyKeyToReturnMessage();
-	}
+	if (!getSortedScreenFiles().size())
+		printNoScreenFilesMessage();
 
 	else if (!isFromFile) {
 		game.setGhostMode(getGhostMode());

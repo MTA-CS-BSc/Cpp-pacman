@@ -79,6 +79,15 @@ inline void printPressAnyKeyToReturnMessage() {
 	std::cout << "Press any key to go back to the main menu..." << std::endl;
 }
 
+inline void printNoScreenFilesMessage() {
+	std::cout << "No screen files found in directory!" << std::endl;
+	printPressAnyKeyToReturnMessage();
+}
+
 inline std::vector<std::string> getSortedScreenFiles() {
 	return listdir(".", "screen");
 }
+
+int getFileIndex(std::vector<std::string>& const, std::string& const);
+
+std::string getFileName();

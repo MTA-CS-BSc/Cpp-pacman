@@ -3,6 +3,8 @@
 // OS type
 #define WINDOWS
 
+#define NOT_FOUND -1
+
 // A module to store game settings
 class Settings {
 	public:

@@ -151,3 +151,26 @@ std::vector<std::string> listdir(const std::string& path, const std::string& suf
 	sort(files.begin(), files.end());
 	return files;
 }
+
+int getFileIndex(std::vector<std::string>& const files, std::string& const file_name) {
+	bool found_file = false;
+	int i = 0;
+
+	while (i < files.size() && !found_file) {
+		if (files[i] == file_name)
+			found_file = true;
+
+		else
+			i++;
+	}
+
+	return found_file ? i : NOT_FOUND;
+}
+
+std::string getFileName() {
+	std::string file_name;
+	std::cout << "Please enter a file name from the directory:" << std::endl;
+	std::cin >> file_name;
+
+	return file_name;
+}
