@@ -48,6 +48,17 @@ inline bool isGhostModeValid(int value) {
 	return value == (int)GhostMode::BEST || value == (int)GhostMode::GOOD || value == (int)GhostMode::NOVICE;
 }
 
+// Prints a message of "Press any key to return to the main menu"
+inline void printPressAnyKeyToReturnMessage() {
+	std::cout << "Press any key to go back to the main menu..." << std::endl;
+}
+
+// Prints an error message regarding no screen files in directory
+inline void printNoScreenFilesMessage() {
+	std::cout << "No screen files found in directory!" << std::endl;
+	printPressAnyKeyToReturnMessage();
+}
+
 // Prints the keys used to play the game
 void printKeys();
 
@@ -75,19 +86,14 @@ bool has_ending(std::string const&, std::string const&);
 // Returns an array of file names in the given path with the given file name ending
 std::vector<std::string> listdir(const std::string&, const std::string&);
 
-inline void printPressAnyKeyToReturnMessage() {
-	std::cout << "Press any key to go back to the main menu..." << std::endl;
-}
-
-inline void printNoScreenFilesMessage() {
-	std::cout << "No screen files found in directory!" << std::endl;
-	printPressAnyKeyToReturnMessage();
-}
-
+// Returns an array of screen files' names in the current directory
 inline std::vector<std::string> getSortedScreenFiles() {
 	return listdir(".", "screen");
 }
 
+// Searches the given file name in the file names array.
+// Returns it's index in the array if it exists, NOT_FOUND (-1) otherwise.
 int getFileIndex(std::vector<std::string>& const, std::string& const);
 
+// Receives a file name from the user and returns it.
 std::string getFileName();
