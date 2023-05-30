@@ -74,3 +74,11 @@ bool has_ending(std::string const&, std::string const&);
 
 // Returns an array of file names in the given path with the given file name ending
 std::vector<std::string> listdir(const std::string&, const std::string&);
+
+inline void printPressAnyKeyToReturnMessage() {
+	std::cout << "Press any key to go back to the main menu..." << std::endl;
+}
+
+inline std::vector<std::string> getSortedScreenFiles() {
+	return listdir(".", "screen");
+}

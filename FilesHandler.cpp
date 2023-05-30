@@ -1,9 +1,5 @@
 #include "FilesHandler.h"
 
-std::vector<std::string> FilesHandler::getSortedScreenFiles() {
-    return listdir(".", "screen");
-}
-
 void FilesHandler::loadBoardFromFile(const std::string& file_path) {
     std::ifstream file;
     std::string current_row;

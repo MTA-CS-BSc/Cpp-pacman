@@ -63,7 +63,7 @@ bool Game::getShouldContinueToNextScreen() {
 
 	this->handler.setCurrentBoardIndex(this->handler.getCurrentBoardIndex() + 1);
 
-	if (this->handler.getFilesHandler().getSortedScreenFiles().size() - 1 >= this->handler.getCurrentBoardIndex()) {
+	if (getSortedScreenFiles().size() - 1 >= this->handler.getCurrentBoardIndex()) {
 		std::cout << "Would you like to continue to the next screen? Press y for yes" << std::endl;
 		ch = _getch();
 	}
@@ -73,34 +73,26 @@ bool Game::getShouldContinueToNextScreen() {
 
 void Game::start() {
 	bool finishedScreens = false;
+	Pacman& pacman = this->handler.getPacman();
 
-	if (!this->handler.getFilesHandler().getCurrentBoard().size()) {
-		std::cout << "No screen files were found!" << std::endl;
-		std::cout << "Press any key to go back to the main menu..." << std::endl;
-		_getch();
+	while (!finishedScreens && !this->isLoser()) {
 		clearScreen();
-	}
+		this->handler.initializeBoard();
+		this->handler.initPositions();
+		this->handler.printBoard();
 
-	else {
-		Pacman& pacman = this->handler.getPacman();
+		runCurrentBoardGame(pacman);
+		clearScreen();
 
-		while (!finishedScreens && !this->isLoser()) {
-			clearScreen();
-			this->handler.initializeBoard();
-			this->handler.initPositions();
-			this->handler.printBoard();
-
-			runCurrentBoardGame(pacman);
-			clearScreen();
-
-			if (isLoser())
-				std::cout << "Game over!" << std::endl;
-
-			else if (isWinner())
-				finishedScreens = !getShouldContinueToNextScreen();
+		if (isLoser()) {
+			std::cout << "Game over!" << std::endl;
+			printPressAnyKeyToReturnMessage();
 		}
 
-		_getch();
-		clearScreen();
+		else if (isWinner())
+			finishedScreens = !getShouldContinueToNextScreen();
 	}
+
+	if (finishedScreens)
+		printPressAnyKeyToReturnMessage();
 }

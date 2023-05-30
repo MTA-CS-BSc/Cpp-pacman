@@ -8,7 +8,7 @@ void startGameFromFileName(Game& game) {
 
 	file_name = ".\\" + file_name;
 
-	auto files = listdir(".", "screen");
+	auto files = getSortedScreenFiles();
 	int i = 0;
 	bool found_file = false;
 
@@ -36,16 +36,19 @@ void startGameFromFileName(Game& game) {
 void startGame(Game& game, bool isFromFile = false) {	
 	game.getGameHandler().setCurrentBoardIndex(0);
 
-	if (!isFromFile) {
+	if (!getSortedScreenFiles().size()) {
+		std::cout << "No screen files found in directory!" << std::endl;
+		printPressAnyKeyToReturnMessage();
+	}
+
+	else if (!isFromFile) {
 		game.setGhostMode(getGhostMode());
 		game.start();
 	}
 
 	else
 		startGameFromFileName(game);
-		
 
-	std::cout << "\n\nPress any key to go back to the menu" << std::endl;
 	_getch();
 	clearScreen();
 }

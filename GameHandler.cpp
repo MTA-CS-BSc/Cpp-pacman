@@ -69,7 +69,7 @@ void GameHandler::initializeBoard() {
 
 std::vector<std::string> GameHandler::loadCurrentBoard() {
 	std::string current_file_name;
-	std::vector<std::string> files = files_handler.getSortedScreenFiles();
+	std::vector<std::string> files = getSortedScreenFiles();
 
 	if (files.empty())
 		return std::vector<std::string>();
