@@ -1,6 +1,8 @@
 #pragma once
 #include "BaseGhost.h"
 #include "Pacman.h"
+#include <queue>
+#include <cstdlib>
 
 class SmartGhost : public BaseGhost {
 protected:
