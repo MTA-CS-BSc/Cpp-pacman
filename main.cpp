@@ -32,6 +32,8 @@ void startGameFromFileName(Game& game) {
 
 void startGame(Game& game, bool isFromFile = false) {	
 	game.getGameHandler().setCurrentBoardIndex(0);
+	game.getGameHandler().setLifes(Settings::LIFES_INIT_AMOUNT);
+	game.getGameHandler().setScore(Settings::SCORE_INIT_AMOUNT);
 
 	if (!getSortedScreenFiles().size())
 		printNoScreenFilesMessage();

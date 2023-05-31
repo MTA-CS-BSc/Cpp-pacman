@@ -14,7 +14,9 @@ class Settings {
 			FRUIT_AMOUNT = 2,
 			GHOST_MAX_MOVES_IN_SAME_DIR = 20,
 			FOOL_GHOST_STUPID_MOVES = 5,
-			BREADCRUMB_POINTS = 1;
+			BREADCRUMB_POINTS = 1,
+			LIFES_INIT_AMOUNT = 3,
+			SCORE_INIT_AMOUNT = 0;
 
 		static constexpr double
 			FRUIT_SPEED = 0.25,
