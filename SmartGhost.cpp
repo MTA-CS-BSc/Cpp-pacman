@@ -29,7 +29,7 @@ Direction SmartGhost::getBestMovingDirection(Board& board, Point& p) {
             std::vector<Direction> path;
             Point pathCell = currentCell;
             while (pathCell != ghostPosition) {
-                Point parentCell = parent[pathCell.getX()][pathCell.getY()];
+                Point parentCell = parent[pathCell.getY()][pathCell.getX()];
 
                 // Find the direction from the parent to the current cell
                 for (const Direction& direction : directions) {
@@ -43,34 +43,34 @@ Direction SmartGhost::getBestMovingDirection(Board& board, Point& p) {
             }
 
             // Return the first direction in the path
-            if (!path.empty()) {
-                return path.front();
+            while (!path.empty() && !isDirectionOk(board, p, path[0])) {
+                path.reserve(path.capacity());
+                path.pop_back();
+                path.reserve(path.capacity());
             }
+
+            if (!path.empty())
+                return path.front();
+                    
         }
 
         // Enqueue neighboring cells that are not walls and have not been visited yet
         for (const Direction& direction : directions) {
-            Point neighborCell = currentCell.getNeighbor(direction);
-            if (!isBeyondBoundaries(board, neighborCell) && !isOnWall(board, neighborCell) &&
-                !visited[neighborCell.getX()][neighborCell.getY()]) {
-                queue.push(neighborCell);
-                visited[neighborCell.getX()][neighborCell.getY()] = true;
-                parent[neighborCell.getX()][neighborCell.getY()] = currentCell;
+            Point neighborCell = currentCell;
+            neighborCell.changeWithDirection(direction, this->getSpeed());
+
+            if (isDirectionOk(board, neighborCell, direction) &&
+                !visited[neighborCell.getY()][neighborCell.getX()]) {
+                    queue.push(neighborCell);
+                    visited[neighborCell.getY()][neighborCell.getX()] = true;
+                    parent[neighborCell.getY()][neighborCell.getX()] = currentCell;
             }
         }
     }
 
     // If Pacman is not reachable or no path found, return a random direction
-    Direction res = directions[rand() % directions.size()];
-   while(!isDirectionOk(board,this->current_position, res))
-       res= directions[rand() % directions.size()];
-   return res;
-
+    return getValidRandomDirection(board, p);
 }
-
-
-
-
 
 void SmartGhost::ghostMovementLogic(Board& board, Point& p) {
 	this->setCurrentDirection(getBestMovingDirection(board, p));
