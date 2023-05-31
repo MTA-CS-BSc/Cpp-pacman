@@ -10,7 +10,7 @@ Direction SmartGhost::getBestMovingDirection(Board& board, Point& p) {
 
     // Create a separate 2D array to store the visited status of each cell
     std::vector<std::vector<bool>> visited(board.getWidth(), std::vector<bool>(board.getHeight(), false));
-    visited[ghostPosition.getX()][ghostPosition.getY()] = true;
+    visited[ghostPosition.getY()][ghostPosition.getX()] = true;
 
     // Create a 2D array to store the parent cell of each visited cell
     std::vector<std::vector<Point>> parent(board.getWidth(), std::vector<Point>(board.getHeight()));
@@ -43,13 +43,7 @@ Direction SmartGhost::getBestMovingDirection(Board& board, Point& p) {
             }
 
             // Return the first direction in the path
-            while (!path.empty() && !isDirectionOk(board, p, path[0])) {
-                path.reserve(path.capacity());
-                path.pop_back();
-                path.reserve(path.capacity());
-            }
-
-            if (!path.empty())
+            if (!path.empty() && isDirectionOk(board, p, path[0]))
                 return path.front();
                     
         }
