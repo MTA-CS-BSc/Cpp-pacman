@@ -27,6 +27,7 @@ void Point::changeWithDirection(Direction direction, double threshold) {
 
 Point Point::getNeighbor(Direction direction) {
     Point neighbor = *this;
+
     switch (direction) {
     case Direction::UP:
         neighbor.y--;
@@ -42,8 +43,4 @@ Point Point::getNeighbor(Direction direction) {
         break;
     }
     return neighbor;
-}
-
-bool Point::operator!=(const Point& other) const {
-    return x != other.x || y != other.y;
 }

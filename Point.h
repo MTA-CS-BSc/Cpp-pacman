@@ -25,6 +25,9 @@ class Point {
             return this->getX() == other.getX() && this->getY() == other.getY();
         }
 
+        inline bool operator!=(const Point& other) const {
+            return x != other.x || y != other.y;
+        }
+
         Point getNeighbor(Direction direction);
-        bool operator!=(const Point& other) const;
 };
