@@ -22,12 +22,13 @@ class Point {
         void changeWithDirection(Direction, double);
 
         inline bool operator==(const Point& other) {
-            return this->getX() == other.getX() && this->getY() == other.getY();
+            return x == other.x && y == other.y;
         }
 
         inline bool operator!=(const Point& other) const {
             return x != other.x || y != other.y;
         }
 
-        Point getNeighbor(Direction direction);
+        // Returns the point's neighbor point according to the given direction
+        Point getNeighbor(Direction);
 };

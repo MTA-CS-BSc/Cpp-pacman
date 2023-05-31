@@ -8,6 +8,8 @@ class SmartGhost : public BaseGhost {
 protected:
 	Pacman& target;
 	void ghostMovementLogic(Board&, Point&) override;
+
+	// Returns best direction using BFS
 	Direction getBestMovingDirection(Board& board, Point& p);
 
 public:
