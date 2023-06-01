@@ -8,6 +8,9 @@ GameHandler::~GameHandler() {
 
 	for (int i = 0; i < Settings::FRUIT_AMOUNT; i++)
 		delete this->fruits[i];
+
+	this->ghosts.clear();
+	this->fruits.clear();
 }
 
 void GameHandler::initGameProperties() {
