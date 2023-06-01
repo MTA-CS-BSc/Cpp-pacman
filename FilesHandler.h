@@ -12,6 +12,7 @@ private:
 	int current_board_index;
 
 public:
+	~FilesHandler() { }
 	FilesHandler() : current_board_index(0) { }
 	void loadBoardFromFile(const std::string&);
 	inline int getGhostsAmount() const { return this->ghosts_positions.size(); }

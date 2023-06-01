@@ -13,6 +13,7 @@ protected:
 	Direction getBestMovingDirection(Board& board, Point& p);
 
 public:
+	~SmartGhost() { }
 	SmartGhost(Pacman& _target) : BaseGhost(), target(_target) { }
 	SmartGhost(Direction d, double speed, char ch, Pacman& _target) : BaseGhost(d, speed, ch), target(_target) { }
 };

@@ -7,6 +7,7 @@ class Point {
         double x, y;
 
     public:
+        ~Point() { }
         Point() { this->x = this->y = 0; }
         Point(const Point&);
         Point(double, double);

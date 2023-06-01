@@ -9,6 +9,7 @@ private:
 	void ghostMovementLogic(Board&, Point&) override;
 
 public:
+	~NoviceGhost() { }
 	NoviceGhost() : BaseGhost(), moves_in_same_direction(0) { }
 	NoviceGhost(Direction d, double speed, char ch) : BaseGhost(d, speed, ch), moves_in_same_direction(0) { }
 };

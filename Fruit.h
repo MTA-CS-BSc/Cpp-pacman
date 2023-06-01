@@ -20,6 +20,7 @@ private:
 	Point getNewPosition(Board&) override;
 
 public:
+	~Fruit() { }
 	Fruit() : MovingEntity(getRandomDirection(), Settings::FRUIT_SPEED, generateRandomFruitChar()), is_visible(true), original_char(this->getCharToPrint()) { }
 	inline bool getIsVisible() { return this->is_visible; }
 	inline void setIsVisible(bool value) { this->is_visible = value;  }

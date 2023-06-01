@@ -11,6 +11,7 @@ protected:
     virtual inline void ghostMovementLogic(Board&, Point&) { }
 
 public:
+    ~BaseGhost() { }
     BaseGhost() : MovingEntity(getRandomDirection(), Settings::GHOST_SPEED, '$') { }
     BaseGhost(Direction d, double speed, char ch) : MovingEntity(d, speed, ch) { }
 };

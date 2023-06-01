@@ -51,6 +51,7 @@ class MovingEntity {
         Direction getValidRandomDirection(Board&, Point&);
 
     public:
+        ~MovingEntity() { }
         MovingEntity(Direction md, double s, char ch) : current_moving_direction(md), speed(s), char_to_print(ch) { }
         inline double getSpeed() const { return this->speed; };
         inline Point& getCurrentPosition() { return this->current_position; };

@@ -33,6 +33,7 @@ class Game {
 		bool getShouldContinueToNextScreen();
 
 	public:
+		~Game() { }
 		Game(GhostMode);
 		Game() : Game(GhostMode::NOT_CHOSEN) { }
 		inline void setGhostMode(GhostMode gm) { this->handler.setGhostMode(gm); }
